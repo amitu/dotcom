@@ -1,0 +1,46 @@
+-- ds.page: Git Attributes
+
+Git has a file `.gitattributes`, that can be used to store attributes for files in this 
+folder.
+
+[Offical Documentation](https://git-scm.com/docs/gitattributes).
+
+-- ds.code: exampel file
+lang: gitattributes
+
+*               text=auto
+*.txt		text
+*.vcproj	text eol=crlf
+*.sh		text eol=lf
+*.jpg		-text
+
+-- ds.markdown:
+
+When more than one attributes match, the ones that come later overrider the earlier ones.
+
+-- ds.h1: Setting and Unsetting an Atribute
+
+In `*.txt` we only have `text`, which can be thought of as `text=true`. To unset a value, 
+you can either use `-text` or `text=false`.
+
+-- ds.h1: Location Of the File
+
+This file can put in `.gitattributes` in the repo root, if you want to share with the team,
+or in any folder in git. It can also be placed in `$GIT_DIR/info/attributes` if you want it
+for current repo, but do not want to share with your team. It can also be stored in 
+`$HOME/.config/git/attributes` and `$(prefix)/etc/gitattributes`.
+
+The attributes defined closer to an actual file has higher precendence than further down.
+`$GIT_DIR/info/attributes` has the highest precedence.
+
+-- ds.h1: Checking Attributes: use [`check-attr`](https://git-scm.com/docs/git-check-attr)
+
+You can use `git check-attr <name-of-attribute> <name-of-file>`, eg `git check-attr diff 
+org/example/MyClass.java`. To check multiple attribuets, or deal with multiple files separate
+attributes and files list by `--` eg `git check-attr foo bar -- file1.txt file2.html`. 
+
+-- ds.h1: Custom Attributes
+
+You can use these for file level custom attributes. Ideally pick an attribute name unique
+to your program. For example [Github Linguist](https://github.com/github/linguist/blob/master/docs/overrides.md)
+uses git attributes, and their attributes are named `linguist-*`. 
