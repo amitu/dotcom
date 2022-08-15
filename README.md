@@ -1,2 +1,3 @@
-# fpm-template
-FPM Blank Package Template Repo
+# AmitU's Blog
+
+This is the source of amitu.com.
