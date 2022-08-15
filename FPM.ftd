@@ -7,3 +7,12 @@ base: https://raw.githubusercontent.com/amitu/dotcom/main
 -- fpm.dependency: fifthtry.github.io/doc-site as ds
 
 -- fpm.auto-import: ds
+
+-- fpm.sitemap:
+
+# Home: /
+# Tech: /git/attributes/
+
+## General: /git/attributes/
+
+- Git Attributes: /git/attributes/
