@@ -1,4 +1,4 @@
--- ft.page: pdoc
+-- ds.page: pdoc
 
 [pdoc](https://pdoc.dev/docs/pdoc.html) is a tool that generates python documnentation based on source docs.
 
