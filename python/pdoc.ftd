@@ -1,0 +1,6 @@
+-- ft.page: pdoc
+
+[pdoc](https://pdoc.dev/docs/pdoc.html) is a tool that generates python documnentation based on source docs.
+
+Its like [sphinx](http://sphinx-doc.org), but simpler. Its like [pydoc](https://docs.python.org/3/library/pydoc.html), 
+but cleaner/better looking.
