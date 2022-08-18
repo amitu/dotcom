@@ -7,6 +7,10 @@
   - Such workflows can run using [actions tab manually](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow#running-a-workflow), 
     via [github cli](https://cli.github.com/manual/gh_workflow_run), 
     or via [API call](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event)
+  - workflow_dispatch workflows [can also accept input](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#providing-inputs),
+    you specify what all inputs are required, and github auto creates a UI in the action tab, or does input validation 
+    when using cli or api. You can use the inputs using `${{ inputs.logLevel }}` syntax.
 - Events [can be filtered](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet),
   so eg only if a file/pattern is modified in a commit.
 - Workflow is composed of one or more `job`s. Each `job` is a run on a "runner machine".
+
