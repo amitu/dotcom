@@ -11,8 +11,10 @@ base: https://raw.githubusercontent.com/amitu/dotcom/main
 -- fpm.sitemap:
 
 # Home: /
+
 # Tech: /git/attributes/
 
 ## General: /git/attributes/
 
 - Git Attributes: /git/attributes/
+- Github Actions: /github/actions/
