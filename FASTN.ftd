@@ -1,0 +1,19 @@
+-- import: fastn
+
+-- fastn.package: amitu.github.io/dotcom
+download-base-url: https://raw.githubusercontent.com/amitu/dotcom/main
+
+-- fastn.dependency: fifthtry.github.io/doc-site as ds
+
+-- fastn.auto-import: ds
+
+-- fastn.sitemap:
+
+# Home: /
+
+# Tech: /git/attributes/
+
+## General: /git/attributes/
+
+- Git Attributes: /git/attributes/
+- Github Actions: /github/actions/

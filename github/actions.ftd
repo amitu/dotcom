@@ -7,7 +7,7 @@
 - Events [can be filtered](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet),
   so eg only if a file/pattern is modified in a commit.
 
--- ft.h1: `workflow_dispatch`
+-- ds.h1: `workflow_dispatch`
 
 Events can also be custom external, called
 [workflow_dispatch](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow).
@@ -18,14 +18,16 @@ Such workflows can run using:
 - [github cli](https://cli.github.com/manual/gh_workflow_run),
 - [API call](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event)
 
--- ft.h1: `workflow_dispatch` Input
+-- ds.h1: `workflow_dispatch` Input
 
 workflow_dispatch workflows [can also accept input](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#providing-inputs),
 you specify what all inputs are required, and github auto creates a UI in the
 action tab, or does input validation when using cli or api. You can use the
 inputs using `${{ inputs.logLevel }}` syntax.
 
--- ft.h1: Job And Runners
+-- ds.h1: Job And Runners
 
 - Workflow is composed of one or more `job`s. Each `job` is a run on a "runner machine".
 
+
+-- end: ds.page

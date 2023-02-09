@@ -5,7 +5,7 @@ folder.
 
 [Offical Documentation](https://git-scm.com/docs/gitattributes).
 
--- ds.code: exampel file
+-- ds.code: example file
 lang: gitattributes
 
 *               text=auto
@@ -44,3 +44,6 @@ attributes and files list by `--` eg `git check-attr foo bar -- file1.txt file2.
 You can use these for file level custom attributes. Ideally pick an attribute name unique
 to your program. For example [Github Linguist](https://github.com/github/linguist/blob/master/docs/overrides.md)
 uses git attributes, and their attributes are named `linguist-*`. 
+
+
+-- end: ds.page
