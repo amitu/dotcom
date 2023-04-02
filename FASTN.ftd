@@ -1,7 +1,6 @@
 -- import: fastn
 
 -- fastn.package: amitu.github.io/dotcom
-download-base-url: https://raw.githubusercontent.com/amitu/dotcom/main
 
 -- fastn.dependency: fifthtry.github.io/doc-site as ds
 
@@ -17,3 +16,6 @@ download-base-url: https://raw.githubusercontent.com/amitu/dotcom/main
 
 - Git Attributes: /git/attributes/
 - Github Actions: /github/actions/
+- Supabase Functions: /supabase/functions/
+- Supabase ❤️ `fastn`: /supabase/fastn/
+

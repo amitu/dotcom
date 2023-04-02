@@ -1,0 +1,232 @@
+-- ds.page: Supabase ❤️ `fastn`
+
+`fastn` is a good choice for writing frontend. Supabase is a great choice for
+backend. Together they can be a great choice.
+
+-- ds.h1: Semi Static Sites
+
+`fastn` can be used for creating static sites. Static sites are great because
+they do not require a server, and thus all the maintenance, cost etc associated
+with that. There are a lot of really cheap and free options to deploy your site
+on static servers, like Github Pages.
+
+Some sites can be "semi static", instead of content coming from text files, page
+content can come from postgresql. Now content can come from a lot of places,
+APIs, JSON files and so on.
+
+APIs require backend and so if you are lucky and someone is hosting those APIs
+then great, use the API with your fastn pages. But if not, if the APIs are not
+exactly what you need, then you have two options, you can store JSON files or
+put things in a SQL table.
+
+JSON files are problematic, even though they initially sound simpler. Say you
+are trying to show a list of github repositories in your organisation on your
+website for some reason. You can write a github action that will fetch the repo
+data and store it in a JSON file, and then commit that JSON in your git repo,
+and you can instrument your FTD file to pick the data from JSON file.
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn/processors as pr
+
+\-- record repo-data:
+caption name:
+string url:
+string stars:
+boolean is-private:
+optional string license:
+optional body description:
+
+\-- record org-wise-repos-data:
+repo-data list fifthtry:
+repo-data list fastn-stack:
+
+\-- org-wise-repos-data org-wise-repos: ;; <hl>
+$processor$: pr.get-data                ;; <hl>
+file: github-data.json                  ;; <hl>
+
+-- ds.markdown:
+
+This setup is simple, only requires Github Action, no store, JSON files are
+stored in your Git repo so you even have their history.
+
+-- ds.code: fetch-repo-data.py
+lang: py
+
+import subprocess
+import json
+
+org_wise_repos = {}
+
+for org in ["fifthtry", "fastn-stack"]:
+    cmd = (
+        "gh repo list --json name,url,description,stargazerCount,isPrivate," +
+        "licenseInfo --limit 300 %s" % org
+    )
+    output = subprocess.check_output(cmd, shell=True, text=True)
+    repo_list = json.loads(output)
+
+    org_wise_repos[org] = [
+        {
+            "name": repo["name"],
+            "url": repo["url"],
+            "stars": repo["stargazerCount"],
+            "is-private": repo["isPrivate"],
+            "license": repo["licenseInfo"]["name"] if repo["licenseInfo"] else None,
+            "description": repo.get("description")
+        }
+    ]
+    assert len(org_wise_repos[org]) < 300, "limit reached"
+
+with open("github-data.json", "w") as f:  # <hl>
+    json.dump(org_wise_repos, f)
+
+
+
+-- ds.code: github action
+lang: yml
+
+name: fetch the data
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch-github-repo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: python ./scripts/fetch-repo-data.py                # <hl>
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "updated github-repo.json"
+  call-deploy-workflow:
+    needs: [ fetch-github-repo-data ]
+    uses: ./.github/workflows/deploy.yml
+
+-- ds.markdown:
+
+The github action can be manually triggered, or can be run periodically. It
+runs the python script and commits the updated json back. It then triggers the
+`deploy.yml` workflow, which updates your website.
+
+-- ds.h2: SQL instead of JSON
+
+But JSON files are hard to query. If you really wanted the git history of JSON
+files you can store in JSON file as well, but it may be better to spin up a
+free supabase project, create your table and store the repo data there.
+
+-- ds.h1: Recommendations For Using Supabase With `fastn`
+
+So supabase expects a folder `supabase`, where it stores all supabase specific
+stuff. You can also overwrite this folder by passing `--workdir` to all
+`supabase` cli invocations.
+
+You can store the `supabase` folder in your `fastn` package repo.
+
+-- ds.h2: Separate `fastn` package and `supabase` projects
+
+You may not want to store your supabase stuff in `fastn` package, and that is
+perfectly fine. In that case you would want to store the appropriate API keys
+in your `fastn` package somewhere, and you will not have `supabase` folder.
+
+You may want to do this for privacy reason, say you do not want supabase code to
+be publicly viewable, but you are okay with `fastn` package source to be
+public. You may also want this if you are using your supabase project
+elsewhere.
+
+-- ds.h2: One `fastn` package, multiple Supabase projects
+
+If your fastn package is "parent" of the supabase project, you may want to have
+one of more supabase child projects. By having more than one you can have
+different policies, security etc.
+
+If you have more than one projects, maybe store your supabase stuff in folders
+named `supabase-<project-name>`. You will have to use `--workdir` appropriatly
+for it to work properly.
+
+-- ds.h2: Normal Scenario: One fastn package, and one child supabase project
+
+This is what a lot of people will end up doing. Say for your blog, or for your
+company website. In this case the folder would be named just `supabase` and you
+will not have to bother with `--workdir` flag.
+
+-- ds.h2: Django For Migrations
+
+Now supabase has great migration support. You can use their "studio" product and
+do table schema updates using the UI, and then use the `supabase db diff` etc
+commands to create migration files in `supabase/migrations` folder. This is
+quite decent, but I am not fond of this.
+
+I am not fond of not reading / manually editing text files, generated by tools.
+The code generated by `supabase migrtion` is pretty decent, but I want to still
+own this code. I can of course manually modify sql files generated by `supabase
+migration`, but I prefer Django's migration system for doing this.
+
+Why Django? Django has rock solid migration support. And using Django for
+migration means we have to write Python models compatible with what we have in
+the database, and since those python model files are the master source of truth
+about the database schema, you not only get migraiton, but also get proper
+python model definitions.
+
+If you have python model definitions, scripting things become lot easier. If you
+do not and want to write Python scripts to interact with database, you are
+going to have inferior experience.
+
+-- ds.h3: Django Folder: `dj`
+
+Our recommendation is you store your django stuff in a folder named `dj`.
+
+-- ds.h2: `scripts` folder
+
+We are going to manage supabase and django, and there are going to be many
+commands you want everyone who works on the fastn package to run regularly. Its
+a good idea to put them in a well known location, and `scripts` is a good such
+location.
+
+-- ds.h2: Use `zsh`
+
+One decision you have to make early on is if your scripts are going to be
+written with `bash` as the script engine or `zsh`. `zsh` is more modern, maybe
+more powerful, but `bash` is more widely supported.
+
+We recommend you use `zsh` for your daily scripting needs. The scripts we
+distribute are all written for `zsh`.
+
+
+-- ds.h2: `scripts/auto.sh`
+
+We recommend you use `scripts/auto.sh` for defining all shell aliases, shell
+functions, commonly used environment variables etc.
+
+Anytime someone `cd`s into your `fastn` package, they should `source
+scripts/auto.sh`. This can be done automatically if you are using `direnv`
+plugin of `oh-my-zsh`, else you have to do this manually before running any
+other daily use commands.
+
+
+-- ds.h2: `scripts/common.sh`
+
+
+Other scripts in `scripts` folder should not assume that `auto.sh` has been
+sourced. They should also not explicitly source `auto.sh` as `auto.sh` is meant
+only for shell access. If some common functionality is needed by both
+`scripts/auto.sh` and other scripts, they should be put in a
+`scripts/common.sh` and sourced from both `scripts/auto.sh` and other scripts.
+
+-- ds.h2: Security Sensitive Environment Variables
+
+-- ds.h2: `fastn-ignore`
+
+Now that you are going to have `supabase` and `dj` folders that are not going to
+contain `ftd` files, it's a good idea to tell `fastn` to ignore those folders.
+
+-- ds.code: Add this to your `FASTN.ftd`
+lang: ftd
+
+\-- fastn.ignore: supabase
+\-- fastn.ignore: dj
+
+
+
+-- end: ds.page

@@ -1,9 +1,15 @@
 -- ds.page: Sublime
 
 
+
+-- ds.h1: How to create a Sublime Package?
+
+Sublime has "Package Control" thing, which can be used to install packages, like
+[syntax highlighting of elm](https://github.com/evancz/elm-syntax-highlighting/blob/master/install/mac.md).
+
 -- ds.h1: How to install a .sublime-syntax file?
 
-Copy the .sublime-syntax file in `~/Library/Application\ Support/Sublime\
+Copy the .sublime-syntax file in `~/Library/Application Support/Sublime
 Text/Packages/User/`.
 
 On linux they are usually stored in `~/.config/sublime-text-3/Packages/User`.
