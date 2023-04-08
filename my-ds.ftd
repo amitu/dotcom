@@ -7,6 +7,7 @@ children wrapper:
 optional caption title:
 optional body body:
 boolean sidebar: true
+optional boolean full-width: false
 
 -- ds.page: $page.title
 site-logo: $assets.files.images.favicon.png
@@ -15,5 +16,6 @@ wrapper: $page.wrapper
 colors: $winter-cs.main
 show-banner: true
 types: $typo.types
+$widthfill: *$page.full-width
 
 -- end: page

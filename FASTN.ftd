@@ -12,8 +12,6 @@ favicon: images/favicon.png
 
 -- fastn.sitemap:
 
-# Home: /
-
 # Tech: /git/attributes/
 
 ## General: /git/attributes/

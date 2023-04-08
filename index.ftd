@@ -1,3 +1,143 @@
--- my-ds.page: hello
+-- import: amitu.github.io/dotcom/assets
+
+-- my-ds.page:
+full-width: true
+
+-- me:
+
+-- content:
+
+-- reading-lists:
 
 -- end: my-ds.page
+
+
+
+
+
+-- component me:
+
+-- ftd.row:
+width: fill-container
+padding-horizontal.px: 100
+padding-vertical.px: 40
+spacing.fixed.px: 40
+
+-- ftd.image:
+src: $assets.files.images.amitu-1.jpg
+width.fixed.percent: 35
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.em: 3.5
+
+-- ftd.text:
+role: $inherited.types.heading-hero
+color: $inherited.colors.text-strong
+
+Hi, MY NAME IS
+
+Amit Upadhayay
+
+-- ds.h3: CEO and Founder of [FifthTry.com](https://www.fifthtry.com/). Creator of [fastn](https://fastn.io/) framework.
+
+-- end: ftd.column
+
+-- end: ftd.row
+
+-- end: me
+
+
+
+
+
+-- component content:
+
+-- ftd.column:
+width: fill-container
+background.solid: $inherited.colors.background.step-2
+padding-vertical.px: 25
+spacing.fixed.px: 15
+role: $inherited.types.copy-regular
+color: $inherited.colors.text
+
+-- ftd.row:
+width: fill-container
+spacing: space-between
+padding-horizontal.px: 100
+
+-- ftd.text:
+max-width.fixed.px: 340
+
+Take up one idea. Make that one idea your life.
+
+Think of it, dream of it, [live on that idea](http://www.paulgraham.com/top.html).
+
+Let the brain, muscles, nerves, every part of your body, be full of that idea,
+and just leave every other idea alone.
+
+This is the way to success.
+
+– Swami Vivekananda
+
+-- ftd.image:
+width.fixed.percent: 38
+src: $assets.files.images.startup.jpg
+
+-- end: ftd.row
+
+
+-- ftd.text:
+background.solid: $inherited.colors.background.step-1
+padding-vertical.px: 20
+width: fill-container
+padding-horizontal.px: 100
+
+My name is Ozymandias, look at on my works ye mighty and despair.
+
+-- ftd.text:
+width: fill-container
+padding-horizontal.px: 100
+
+First, master fundamentals. Then, play infinite games. — James Stuber
+
+-- end: ftd.column
+
+
+-- end: content
+
+
+
+
+
+
+
+-- component reading-lists:
+
+-- ftd.row:
+padding-horizontal.px: 100
+padding-vertical.px: 40
+spacing.fixed.px: 40
+
+-- ds.h1: Let's dive in
+
+I intend to write several articles on this site about software development,
+management, business, and the Internet. You can go to [Tech](/git/attributes/)
+to find them.
+
+-- ftd.column:
+width.fixed.percent: 30
+align-self: center
+
+-- ftd.text: Start Your Journey
+padding.px: 20
+role: $inherited.types.copy-regular
+color: $inherited.colors.cta-primary.text
+background.solid: $inherited.colors.cta-primary.base
+link: /git/attributes/
+
+-- end: ftd.column
+
+-- end: ftd.row
+
+-- end: reading-lists
