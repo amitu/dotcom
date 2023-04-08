@@ -1,5 +1,6 @@
 -- import: fifthtry.github.io/winter-cs
 -- import: amitu.github.io/dotcom/assets
+-- import: fifthtry.github.io/raleway-typography as typo
 
 -- component page:
 children wrapper:
@@ -13,5 +14,6 @@ body: $page.body
 wrapper: $page.wrapper
 colors: $winter-cs.main
 show-banner: true
+types: $typo.types
 
 -- end: page
