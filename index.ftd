@@ -1,4 +1,5 @@
 -- import: amitu.github.io/dotcom/assets
+-- import: fifthtry.github.io/winter-cs
 
 -- my-ds.page:
 full-width: true
@@ -26,6 +27,7 @@ spacing.fixed.px: 40
 -- ftd.image:
 src: $assets.files.images.amitu-1.jpg
 width.fixed.percent: 35
+shadow: $shadow
 
 -- ftd.column:
 width: fill-container
@@ -83,6 +85,7 @@ This is the way to success.
 -- ftd.image:
 width.fixed.percent: 38
 src: $assets.files.images.startup.jpg
+shadow: $content-shadow
 
 -- end: ftd.row
 
@@ -141,3 +144,23 @@ link: git/attributes/
 -- end: ftd.row
 
 -- end: reading-lists
+
+
+
+
+
+-- ftd.shadow shadow:
+y-offset.px: 14
+x-offset.px: -14
+spread.px: 2
+blur.px: 4
+color: $winter-cs.main.background.step-1
+
+
+
+-- ftd.shadow content-shadow:
+y-offset.px: -7
+x-offset.px: 7
+spread.px: 2
+blur.px: 4
+color: $winter-cs.main.background.step-1
