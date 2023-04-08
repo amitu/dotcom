@@ -134,12 +134,14 @@ to find them.
 width.fixed.percent: 30
 align-self: center
 
--- ftd.text: Start Your Journey
+-- ftd.text: Start Reading
 padding.px: 20
 role: $inherited.types.copy-regular
 color: $inherited.colors.cta-primary.text
 background.solid: $inherited.colors.cta-primary.base
 link: git/attributes/
+align-self: end
+shadow: $content-shadow
 
 -- end: ftd.column
 
