@@ -1,4 +1,4 @@
--- ds.page: Supabase ❤️ `fastn`
+-- my-ds.page: Supabase ❤️ `fastn`
 
 `fastn` is a good choice for writing frontend. Supabase is a great choice for
 backend. Together they can be a great choice.
@@ -229,4 +229,4 @@ lang: ftd
 
 
 
--- end: ds.page
+-- end: my-ds.page

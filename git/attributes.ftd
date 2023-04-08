@@ -1,4 +1,4 @@
--- ds.page: Git Attributes
+-- my-ds.page: Git Attributes
 
 Git has a file `.gitattributes`, that can be used to store attributes for files in this 
 folder.
@@ -46,4 +46,4 @@ to your program. For example [Github Linguist](https://github.com/github/linguis
 uses git attributes, and their attributes are named `linguist-*`. 
 
 
--- end: ds.page
+-- end: my-ds.page
