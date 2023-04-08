@@ -122,7 +122,7 @@ spacing.fixed.px: 40
 -- ds.h1: Let's dive in
 
 I intend to write several articles on this site about software development,
-management, business, and the Internet. You can go to [Tech](/git/attributes/)
+management, business, and the Internet. You can go to [Tech](git/attributes/)
 to find them.
 
 -- ftd.column:
