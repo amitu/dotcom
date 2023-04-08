@@ -1,4 +1,4 @@
--- ds.page: Sublime
+-- my-ds.page: Sublime
 
 
 
@@ -21,4 +21,4 @@ lang: sh
 
 export PATH=$PATH:"/Applications/Sublime Text.app/Contents/SharedSupport/bin"
 
--- end: ds.page
+-- end: my-ds.page

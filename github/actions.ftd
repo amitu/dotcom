@@ -1,4 +1,4 @@
--- ds.page: Github Actions
+-- my-ds.page: Github Actions
 
 - Every file in `.github/workflows/` file creates a `workflow` ([syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)).
 - Each workflow is [triggered on a event](https://docs.github.com/en/actions/using-workflows/triggering-a-workflow).
@@ -29,4 +29,4 @@ inputs using `${{ inputs.logLevel }}` syntax.
   machine".
 
 
--- end: ds.page
+-- end: my-ds.page

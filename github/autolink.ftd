@@ -1,4 +1,4 @@
--- ds.page: Autolink
+-- my-ds.page: Autolink
 
 Github has a feature called [autolink](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/configuring-autolinks-to-reference-external-resources),
 which can be used to link text in PR/issue comments, commit messages etc to an
@@ -6,4 +6,4 @@ external resource, eg to a Jira ticker, if the pattern matches. Eg you can
 configure things such that if someone uses the text `JIRA123`, it creates an
 auto link to `https://jira.com/ticket/123`.
 
--- end: ds.page
+-- end: my-ds.page

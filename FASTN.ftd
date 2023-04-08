@@ -1,10 +1,15 @@
 -- import: fastn
 
 -- fastn.package: amitu.github.io/dotcom
+favicon: images/favicon.png
 
 -- fastn.dependency: fifthtry.github.io/doc-site as ds
+-- fastn.dependency: fifthtry.github.io/forest-cs
+-- fastn.dependency: fifthtry.github.io/saturated-sunset-cs
+-- fastn.dependency: fifthtry.github.io/winter-cs
 
 -- fastn.auto-import: ds
+-- fastn.auto-import: amitu.github.io/dotcom/my-ds
 
 -- fastn.sitemap:
 
@@ -18,4 +23,3 @@
 - Github Actions: /github/actions/
 - Supabase Functions: /supabase/functions/
 - Supabase ❤️ `fastn`: /supabase/fastn/
-

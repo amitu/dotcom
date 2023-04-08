@@ -1,4 +1,4 @@
--- ds.page: Acknowledge With A Link
+-- my-ds.page: Acknowledge With A Link
 
 This is a practice that I noticed while working at BrowserStack. They had a
 "ack with link" culture so to say.
@@ -12,4 +12,4 @@ you said and not what their prediction
 
 
 
--- end: ds.page
+-- end: my-ds.page

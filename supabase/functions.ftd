@@ -1,4 +1,4 @@
--- ds.page: Supabase Functions
+-- my-ds.page: Supabase Functions
 
 - Supabase has a concept of functions. These are code written in typescript,
   meant for deno code that gets deployed by supabase on their edge locations.
@@ -117,4 +117,4 @@ console.log(result.rows);
 
 - `connection.queryObject`SELECT * FROM animals`
 
--- end: ds.page
+-- end: my-ds.page
