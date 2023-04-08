@@ -10,6 +10,8 @@ full-width: true
 
 -- reading-lists:
 
+-- footer:
+
 -- end: my-ds.page
 
 
@@ -164,3 +166,29 @@ x-offset.px: 7
 spread.px: 2
 blur.px: 4
 color: $winter-cs.main.background.step-1
+
+
+
+
+
+-- component footer:
+
+-- ftd.column:
+width: fill-container
+background.solid: $inherited.colors.background.step-1
+padding-vertical.px: 25
+role: $inherited.types.copy-regular
+color: $inherited.colors.text
+align-content: center
+
+-- ftd.text: @ FifthTry
+
+-- ftd.text: Join our [Discord](https://discord.gg/xN3uD8P7WA)
+
+-- ftd.text: Twitter: [@FifthTryHQ](https://twitter.com/fifthtryhq)
+
+
+
+-- end: ftd.column
+
+-- end: footer
