@@ -10,7 +10,6 @@ boolean sidebar: true
 optional boolean full-width: false
 optional string document-title:
 optional string document-description:
-optional ftd.image-src document-image:
 
 -- ds.page: $page.title
 site-logo: $assets.files.images.favicon.png
@@ -22,6 +21,6 @@ types: $typo.types
 $widthfill: *$page.full-width
 document-title: $page.document-title
 document-description: $page.document-description
-document-image: $page.document-image
+document-image: https://amitu.github.io/dotcom/-/amitu.github.io/dotcom/images/og-image.png
 
 -- end: page
