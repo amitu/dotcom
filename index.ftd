@@ -3,6 +3,9 @@
 
 -- my-ds.page:
 full-width: true
+document-title: AmitU's blog
+document-description: CEO and Founder of FifthTry.com. Creator of fastn framework.
+document-image: $assets.files.images.amitu-1.jpg
 
 -- me:
 
@@ -45,7 +48,7 @@ color: $inherited.colors.text-strong
 
 Hi, MY NAME IS
 
-Amit Upadhayay
+Amit Upadhyay
 
 -- ds.h3: CEO and Founder of [FifthTry.com](https://www.fifthtry.com/). Creator of [fastn](https://fastn.io/) framework.
 

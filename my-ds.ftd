@@ -8,6 +8,9 @@ optional caption title:
 optional body body:
 boolean sidebar: true
 optional boolean full-width: false
+optional string document-title:
+optional string document-description:
+optional ftd.image-src document-image:
 
 -- ds.page: $page.title
 site-logo: $assets.files.images.favicon.png
@@ -17,5 +20,8 @@ colors: $winter-cs.main
 show-banner: true
 types: $typo.types
 $widthfill: *$page.full-width
+document-title: $page.document-title
+document-description: $page.document-description
+document-image: $page.document-image
 
 -- end: page
