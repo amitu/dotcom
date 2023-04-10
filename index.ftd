@@ -33,7 +33,7 @@ spacing.fixed.px: 40
 if: { ftd.device != "mobile" }
 
 -- ftd.image:
-src: $assets.files.images.amitu-1.jpg
+src: $assets.files.images.amitu-3.png
 width.fixed.percent: 35
 shadow: $shadow
 
