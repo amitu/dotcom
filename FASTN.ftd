@@ -6,6 +6,7 @@ favicon: images/favicon.png
 -- fastn.dependency: fifthtry.github.io/doc-site as ds
 -- fastn.dependency: fifthtry.github.io/winter-cs
 -- fastn.dependency: fifthtry.github.io/raleway-typography
+-- fastn.dependency: fifthtry.github.io/dark-mode-switcher
 
 -- fastn.auto-import: ds
 -- fastn.auto-import: amitu.github.io/dotcom/my-ds
