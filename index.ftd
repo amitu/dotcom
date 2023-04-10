@@ -5,7 +5,7 @@
 full-width: true
 document-title: AmitU's blog
 document-description: CEO and Founder of FifthTry.com. Creator of fastn framework.
-document-image: $assets.files.images.amitu-1.jpg
+document-image: https://amitu.github.io/dotcom/-/amitu.github.io/dotcom/images/amitu-1.jpg
 
 -- me:
 
