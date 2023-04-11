@@ -1,4 +1,5 @@
 -- import: fastn-stack.github.io/media/assets as m-assets
+-- import: amitu.github.io/dotcom/assets
 
 
 
@@ -18,9 +19,13 @@ spacing.fixed.px: 20
 role: $inherited.types.heading-hero
 
 -- ftd.image:
+id: panda-image
 src: $m-assets.files.page-not-found-panda.svg
 width.fixed.percent if { ftd.device == "desktop" }: 50
 width: fill-container
+$on-click$: $animate()
+$on-click$: $load()
+
 
 -- ftd.text:
 role: $inherited.types.heading-small
@@ -31,3 +36,14 @@ Uh oh, Panda can’t seem to find the page you’re looking for.
 -- end: ftd.column
 
 -- end: my-ds.page
+
+
+-- void animate():
+js: $assets.files.rive.js
+
+animate_panda()
+
+-- void load():
+js: //unpkg.com/@rive-app/canvas@1.0.102:onload="onScriptLoad_js()"
+
+2 + 1
