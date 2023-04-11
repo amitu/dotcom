@@ -1,4 +1,3 @@
--- import: amitu.github.io/dotcom/assets
 -- import: fifthtry.github.io/winter-cs
 -- import: fifthtry.github.io/raleway-typography as typo
 -- import: fifthtry.github.io/dark-mode-switcher as dms
@@ -15,8 +14,6 @@ align-content: center
 -- ftd.text: Page Not Found!
 role: $typo.types.heading-hero
 
--- ftd.image:
-src: $assets.files.images.404.png
 
 -- ftd.text:
 role: $typo.types.heading-small
