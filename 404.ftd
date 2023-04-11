@@ -1,6 +1,3 @@
--- import: fifthtry.github.io/winter-cs
--- import: fifthtry.github.io/raleway-typography as typo
--- import: fifthtry.github.io/dark-mode-switcher as dms
 -- import: fastn-stack.github.io/media/assets as m-assets
 
 
@@ -30,8 +27,6 @@ role: $typo.types.heading-small
 text-align: center
 
 Uh oh, Panda can’t seem to find the page you’re looking for.
-
--- dms.dark-mode-switcher-float:
 
 -- end: ftd.column
 
