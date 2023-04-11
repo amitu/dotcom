@@ -40,9 +40,25 @@ function onScriptLoad_js() {
 
 
 function animate_panda() {
-    let old_node = document.getElementById("panda-image");
+    let le = document.querySelectorAll("#panda-image");
+    let old_node = le[0];
+    if (!!window.ftd.data.main && !!window.ftd.data.main["ftd#device"] && window.ftd.data.main["ftd#device"] == "mobile") {
+        old_node = le[le.length - 1];
+    }
+    old_node.style.display = "none";
     let new_node  = stringToHTML("<canvas id=\"canvas\"></canvas>");
-    old_node.parentNode.replaceChild(new_node.children[0], old_node)
+    old_node.parentNode.insertBefore(new_node.children[0], old_node);
+
+
+    const r = new window.rive.Rive({
+        src: "panda.riv",
+        canvas: document.getElementById("canvas"),
+        autoplay: true,
+        stateMachines: "State Machine 1",
+        onLoad: () => {
+            r.resizeDrawingSurfaceToCanvas();
+        },
+    });
 }
 
 
