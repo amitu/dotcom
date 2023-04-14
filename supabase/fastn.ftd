@@ -177,6 +177,16 @@ going to have inferior experience.
 
 Our recommendation is you store your django stuff in a folder named `dj`.
 
+-- ds.code:
+lang: sh
+
+python3 -m venv .venv           # one time only
+source .venv/bin/activate
+cat requirements.in
+brew install postgresql
+pip install -r requirements.in
+doit pip                        # updates requirements.txt file
+
 -- ds.h2: `scripts` folder
 
 We are going to manage supabase and django, and there are going to be many

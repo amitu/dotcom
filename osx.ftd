@@ -1,0 +1,20 @@
+-- ds.page: OSX Tips
+
+-- ds.h1: Keyboard Shortcuts
+
+-- kbd: Ctrl-Cmd-Space
+
+Launch Emoji Keyboard
+
+-- end: ds.page
+
+
+-- component kbd:
+caption shortcut:
+body about:
+
+-- ds.h2: $kbd.shortcut
+
+$kbd.about
+
+-- end: kbd
