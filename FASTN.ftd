@@ -22,12 +22,9 @@ favicon: images/favicon.png
 - Github Actions: /github/actions/
 - Supabase Functions: /supabase/functions/
 - Supabase ❤️ `fastn`: /supabase/fastn/
-<<<<<<< Updated upstream
-=======
 - `doit`: /doit/
   document: python/doit.ftd
 - `snakemake`: /snakemake/
   document: python/snakemake.ftd
 - `poetry`: /poetry/
   document: python/poetry.ftd
->>>>>>> Stashed changes
