@@ -22,9 +22,12 @@ favicon: images/favicon.png
 - Github Actions: /github/actions/
 - Supabase Functions: /supabase/functions/
 - Supabase ❤️ `fastn`: /supabase/fastn/
-- `doit`: /doit/
-  document: python/doit.ftd
-- `snakemake`: /snakemake/
-  document: python/snakemake.ftd
-- `poetry`: /poetry/
-  document: python/poetry.ftd
+- Python
+  - `doit`: /doit/
+    document: python/doit.ftd
+  - `snakemake`: /snakemake/
+    document: python/snakemake.ftd
+  - `poetry`: /poetry/
+    document: python/poetry.ftd
+- Rust
+  - workspace dependencies: /rust/workspace-dependencies/
