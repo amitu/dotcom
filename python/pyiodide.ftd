@@ -1,4 +1,4 @@
--- ds.page: `pyiodide`
+-- my-ds.page: `pyiodide`
 
 - [pyiodide](https://github.com/pyodide/pyodide) lets you run python in browser
   or node. It uses webassembly.
@@ -134,4 +134,4 @@ await micropip.install('seaborn')
   instructions](https://pyodide.org/en/stable/development/new-packages.html).
 
 
--- end: ds.page
+-- end: my-ds.page

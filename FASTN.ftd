@@ -31,3 +31,4 @@ favicon: images/favicon.png
     document: python/poetry.ftd
 - Rust
   - workspace dependencies: /rust/workspace-dependencies/
+  - sharing package data: /rust/workspace-package/

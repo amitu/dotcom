@@ -1,0 +1,30 @@
+-- my-ds.page: Rust: Sharing Package Data
+
+Official Docs: [[workspace.package]](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-package-table)
+
+> The `workspace.package` table is where you define keys that can be inherited
+> by members of a workspace. These keys can be inherited by defining them in the
+> member package with `{key}.workspace = true`.
+
+See also: [shareing package dependencies](/rust/workspace-dependencies/).
+
+-- ds.code: Workspace `Cargo.toml`
+lang: tom
+
+[workspace.package]
+version = "1.2.3"
+authors = ["Nice Folks"]
+description = "A short description of my package"
+documentation = "https://example.com/bar"
+
+-- ds.code: Child package's `Cargo.toml`
+lang: tom
+
+[package]
+name = "bar"
+version.workspace = true
+authors.workspace = true
+description.workspace = true
+documentation.workspace = true
+
+-- end: my-ds.page

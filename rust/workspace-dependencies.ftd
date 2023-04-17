@@ -1,8 +1,10 @@
--- ds.page: Workspace Dependencies In Rust
+-- my-ds.page: Rust: Workspace Dependencies
 
 If you are maintaining multiple crates as part of single workspace, and you want
 to use **same version for dependencies across all crates in your workspace**,
 it is possible to specify dependency version the workspace's toml file:
+
+See also: [shareing package common data](/rust/workspace-package/).
 
 -- ds.code: in workspace's `Cargo.toml`
 lang: toml
@@ -29,5 +31,5 @@ log = { workspace = true }
 Since the member is saying `workspace=true` as the version for the `log` create,
 the version of log crate in the member will be inherited from the workspace.
 
--- end: ds.page
+-- end: my-ds.page
 

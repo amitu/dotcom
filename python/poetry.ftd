@@ -1,4 +1,4 @@
--- ds.page: `poetry`
+-- my-ds.page: `poetry`
 
 - [`poetry`](https://python-poetry.org/) is a modern python package manager
 - `curl -sSL https://install.python-poetry.org | python3 -`
@@ -39,4 +39,4 @@ build-backend = "poetry.core.masonry.api"
   `python.exe` `python` binary that can be passed to editor configurations as
   the **interpreter path**
   
--- end: ds.page
+-- end: my-ds.page

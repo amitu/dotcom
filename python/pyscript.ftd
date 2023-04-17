@@ -1,4 +1,4 @@
--- ds.page: `pyscript`
+-- my-ds.page: `pyscript`
 
 - [pyscript]() runs on top of [pyiodide](/pyiodide/) and provides html tags
   (web components) to make things easy
@@ -22,4 +22,4 @@ lang: html
         - beautifulsoup4
 </py-env>
 
--- end: ds.page
+-- end: my-ds.page

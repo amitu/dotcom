@@ -1,4 +1,4 @@
--- ds.page: `snakemake`
+-- my-ds.page: `snakemake`
 
 - [snakemake](https://snakemake.readthedocs.io/en/stable/tutorial/basics.html)
   is "make" like tool. see also [`doit`](/doit/)
@@ -45,4 +45,4 @@ have access to a global variable `snakemake`, which contains `.input` and
 `.output` (`string lists`) representing the input and output files matching the
 rule.
 
--- end: ds.page
+-- end: my-ds.page

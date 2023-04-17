@@ -1,4 +1,4 @@
--- ds.page: Git Tips
+-- my-ds.page: Git Tips
 
 -- ds.h1: auto add branch to remote
 
@@ -41,4 +41,4 @@ lang: sh
 
 git diff HEAD
 
--- end: ds.page
+-- end: my-ds.page
