@@ -1,0 +1,6 @@
+-- my-ds.page: postgre-wasm
+
+- Repo: https://github.com/snaplet/postgres-wasm
+- Demo: https://postgres-wasm.netlify.app
+
+-- end: my-ds.page

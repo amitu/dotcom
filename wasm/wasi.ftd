@@ -3,4 +3,62 @@
 - [Lin Clark - Standardizing WASI: A system interface to run WebAssembly outside
   the web](https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/)
 
+-- ds.h1: Wasmtime Binding
+
+[wasmtime_wasi create](https://docs.rs/wasmtime-wasi/latest/wasmtime_wasi/index.html)
+
+-- ds.h1: Providers
+
+Do not understand these things.
+
+Seems Wasi has providers. `wasi_snapshot_preview1.wasm` was the original
+provider. It provided a bunch of APIs to read environemt variables, command
+line arguments, stdio, and file access.
+
+[preview2](https://github.com/bytecodealliance/preview2-prototyping) is under
+works, with lot more APIs. Provider 1 was done using witx, and provider 2 is
+being developed using wit.
+
+-- ds.h1: `wasi-cloud-core`
+
+This is a [collection of wasi proposals](https://github.com/WebAssembly/WASI/issues/520)
+to create a "cloud code".
+
+- wasi-keyvalue
+- wasi-messaging
+- wasi-http
+- wasi-runtime-config
+- wasi-distributed-lock-service
+- wasi-sql
+- wasi-blob-store
+
+-- ds.h1: browser_wasi_shim
+
+Github: [bjorn3/browser_wasi_shim](https://github.com/bjorn3/browser_wasi_shim)
+
+-- ds.code:
+lang: js
+
+import { WASI, File, OpenFile, PreopenDirectory } from "@bjorn3/browser_wasi_shim";
+
+let args = ["bin", "arg1", "arg2"];
+let env = ["FOO=bar"];
+let fds = [
+    new OpenFile(new File([])), // stdin
+    new OpenFile(new File([])), // stdout
+    new OpenFile(new File([])), // stderr
+    new PreopenDirectory(".", {
+        "example.c": new File(new TextEncoder("utf-8").encode(`#include "a"`)),
+        "hello.rs": new File(new TextEncoder("utf-8").encode(`fn main() { println!("Hello World!"); }`)),
+    }),
+];
+let wasi = new WASI(args, env, fds);
+
+let wasm = await WebAssembly.compileStreaming(fetch("bin.wasm"));
+let inst = await WebAssembly.instantiate(wasm, {
+    "wasi_snapshot_preview1": wasi.wasiImport,
+});
+wasi.start(inst);
+
+
 -- end: my-ds.page

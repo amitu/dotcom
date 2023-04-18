@@ -1,0 +1,12 @@
+-- my-ds.page: AssemblyScript
+
+AssemblyScript is a TypeScript-like language for WebAssembly.
+
+-- ds.h1: Disgruntled
+
+They are a bit not happy with the direction wasm seems to be taking. They
+[keep](https://news.ycombinator.com/item?id=29595107) complaining about being
+left out from standards process. They have document listing their
+[objections](https://www.assemblyscript.org/standards-objections.html).
+
+-- end: my-ds.page

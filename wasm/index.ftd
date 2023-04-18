@@ -1,12 +1,34 @@
 -- my-ds.page: wasm stuff
 
 
+-- ds.h1: Servers
+
+- [wasmedge](/wasmedge/)
+- [wws](/vmware/)
+- [fastly: Compute@Edge & Viceroy](/fastly/)
+- spin
+- [wagi](/wagi/)
+- [Shopify Functions](/shopify/)
+- [Vercel](https://vercel.com/docs/concepts/functions/edge-functions/wasm),
+  [Cloudflare](https://blog.cloudflare.com/webassembly-on-cloudflare-workers/),
+  [Supabase Edge Functions](https://supabase.com/blog/edge-runtime-self-hosted-deno-functions)
+  all use V8, with Wasm
+
+-- ds.h1: Tools
+
+- [`wasm-opt` by binaryen - optimise wasm
+  size](https://github.com/WebAssembly/binaryen)
+- [`wabt` - The WebAssembly Binary Toolkit](https://github.com/WebAssembly/wabt)
+- [`wasm-tools`](https://github.com/bytecodealliance/wasm-tools)
+- [WasmExplorer](https://mbebenita.github.io/WasmExplorer/)
+
 -- ds.h1: Bindgen
 
 Since wasm can only speak i32, i64, f32, and f64, passing other data types like
 string, structs etc is hard. Bindgens generate glue code that helps with these
 back and forth.
 
+- [Rust Without Bindgen](https://surma.dev/things/rust-to-webassembly/)
 - Article: [Getting data in and out of WASI
   modules](https://petermalmgren.com/serverside-wasm-data/)
 - Article: [A practical guide to WebAssembly
