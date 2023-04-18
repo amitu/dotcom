@@ -1,0 +1,26 @@
+-- my-ds.page: shopify
+
+Shopify lets you run [wasm as part of their
+infra](https://apps.shopify.com/collections/functions-discounts). They call them
+"Discount Apps" for some reason, and the technology is [Shopify
+Functions](https://shopify.dev/docs/apps/functions).
+
+> Shopify Functions allow developers to customize the backend logic of Shopify.
+  This guide introduces how Shopify Functions work and the benefits of using
+  Shopify Functions.
+
+They us [wasi](/wasi/).
+
+> The module must consume a JSON-formatted string via stdin and produce a
+  JSON-formatted string on stdout.
+
+They have a 5ms timeout, and 256KB size limit.
+
+> We’re exploring a gas-like approach as a machine- and situation-independent
+  measurement to give developers confidence that their function is fast
+  enough.
+
+They use quickjs to run JavaScript in WASM. And they have built
+[Javy](https://github.com/Shopify/javy).
+
+-- end: my-ds.page

@@ -1,0 +1,9 @@
+-- my-ds.page: fastly - Compute@Edge
+
+Fastly lets you run wasm using their [Compute@Edge](https://www.fastly.com/products/edge-compute)
+product.
+
+- Their JavaScript runtime is based on [spidermonkey](/spidermonkey/).
+- They seems to only support HTTP requests from their wasm applications, no
+  socket or DB support.
+

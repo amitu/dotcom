@@ -1,0 +1,34 @@
+-- my-ds.page: wizer - The WebAssembly Pre-Initializer
+
+Status: active (Apr 2023)
+
+Github: [bytecodealliance/wizer](https://github.com/bytecodealliance/wizer)
+
+> Don't wait for your Wasm module to initialize itself, pre-initialize it! Wizer
+  instantiates your WebAssembly module, executes its initialization function,
+  and then snapshots the initialized state out into a new WebAssembly module.
+  Now you can use this new, pre-initialized WebAssembly module to hit the
+  ground running, without making your users wait for that first-time set up
+  code to complete.
+
+Improves startup latency.
+
+-- ds.code:  exports an initialization function named `wizer.initialize`
+lang: rs
+
+#[export_name = "wizer.initialize"]
+pub extern "C" fn init() {
+    // Your initialization code goes here...
+}
+
+-- ds.code: use `wizer` to create pre-initialized module
+lang: sh
+
+wizer input.wasm -o initialized.wasm
+
+
+-- ds.h1: Caveats
+
+The initialization function may not call any imported functions.
+
+-- end: my-ds.page
