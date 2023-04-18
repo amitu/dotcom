@@ -24,21 +24,21 @@ favicon: images/favicon.png
 - Supabase ❤️ `fastn`: /supabase/fastn/
 - SRS: /srs/
   document: misc/srs.ftd
-- Devops
+- Devops:
   - fibreplane: /fibreplane/
     document: devops/fibreplane.ftd
   - tll-sh: /ttl-sh/
     document: devops/ttl-sh.ftd
   - elephant-sql: /elephant-sql/
     document: pg/elephant-sql.ftd
-- Python
+- Python:
   - `doit`: /doit/
     document: python/doit.ftd
   - `snakemake`: /snakemake/
     document: python/snakemake.ftd
   - `poetry`: /poetry/
     document: python/poetry.ftd
-- Rust
+- Rust:
   - workspace dependencies: /rust/workspace-dependencies/
   - sharing package data: /rust/workspace-package/
 - Wasm: /wasm/
