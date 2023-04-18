@@ -1,0 +1,24 @@
+-- ds.page: `ednet` Implementation Notes
+
+-- ds.h1: Become A Board
+
+To participate in the `ednet` network, you should consider becoming a `board`.
+Every collage should be a board. Every school adhers to a board. Every company
+should become a board for what is needed for employees of that company. Every
+housing society can become a board for housing society members about the rules
+to follow in that society. Same for every hobby club or social or community
+groups.
+
+To become a board, if you already have a Github organisation, create a
+repository named `ednet` using the `ednet-protocol/board-template`.
+
+In the board you will have to decide how many syllabuses you are going to keep.
+You may have just one, or you may have dozens. It is a good idea to create more
+than one audiance specific syllabuses, instead of creating a large syllabus
+where only some part is applicable to any given audiance.
+
+To create a syllabus, copy the `syllabus-template.ftd` file, and give it a name
+meaningful to
+
+
+-- end: ds.page

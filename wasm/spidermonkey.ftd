@@ -1,0 +1,28 @@
+-- my-ds.page: spidermonkey
+
+As of [sept 2022, Fastly's  Compute@Edge used
+Spidermonkey.wasm](https://news.ycombinator.com/item?id=32916019).
+
+> These are good questions! Here's some answers from the corner of the world I
+> know best as a Wasmtime contributor at Fastly:
+>
+> 1. Spidermonkey.wasm is the basis of Fastly's JavaScript on Compute@Edge
+> support. We have found it to be faster than QuickJS. The source code is here:
+> https://github.com/fastly/js-compute-runtime.
+>
+> 2. Fastly Compute@Edge is built on wasmtime. You can develop web services for
+> it in Rust, JS, and Go: https://developer.fastly.com/learning/compute/
+>
+> 3. Fastly's multi-tenant platform is closed source, but our single-tenant
+> local development platform, which also uses wasmtime under the hood as well,
+> is open source: https://github.com/fastly/viceroy. It isn't a big leap to
+> make viceroy multi-tenant: Wasmtime provides everything you need, and all
+> Viceroy would have to do is dispatch on e.g. HTTP host header to the correct
+> tenant. Our multi-tenant platform is closed source because it is very
+> specialized for use on Fastly's edge, not because the multi-tenant aspect is
+> special.
+
+Fastly's https://github.com/fastly/spidermonkey-wasi-embedding
+
+
+-- end: my-ds.page

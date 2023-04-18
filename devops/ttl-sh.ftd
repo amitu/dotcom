@@ -1,0 +1,16 @@
+-- my-ds.page: `ttl.sh`: Anonymous & ephemeral Docker registry
+
+> Many workflows in CI will build an image, and then subsequent steps will test
+> that image in parallel. Docker registries are a commonly used storage
+> mechanism for these intermediate build artifacts. One build step can push an
+> image, and other distributed steps can pull. The challenge is that most
+> registries require authentication to push and pull. A workflow can either
+> bake credentials in and share them to build workers, or require forked builds
+> to bring their own registry credentials. The first is insecure, the second
+> creates friction for new contributors.
+>
+> ttl.sh solves this by making an ephemeral and anonymous registry.
+
+[ttl.sh](https://ttl.sh)
+
+-- end: my-ds.page

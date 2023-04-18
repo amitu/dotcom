@@ -1,5 +1,84 @@
 -- my-ds.page: Supabase ❤️ `fastn`
 
+
+-- ds.h1: 15th Apr 2023
+
+Using supabase with `fastn` means we have to install `fastn` and supabase.
+`fastn` is an easy dependency, just a single binary, works well on windows, mac
+and linux (and more tomorrow, we intend to ensure people can use fastn from
+tablets etc also).
+
+But `supabase` is quite heavy dependency. One has to install Docker to use it,
+which is quite painful, and will def never run on mobile.
+
+Why do we want to install supabase? Can't we just add postgresql bindings to
+`fastn` and pass DB url to `fastn` and let it to do its thing? Why do we need
+supbase on local machine?
+
+One question is how do we manage database tables? One way to manage db is use
+[supbase migration](https://supabase.com/docs/guides/cli/managing-environments)
+features to manage the migrations. Supabase gives you "studio" where you can
+edit tables in your DB using their studio UI, and then run `supabase db diff -f
+<migraiton-name>` to do a diff from your local db against the prod db, and
+`supabase db push` to apply unapplied migrations to remote.
+
+These migration files are stored in `supabase/migrations` folder and supabase.
+We want to store migrations in each `fastn` package. And when I install a
+package that contains migrations, I want some `fastn` command to apply this
+migrations to prod db (after appropriate warnings and inspections and
+confirmations etc).
+
+My earlier thought was to use Django. I love Django. And using Django means our
+models can be further used for scripting. But installing Python across all
+platforms is a pain. I tried checking if we can use [pyiodide](/pyiodide/) with
+`fastn` without installing Python on the system at all, but `pyiodide` does not
+yet work with `psycopg` etc so its a no go.
+
+I also came across [migra](/migra/), a python package that can do a db diff,
+supabase has experimental supprot for `migra`.
+
+So what do we do? We have two roles, fastn developers, people who create fastn
+packages that depends on supabase tables. Such people can install python and
+migra, which is a simpler dependency than supabase. And then we have people who
+will use such packages, website creators, they just install fastn, and fastn
+will apply the migrations.
+
+How migrations could be stored? For each db change, we run `migra
+postgresql:///old postgresql:///new` to create `up.sql` and `migra
+postgresql:///down postgresql:///up` to create `down.sql`. For each named
+migration we create a folder containing the up and down sql files. We also
+create a database table called `fastn_migrations` and store which all migration
+is already applied, and `fastn migrate <optional-destination>` will apply all
+the migrations needed to go from current state in `fastn_migrations` to the
+`optional-destination`.
+
+We will have to collect migrations from all the packages (each package will
+store all migrations in a folder named `FASTN/migrations`. Each package will
+get its own db schema so that table names do not conflict. We will also have to
+worry about database schema etc that each migration only modifies the schema
+specific to that package.
+
+-- ds.h2: `fastn` Functions
+
+We can use quickjs compiled as wasm.
+
+
+-- ds.h2: What About Supabase Functions
+
+Some of the projects we are going to depend on will require supabase functions
+as well. This will allow arbitrary computation, which we can use from either
+the backend using processor or frontend using endpoint and ajax. In such cases,
+if a fastn package contains supabase function, we should install the function,
+along with creating the db tables needed for that application. Further newer
+versions of that fastn package may require use to update the code behind the
+supabase function, along with running db migrations.
+
+We can run migrations, they are just a bunch of sql files, but how do we create
+supabase functions?
+
+
+-- ds.h1: old thought
+
 `fastn` is a good choice for writing frontend. Supabase is a great choice for
 backend. Together they can be a great choice.
 
@@ -177,12 +256,27 @@ going to have inferior experience.
 
 Our recommendation is you store your django stuff in a folder named `dj`.
 
--- ds.h2: `scripts` folder
+-- ds.h3: `poetry` for managing python dependencies
+
+The [`poetry`](/poetry/) files would be kept in `dj` itself. To do any python
+related thing one has to cd to `dj` folder.
+
+-- ds.code:
+lang: sh
+
+python3 -m venv .venv           # one time only
+source .venv/bin/activate
+cat requirements.in
+brew install postgresql
+pip install -r requirements.in
+doit pip                        # updates requirements.txt file
+
+-- ds.h2: `dj/scripts` folder
 
 We are going to manage supabase and django, and there are going to be many
 commands you want everyone who works on the fastn package to run regularly. Its
-a good idea to put them in a well known location, and `scripts` is a good such
-location.
+a good idea to put them in a well known location, and `dj/scripts` is a good
+such location.
 
 -- ds.h2: Use `zsh`
 

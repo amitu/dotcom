@@ -1,0 +1,137 @@
+-- my-ds.page: `pyiodide`
+
+- [pyiodide](https://github.com/pyodide/pyodide) lets you run python in browser
+  or node. It uses webassembly.
+
+
+-- ds.code:
+lang: html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js"></script>
+  </head>
+
+  <body>
+    <p id="title">My first Pyodide app</p>
+
+    <script>
+      async function main() {
+        let pyodide = await loadPyodide();
+
+        pyodide.runPython(`
+          print('Hello world, from the browser!')
+
+          import js
+          js.document.title = "Hello from Python"
+        `);
+      };
+
+      main();
+    </script>
+  </body>
+</html>
+
+
+-- ds.code:
+lang: html
+
+<head>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js"></script>
+  <script>
+    async function main() {
+      let pyodide = await loadPyodide({
+        indexURL : "https://cdn.jsdelivr.net/pyodide/v0.20.0/full/"
+      });
+      console.log(pyodide.runPython("print('Hello, world from the browser!')"));
+    };
+    main();
+  </script>
+</head>
+
+-- ds.code: full js inerop is possible
+lang: js
+
+await pyodide.loadPackage('numpy');
+// numpy is now available
+pyodide.runPython('import numpy as np')
+// create a numpy array
+np_array = pyodide.runPython('np.ones((3, 3))')
+// convert Python array to JS array
+np_array = np_array.toJs()
+console.log(np_array)
+
+-- ds.code: accessing dom from python
+lang: py
+
+from js import document
+div = document.createElement('div')
+div.innerHTML = '<h1>This element was created from Python</h1>'
+#insert into body as a first child
+document.body.prepend(div)
+
+
+-- ds.code: event handling
+lang: py
+
+from js import document
+def handle_clear_output(event):
+  output_area = document.getElementById('output')
+  output_area.value = ''
+clear_button = document.createElement('button')
+clear_button.innerHTML = 'Clear output'
+clear_button.onclick = handle_clear_output
+document.body.appendChild(clear_button)
+
+-- ds.code: http requests
+lang: py
+
+from js import window
+window.fetch('https://karay.me/assets/misc/test.json')
+      .then(lambda resp: resp.json()).then(lambda data: data.msg)
+      .catch(lambda err: 'there were error: '+err.message)
+
+-- ds.code: await works too
+lang: py
+
+import json
+from js import window
+
+resp = await window.fetch('https://karay.me/assets/misc/test.json')
+data = await resp.json()
+print(type(data))
+# convert JsProxy to Python dict
+data = data.to_py()
+json.dumps(data, indent=2)
+
+-- ds.code: pyodide.runPython('x = 10')
+lang: js
+
+pyodide.globals.get('x').toJs()
+
+-- ds.markdown:
+
+- see [implicit conversion rules
+  document](https://pyodide.org/en/stable/usage/type-conversions.html#implicit-conversions)
+  to see how python types are translated to js ones
+- [proxy objects](https://pyodide.org/en/stable/usage/type-conversions.html#proxying)
+  are used for non basic types.
+
+-- ds.code: use micropip to install packages
+lang: py
+
+import micropip
+await micropip.install('seaborn')
+
+-- ds.markdown:
+
+- [micropip](https://micropip.pyodide.org/en/stable/project/api.html) is part of
+  [pyiodide](/pyiodide/) project and can be used to install pure Python
+  packages published on PyPi, and any package for which wasm compiled wheel is
+  available, eg [pyiodide maintained ones](https://pyodide.org/en/stable/usage/packages-in-pyodide.html)
+- you can also compile your c extension package to wasm following [these
+  instructions](https://pyodide.org/en/stable/development/new-packages.html).
+
+
+-- end: my-ds.page

@@ -1,0 +1,24 @@
+-- my-ds.page: wasm stuff
+
+
+-- ds.h1: Bindgen
+
+Since wasm can only speak i32, i64, f32, and f64, passing other data types like
+string, structs etc is hard. Bindgens generate glue code that helps with these
+back and forth.
+
+- Article: [Getting data in and out of WASI
+  modules](https://petermalmgren.com/serverside-wasm-data/)
+- Article: [A practical guide to WebAssembly
+  memory](https://radu-matei.com/blog/practical-guide-to-wasm-memory/)
+- [Radu's Posts About #wasm Are Great](https://radu-matei.com/tags/wasm/)
+- [@adlrocha - Playing with Wasmtime and Web Assembly's linear
+  memory](https://adlrocha.substack.com/p/adlrocha-playing-with-wasmtime-and)
+- [fp-bindgen](/fp-bindgen/)
+
+-- ds.h1: Performance
+
+- [Plugins for Rust](https://reorchestrate.com/posts/plugins-for-rust/)
+- [wizer](/wizer/)
+
+-- end: my-ds.page

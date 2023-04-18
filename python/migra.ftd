@@ -1,0 +1,8 @@
+-- my-ds.page: migra - Like diff but for PostgreSQL schemas
+
+- [migra](https://github.com/djrobstep/migra)
+- `migra postgresql:///a postgresql:///b` or `migra --unsafe postgresql:///a
+  postgresql:///b` if you want to allow `DROP` statements in migration
+- supabase can use migra to [create migrations](https://supabase.com/docs/guides/cli/managing-environments#auto-schema-diff)
+
+-- end: my-ds.page

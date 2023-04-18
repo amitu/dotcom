@@ -1,0 +1,413 @@
+-- ds.page: `ednet` protocol
+
+`ednet` protocol is an open source standard for organising educational content
+of the world. This protocol can be used to designate what online `content`
+helps one learn what `concept`, prescribed by what `board` or in what
+`syllabus`. This protocol helps `classroom` teachers create learning material
+for their class. This protocol also helps learners keep track of what they have
+learnt, and evaluators to easily review what a learner knows.
+
+Our goal is to make learning accessible to everyone in the world. To be part of
+`ednet` network, all content should be public and licensed under permissible
+license.
+
+
+-- ds.h1: High Level Protocol Design Guidelines
+
+-- ds.h2: Complete Lack Of Authority
+
+Anyone create a board, or anyone create content etc. No need for "politics" of
+talking to the right people. Autonomous protocol.
+
+-- ds.h2: As Software Light As Possible
+
+Websites go down. If one uses any dynamic language, or database etc, keeping
+site up is hard. Therefore all the pages are static pages.
+
+-- ds.h2: Fully Download-able Content
+
+Standardised on FTD (subset). So that it works on as many devices as possible,
+and yet is as interactive as it can be. We can't do PDF which is most widely
+supported, but lacks interactivity etc.
+
+-- ds.h2: Study Without Internet
+
+Once learner has "subscribed" to a class, their app (browser extension, desktop
+or mobile app can download entire content). And then on, no internet is
+required. Xray uploads would be done opportunistically, when the internet is
+available, in the background.
+
+-- ds.h2: Data Collection Done In Privacy Friendly Way
+
+Only teachers can identify students. Content creators, board etc can not. And
+only xray information is availble, not any other information.
+
+-- ds.h2: Self Learning But With Guides
+
+Teachers are needed at times.
+
+-- ds.h2: Low Hardware/Power Requirements
+
+We want people in remote areas with limited access to internet, elecronic
+devices, power etc to be able to learn using the `ednet` network. We will be
+identify low powered tablets and all content should support those devices.
+
+Content should fail gracefully in case there is a hardware or internet or power
+constraint, for example if there is not enough internet, maybe only download
+and show text. If some more internet is there also download images. And then
+videos. Content is consumable even if only text is available.
+
+
+-- ds.h1: Key Concepts Of *`ednet` Protocol*
+
+-- ds.h2: Board Of Education
+
+Most education content is decided by some sort of a `board`. It can be a
+university for college education or a school board for school education. We are
+using the term `board` to also describe aprenticeships or tradeschools. In case
+of companies, there is internal training, so a lot of companies can be
+considered `boards` too. Finally our protocol allows anyone to create a
+`board`, and start prescribing `syllabus` for learners.
+
+Examples of `Boards`:
+
+- Central Board Of Secondary Education in India
+- IIT Bombay
+- Mongo University (training arm of MongoDB company)
+
+-- ds.h2: `Syllabus`
+
+A `board` can have one or more courses. Each course has a syllabus. The
+`syllabus` describes all the `concepts` that are taught or is a required
+learning for that `syllabus`.
+
+A syllabus is for a single subject, for a single education periods, like:
+
+- [CBSE has a syllabus for 10th standard Mathematics](https://cbseacademic.nic.in/web_material/CurriculumMain23/Sec/Maths_Sec_2022-23.pdf)
+- [Introduction To MongoDB's syllabus](https://learn.mongodb.com/learning-paths/introduction-to-mongodb)
+
+-- ds.h2: `Concept`
+
+Every `syllabus` is composed of `concepts`. Each `concept` is an atomic unit of
+learning. Like the CBSE 10th Standard Mathemtics `syllabus` has `concepts`
+like:
+
+- representation of natural number
+- integers on number line
+- non recurring, non terminating decimals
+- existence of irrational number
+- irrational number on number line
+- nth root of a real number
+
+Each concept requires some content for you to learn.
+
+-- ds.h3: Concept Dependencies And Concept Graph
+
+Concepts also have related concepts, like `dependencies` (to learn this concept,
+you must be at `Good` for this other concept first), learn more (if you like
+this concept and want to improve your understanding or are curious, you should
+learn this checkout this other `concept`).
+
+`concept dependencies` allows the `concepts` to be organised in a `concept
+graph`.
+
+-- ds.h2: `Content`
+
+In order to learn a `concept` the learner needs some `content`. The `content`
+can be an explainer for the `concept`, or it can be a quiz for the `concept`.
+Same `concept` can be taught by `content` in different languages, styles, or
+even medium (text vs video vs audio vs games?).
+
+-- ds.h2: `Classroom`
+
+There can be a plathors of `content` available for the `concepts` required by a
+`syllabus`. Online search engines can help you a little bit in find the
+relevant `content`, but we believe in curation. Searching each concept to find
+content that is easy to digest is not optimal for every learner. `Classroom` in
+`ednet` is created by some teacher, and the teacher picks some `concepts`, and
+for each `concept` they pick one or more `content`.
+
+Classroom is a learning cohort.
+
+-- ds.h2: `xray`
+
+Xray or a learner is stream of learning data for a learner. The learning happens
+on an ongoing basis, whenever the learner has reviewed some content, they are
+prompted to do self evaluation in the form of "Again" (I did not undestand the
+concept, I have to study it again), "Hard" (I understand the concept but find
+it hard), "Good" (I think I am quite good with this concept) and "Easy"
+(this concept is too easy for me). The learner can re-evaluate themselves on
+the same concept as many times as needed.
+
+The `xray` of the a learner can be shared by the learner with either the
+teacher, or the hiring manager for a job, so people have a good understanding
+of the knowledge of the learner.
+
+`ednet` protocol helps shared anonymised xray with `content` creators and
+`board` administrators to help improve the `content` and `syllabus`.
+
+-- ds.h1: How Is Knowledge Organized?
+
+Board, Syllabus, Concept, Content and Classroom are all URLs. Each URL exposes
+data about itself using meta tags in the HEAD section.
+
+-- ds.h2: Board Data
+
+Board exposes the following:
+
+-- ds.code:
+lang: html
+
+<head>
+    <meta name="ednet-entity" content="board">
+    <meta name="ednet-board" content="<board-url>/board.json">
+</head>
+
+-- ds.markdown:
+
+Any page can designate itself as a board by linking to a `board.json`.
+
+-- ds.code:
+lang: json
+
+{
+    "ednet-version": "1.0",
+    "entity": "board",
+    "name": "Name Of Board",
+    "syllabuses": [
+        {
+            "name": ["10th Standard", "Mathematics"],
+            "url": "<url-to-syllabus.json>"
+        }
+    ]
+}
+
+-- ds.h2: Syllabus
+
+A syllabus page puts these in the meta tag:
+
+-- ds.code:
+lang: html
+
+<head>
+    <meta name="ednet-entity" content="syllabus">
+    <meta name="ednet-syllabus" content="<syllabus.json url>">
+    <meta name="ednet-board" content="<board-url>/board.json">
+</head>
+
+-- ds.markdown:
+
+The `syllabus.json` looks like this:
+
+-- ds.code:
+lang: json
+
+{
+    "ednet-version": "1.0",
+    "entity": "syllabus",
+    "board-url": "<url>",
+    "name": "name of syllabus",
+    "xray-sink": "url of xray sink - optional",
+    "concepts": [
+        {
+            "name": ["Number System", "Real Numbers"],
+            "url": "<url-to-concept>"
+        }
+    ]
+}
+
+
+-- ds.h2: Concept
+
+A `concept` page puts these in the meta tag:
+
+-- ds.code:
+lang: html
+
+<head>
+    <meta name="ednet-entity" content="concept">
+    <meta name="dependency" content="<url of other dependency>">
+</head>
+
+-- ds.markdown:
+
+Please note that there is no link back to syllabus or board, this is done
+intentionally so a concept can be re-used in different syllabus. Concept is
+just a URL. The content of the concept page can be ignored.
+
+
+-- ds.h3: Deprecation Of Concept
+
+From time to time maintainer of a `concept` may realise their concept is
+actually a duplicate of some other concept and would want to let everyone using
+their concept know of this.
+
+They can do so by adding:
+
+-- ds.code: current concept deciding to deprecate themselves
+lang: html
+
+<head>
+    <meta name="ednet-entity" content="concept">
+    <meta name="ednet-canonical-concept" content="the other concept"
+</head>
+
+
+-- ds.h2: Content
+
+Content can be present on any URL. The content can express what concepts it is
+good for by adding the following meta tags:
+
+-- ds.code:
+lang: html
+
+<head>
+    <meta name="ednet-entity" content="content">
+    <meta name="content-url" content="url of content.ftd">
+    <meta name="ednet-concept" content="url of the concept 1">
+    <meta name="ednet-concept" content="url of the concept 2">
+    <meta name=xray-sink" content="url of xray sink - optional">
+</head>
+
+-- ds.markdown:
+
+Same `content` can be used for different `concepts`, so the `ednet-concept`
+meta can be repeated any number of times.
+
+The `content-type` can be one of `explainer`, `video`, `audio`, `quiz`.
+
+-- ds.h3: Download-ability Of Content
+
+For a `content` to be part of `ednet` network, it must be easily downloadable,
+and must work in cross platform study apps.
+
+`ednet` uses `ftd` to author all content. When authoring content the content
+must be linked against `ednet-protoco.github.io/ednet-content` package, with an
+alias `ec`.
+
+-- ds.h2: Classroom
+
+Any page can become a classroom by adding a classroom.json link:
+
+-- ds.code:
+lang: html
+
+<head>
+    <meta name="ednet-entity" content="classroom">
+    <meta name="classroom" content="url of classroom.json">
+    <meta name="xray-sink" content="url of xray sink">
+</head>
+
+-- ds.markdown:
+
+The classroom.json looks like this:
+
+-- ds.code:
+lang: json
+
+{
+    "ednet-version": "1.0",
+    "entity": "classroom",
+    "name": "name of classroom",
+    "xray-sink": "url of xray sink - optional",
+    "concepts": [
+        {
+            "name": ["Number System", "Real Numbers"],
+            "concept": "<url-to-concept>",
+            "syllabus": "<url of syllabus>",
+            "content": [
+                {
+                    "name": "Display name for this content",
+                    "url": "<url of content.ftd>"
+                }
+            ]
+        }
+    ]
+}
+
+-- ds.h1: XRay
+
+-- ds.h2: XRay Data
+
+Xray json looks like this:
+
+-- ds.code: xray schema
+lang: json
+
+{
+    "classroom": "url of the classroom",
+    "concept": "url of the concept",
+    "syllabus": "<url of syllabus>",
+    "timestamp": "nanoseconds, stored as i64 not string",
+    "content": "url of content",
+    "time-spent": "time in seconds, spent on this content",
+    "resolution": "skipped | again | hard | good | easy"
+}
+
+-- ds.h2: XRay Sharing
+
+
+-- ds.h3: With Classroom
+
+Learner can share their xray information with the `classroom` (vis the
+`xray-sink` url). This allows the software on teacher to plot completeness of
+learners so learners and their designated gaurdians can see progress of student
+with their learning cohort.
+
+-- ds.h3: With Syllabus Creators
+
+Learner can chose to allow the classroom to periodically share the XRay
+information with the syllabus (via the `xray-sink` url). This allows software
+with the board / syllabus creators to fine tune the syllabus.
+
+The information also lets syllabus creators understand what content is most
+helpful to learners, so they can publish link to good content against each
+concept which helps future classrooms access better content to include in their
+classrooms.
+
+-- ds.h3: With Content Creators
+
+Learners can chose to allow the classroom to periodically share the xray
+information with the content creators, via the `xray-sink` url. This allows the
+content creator to improve their content.
+
+-- ds.h1: Concept Re-normalization
+
+When the ednet network starts, each board or syllabus will create all their
+concepts, and this will lead to duplication of concept. Like CBSE 10th Std
+Math's "irrational numbers" may have the concept url of
+`https://cbse.org/10th/maths/irrational-numbers/`, but ICSE in 10th may teach
+exactly the same concept, but they may end up creating their own URL:
+`https://icse.com/10/mathematics/numbers/irrational/`.
+
+The xray information helps identify such duplications. The incentive of the
+content author is to make their content as widely used as possible as content
+creator may not care about money (being part of ednet netowrk does not itself
+earn you money, this is for making world a better place), but how often your
+content is included and used by learners is still a metric we believe will
+drive some content creators. Those content creators have incentive to add as
+many concept urls in their content meta data. Now simply spamming will not help
+the reputation of the author, they will appear smappy, lose credibility with
+teachers, so they will only put the link to concepts they truly believe (and
+can see from data that they are indeed helpul for) is relevant.
+
+Syllabus creators are also getting the same xray information. And they can see
+what content is being recommended for the concept in their syllabus, what other
+concepts, that are not part of they syllabus, but is getting taught using the
+same content. If a content is teaching more than one concept, there is a
+possiblity they are duplicate. Analysing the content concept linkages, and xray
+data, gives an picture of concept duplication. The syllabus creators can act on
+this knowledge and remove (deprecate) their concept URLs and start using the
+more popular concept URLs.
+
+This way the concept URLs will start to cluster, and duplication will go down.
+Eg if `content a` was written and tagged only with `concept x` and `content b`
+with `concept y`, and if clustering puts `concept x` and `concept y` as
+duplicates, and syullabus creator who used `concept y` examines the data and
+decides `concept x` and `concept y` are indeed duplicate, syllabus author will
+ask concept maintainer of `concept y` to derecate themselves in favour of
+`concept x`, and if that is done, both `content a` and `content b` will become
+available to learners of `concept x` (which is also now learners of `concept
+y`).
+
+-- end: ds.page

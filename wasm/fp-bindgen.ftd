@@ -1,0 +1,40 @@
+-- my-ds.page: fp-bindgen
+
+[fp-bindgen](https://github.com/fiberplane/fp-bindgen), by
+[fibreplane](/fibreplane/), can be used for creating wasm bindings.
+
+See also: [wit-bindgen](/wit-bindgen/), [witx-bindgen](/witx/) and
+[wasm-bindgen](/wasm-bindgen/).
+
+-- ds.h1: Wasmer Only?
+
+Looks like it only works with [wasmer](/wasmer/), and not
+[wasmtime](/wasmtime/).
+
+-- ds.h1: Can Use Rust For Binding Definition
+
+
+> fp-bindgen is opinionated towards Rust. It uses Rust data structures and
+  function signatures as its "protocol format", enabling tight integration with
+  existing crates from the Rust ecosystem.
+
+-- ds.code:
+lang: rs
+
+use fp_bindgen::prelude::Serializable;
+
+#[derive(Serializable)]
+#[fp(rust_module = "my_crate::prelude")]
+pub struct MyStruct {
+    pub foo: i32,
+    pub bar_qux: String,
+}
+
+> In this example, MyStruct has a double function: it acts both as a type
+  definition for the protocol (through fp-bindgen's Serializable trait), which
+  can still be used for generating a TypeScript type definition, for instance.
+  And it acts as a type that can be directly used by the Rust Wasmer runtime,
+  under the assumption the runtime can import it from my_crate::prelude.
+
+
+-- end: my-ds.page

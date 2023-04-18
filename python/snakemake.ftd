@@ -1,0 +1,48 @@
+-- my-ds.page: `snakemake`
+
+- [snakemake](https://snakemake.readthedocs.io/en/stable/tutorial/basics.html)
+  is "make" like tool. see also [`doit`](/doit/)
+
+-- ds.code: `Snakefile`
+lang: txt
+
+rule bwa_map:
+    input:
+        "data/genome.fa",
+        "data/samples/{sample}.fastq"
+    output:
+        "mapped_reads/{sample}.bam"
+    shell:
+        "bwa mem {input} | samtools view -Sb - > {output}"
+
+
+-- ds.markdown:
+
+With the above `Snakefile` in the current directory, if you run `snakemake -np
+mapped_reads/B.bam` it matches the output, `mapped_reads/B.bam` with the matching
+output, and decides that the value of `{sample}` is `B`, and looks at the input
+dependencies, and if they have changed, runs the `shell` script.
+
+-- ds.h1: `script`
+
+If you use a `script` instead:
+
+-- ds.code:
+lang: txt
+
+rule plot_quals:
+    input:
+        "calls/all.vcf"
+    output:
+        "plots/quals.svg"
+    script:
+        "scripts/plot-quals.py"
+
+-- ds.markdown:
+
+The `script` will be evalauted relative to the `Snakemake` file. The script will
+have access to a global variable `snakemake`, which contains `.input` and
+`.output` (`string lists`) representing the input and output files matching the
+rule.
+
+-- end: my-ds.page

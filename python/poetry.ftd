@@ -1,0 +1,42 @@
+-- my-ds.page: `poetry`
+
+- [`poetry`](https://python-poetry.org/) is a modern python package manager
+- `curl -sSL https://install.python-poetry.org | python3 -`
+- `poetry self update`
+- uses [`pyproject.toml`](https://python-poetry.org/docs/pyproject/) and
+  `poetry.lock` to manage dependencies
+
+-- ds.code:
+lang: toml
+
+[tool.poetry]
+name = "poetry-demo"
+version = "0.1.0"
+description = ""
+authors = ["Sébastien Eustace <sebastien@eustace.io>"]
+readme = "README.md"
+packages = [{include = "poetry_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+-- ds.markdown:
+
+- `poetry add pendulum`
+- to run your script `poetry run python your_script.py` or `poetry run doit`
+- `poetry shell` to use poetry managed python in a shell
+- The current project is installed in [editable](https://pip.pypa.io/en/stable/topics/local-project-installs/)
+  mode by default.
+- `poetry update` to update lockfile. (or delete lockfile and run `poetry
+  install` again)
+- supports [dependency groups](https://python-poetry.org/docs/managing-dependencies/)
+- `poetry config --list` shows `virtualenvs.path`, that contains the
+  `python.exe` `python` binary that can be passed to editor configurations as
+  the **interpreter path**
+  
+-- end: my-ds.page

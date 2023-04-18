@@ -1,0 +1,35 @@
+-- my-ds.page: Rust: Workspace Dependencies
+
+If you are maintaining multiple crates as part of single workspace, and you want
+to use **same version for dependencies across all crates in your workspace**,
+it is possible to specify dependency version the workspace's toml file:
+
+See also: [shareing package common data](/rust/workspace-package/).
+
+-- ds.code: in workspace's `Cargo.toml`
+lang: toml
+
+[workspace]
+members = [
+    "crate1"
+]
+
+[workspace.dependencies]
+log = "0.3.1"
+log2 = { version = "2.0.0", package = "log" }
+serde = { git = 'https://github.com/serde-rs/serde' }
+wasm-bindgen-cli = { path = "crates/cli" }
+
+-- ds.code: in a workspace member's `Cargo.toml`
+lang: toml
+
+[dependencies]
+log = { workspace = true }
+
+-- ds.markdown:
+
+Since the member is saying `workspace=true` as the version for the `log` create,
+the version of log crate in the member will be inherited from the workspace.
+
+-- end: my-ds.page
+

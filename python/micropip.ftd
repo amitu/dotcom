@@ -1,0 +1,10 @@
+-- my-ds.page: micropip
+
+- [micropip](https://micropip.pyodide.org/en/stable/project/api.html) is part of
+  [pyiodide](/pyiodide/) project and can be used to install pure Python
+  packages published on PyPi, and any package for which wasm compiled wheel is
+  available, eg [pyiodide maintained ones](https://pyodide.org/en/stable/usage/packages-in-pyodide.html)
+- you can also compile your c extension package to wasm following [these
+  instructions](https://pyodide.org/en/stable/development/new-packages.html).
+
+-- end: my-ds.page

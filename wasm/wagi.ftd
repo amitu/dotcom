@@ -1,0 +1,16 @@
+-- my-ds.page: `wagi` - WebAssembly Gateway Interface
+
+wagi is like cgi for wasm. You write your module, using `wasi` so you get access
+to stdin/stdout, environment variables, and your "program" is called on every
+HTTP request, where the request data is sent on stdin, and your programs writes
+the HTTP response on stdout.
+
+- [wagi server on Github](https://github.com/deislabs/wagi)
+
+Articles:
+
+- [Deislabs | Introducing WAGI: The Easiest Way to Build WebAssembly
+  Microservices](https://deislabs.io/posts/introducing-wagi-easiest-way-to-build-webassembly-microservices/)
+- [https://radu-matei.com/blog/wagi-updates/
+
+-- end: my-ds.page

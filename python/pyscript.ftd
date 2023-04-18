@@ -1,0 +1,25 @@
+-- my-ds.page: `pyscript`
+
+- [pyscript]() runs on top of [pyiodide](/pyiodide/) and provides html tags
+  (web components) to make things easy
+
+-- ds.code:
+lang: html
+
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css"/>
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<py-script>
+    import string
+    name = "Human"
+    print(string.ascii_uppercase)
+</py-script>
+
+-- ds.code: installing packages
+lang: html
+
+<py-env>
+        - requests
+        - beautifulsoup4
+</py-env>
+
+-- end: my-ds.page

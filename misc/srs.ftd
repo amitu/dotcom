@@ -1,0 +1,112 @@
+-- my-ds.page: srs
+
+-- ds.h1: How to write good prompts
+
+Found a good [blog post](https://andymatuschak.org/prompts/) about creating
+good prompts.
+
+- Retrieval practice prompts should be **focused**. ... one detail at a time
+- Retrieval practice prompts should be **precise** about what they’re asking
+  for. Vague questions will elicit vague answers, which won’t reliably light
+  the bulbs you’re targeting.
+- Retrieval practice prompts should produce **consistent** answers, lighting the
+  same bulbs each time you perform the task. Otherwise, you may run afoul of an
+  interference phenomenon called **retrieval-induced forgetting**. This effect
+  has been produced in many experiments but is not yet well understood. For an
+  overview, see Murayama et al, Forgetting as a consequence of retrieval: a
+  meta-analytic review of retrieval-induced forgetting (2014).: what you
+  remember during practice is reinforced, but other related knowledge which you
+  didn’t recall is actually inhibited.
+- Retrieval practice prompts should be **tractable**. you should strive to write
+  prompts which you can almost always answer correctly. This often means
+  breaking the task down, or adding cues.
+- Retrieval practice prompts should be **effortful**.
+
+_Factual Prompt_: What type of chicken parts are used in stock? -> Bones.
+
+_Explanation Prompt_: Why do we use bones to make chicken stock? -> They’re full
+of gelatin, which produces a rich texture.
+
+_more precise_: How do bones produce a chicken stock’s rich texture? -> They’re
+full of gelatin.
+
+-- ds.h2: Lists
+
+_Grouping_: Chicken stock is made with chicken, water, and what other category
+of ingredients? -> Aromatics.
+
+
+_Missing Element_: Typical chicken stock aromatics:
+
+- ???
+- carrots
+- celery
+- garlic
+- parsley
+
+A: Onion
+
+Tip: keep the list in the same order [visual “shape”].
+
+> Most spaced repetition software has a special function which can rapidly
+> generate sets of fill-in-the-blank prompts like this. In the software
+> interfaces, these prompts are often called “cloze deletions.” In each review
+> session, the software will only ask you to fill in one blank. This behavior
+> is important because without it, one variant would “give away” the answer to
+> another.
+
+
+_explaination prompt_: Why is carrot a good aromatic for chicken stock? -> A
+quick answer: carrot provides vegetal sweetness; like salt, this sugar
+brightens other flavors.
+
+_elaborative encoding_: Typical chicken stock aromatics:
+
+- onion
+- carrots
+- celery
+- garlic
+- ??? (herb)
+
+A. Parsley
+
+
+_bad: gives away too much_: Typical chicken stock aromatics:
+
+- onion
+- ??? (rhymes with parrots)
+- celery
+- garlic
+- parsley
+
+A. Carrots
+
+_elaborative encoding_: Typical chicken stock aromatics
+
+- onion
+- ???
+- celery
+- garlic
+- parsley
+
+A. carrots (rhymes with “parrots”: picture a flock of parrots flying with
+carrots in their mouths, dropping them into a pot of stock)
+
+_prompt to Mnemonic_: Mnemonic device for carrots in chicken stock?
+-> rhymes with “parrots”: picture a flock of parrots flying with carrots in
+their mouths, dropping them into a pot of stock
+
+> Notice how I’ve broken the ingredient list down into many questions here, each
+> focused and precise. I’ve noticed that people often feel a compulsion to
+> economize on the number of prompts they write. Prompts seem to carry a
+> per-unit “price,” so people naturally try to write fewer questions which cover
+> more ground. But that’s counter-productive. Unless you explicitly decide to
+> exclude certain information, the number of “units of raw knowledge” is fixed, a
+> constant of the territory. When you write coarser prompts in smaller quantity,
+> you’re not reducing the amount you have to learn. You’re just making the
+> material harder to review.
+
+> write more prompts than feels natural.
+
+
+-- end: my-ds.page
