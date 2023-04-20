@@ -13,6 +13,7 @@
   [Cloudflare](https://blog.cloudflare.com/webassembly-on-cloudflare-workers/),
   [Supabase Edge Functions](https://supabase.com/blog/edge-runtime-self-hosted-deno-functions)
   all use V8, with Wasm
+- [wasm-micro-runtime - wamr](https://github.com/bytecodealliance/wasm-micro-runtime)
 
 -- ds.h1: Tools
 
