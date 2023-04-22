@@ -1,0 +1,13 @@
+-- my-ds.page: vmware
+
+vmware has an initiative, [wasmlabs](https://wasmlabs.dev) and they have built
+[wasm-workers-server](https://github.com/vmware-labs/wasm-workers-server), `wws`
+in short.
+
+> 🚀 An OSS project to develop and run serverless applications on WebAssembly
+
+[Examples](https://github.com/vmware-labs/wasm-workers-server/tree/main/examples).
+
+[Run your workers anywhere with WebAssembly](https://wasmlabs.dev/articles/run-workers-anywhere/)
+
+-- end: my-ds.page

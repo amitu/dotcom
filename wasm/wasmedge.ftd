@@ -1,0 +1,9 @@
+-- my-ds.page: wasmedge
+
+[wasmedge](https://github.com/WasmEdge/WasmEdge)
+
+- [Running JavaScript in WebAssembly with
+  WasmEdge](https://javascript.plainenglish.io/running-javascript-in-webassembly-883ec71438e1)
+- [wasmedge_wasi_socket](https://github.com/second-state/wasmedge_wasi_socket)
+
+-- end: my-ds.page

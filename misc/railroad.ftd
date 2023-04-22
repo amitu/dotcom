@@ -1,0 +1,42 @@
+-- import: amitu.github.io/dotcom/assets
+
+-- my-ds.page: railroad diagrams
+
+Railroad diagram is name for a kind of diagrams, SQLite uses [railroad diagrams
+to explain their syntax](https://www.sqlite.org/syntaxdiagrams.html):
+
+-- ds.image:
+src: $assets.files.images.sqlite-create-table.png
+
+-- ds.markdown:
+
+They use [pikchr](https://pikchr.org/home/doc/trunk/doc/sqlitesyntax.md) to
+generate these diagrams, e.g.
+[create-table-stmt.pikchr](https://www.sqlite.org/docsrc/file?name=art/syntax/create-table-stmt.pikchr&txt=1).
+
+-- ds.h1: `tabatkins/railroad-diagrams`
+
+[tabatkins/railroad-diagrams](https://github.com/tabatkins/railroad-diagrams)
+implement these kind of diagrams in Python and JavaScript. [Online
+playground](https://tabatkins.github.io/railroad-diagrams/generator.html#Diagram(%0A%20%20Optional('%2B'%2C%20'skip')%2C%0A%20%20Choice(0%2C%0A%20%20%20%20NonTerminal('name-start%20char')%2C%0A%20%20%20%20NonTerminal('escape'))%2C%0A%20%20ZeroOrMore(%0A%20%20%20%20Choice(0%2C%0A%20%20%20%20%20%20NonTerminal('name%20char')%2C%0A%20%20%20%20%20%20NonTerminal('escape'))))).
+
+I tried the python script after installing `pip install railroad-diagrams`, but
+it did not work.
+
+-- ds.code:
+lang: py
+
+import sys
+from railroad import Diagram, Choice
+d = Diagram("foo", Choice(0, "bar", "baz"), type="complex")
+d.writeSvg(sys.stdout.write)
+
+-- ds.markdown:
+
+Maybe the generated SVG is wrong?
+
+-- ds.h1: `regexper.com`
+
+[regexper can show railroad diagram for regex expression](https://regexper.com/#(%3F%3ARailroad%7CRegex)%5Cs%2BDiagrams!%3F)
+
+-- end: my-ds.page
