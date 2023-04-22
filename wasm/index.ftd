@@ -29,6 +29,7 @@ Since wasm can only speak i32, i64, f32, and f64, passing other data types like
 string, structs etc is hard. Bindgens generate glue code that helps with these
 back and forth.
 
+- https://surma.dev/things/rust-to-webassembly/index.html
 - [Rust Without Bindgen](https://surma.dev/things/rust-to-webassembly/)
 - Article: [Getting data in and out of WASI
   modules](https://petermalmgren.com/serverside-wasm-data/)
