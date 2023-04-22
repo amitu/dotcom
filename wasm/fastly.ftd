@@ -17,3 +17,5 @@ https://github.com/fastly/Viceroy
   your service to communicate with.
 
 Uses [wasmtime](/wasmtime/).
+
+-- end: my-ds.page
