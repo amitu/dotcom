@@ -41,6 +41,8 @@ favicon: images/favicon.png
 - Rust:
   - workspace dependencies: /rust/workspace-dependencies/
   - sharing package data: /rust/workspace-package/
+  - `typetag`: /typetag/
+    document: rust/typetag.ftd
 - Wasm: /wasm/
   - Fastly: /fastly/
     document: wasm/fastly.ftd
