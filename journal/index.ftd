@@ -282,7 +282,7 @@ the `ds.h1`. We can generate it by rendering it by temporarily removing the
 children.
 
 -- ds.code:
-lang: rs
+lang: ftd
 
 \-- import: fastn.io/-/refs  ;; <hl>
 
@@ -291,6 +291,8 @@ lang: rs
 
 ;; to get the full version
 \-- refs.the-section.full:
+
+-- ds.markdown:
 
 This allows us to either include just the abstract or the full version. We can
 also use the "abstract" version for auto generated glossary of the site, or for
