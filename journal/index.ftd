@@ -1,0 +1,440 @@
+-- my-ds.page: Journal
+
+
+-- ds.h1: TIL: Text Fragment Linking
+
+25th Apr 2023
+
+[Scroll to text fragment](https://stackoverflow.com/questions/62161819)
+
+You can create a link like `https://fastn.com/#:~:text=Build%20anything&text=hello`
+and when someone visits the page the browser will scroll to that location, and
+it will highlight the selection. [Try
+it](https://fastn.com/#:~:text=Build%20anything&text=hello).
+
+You can also use `#:~:text=<first word>,<last word>` to highlight entire para.
+And you can use `:target` pseudo-class to explicitly style the selection.
+
+You can [opt out of this feature](https://github.com/WICG/scroll-to-text-fragment#opting-out) as well for your document.
+
+Works in Safari as well!
+
+-- ds.h1: Restarting Journal-ing
+
+I used to do a lot of journaling for ftd and fpm way back. Starting again.
+Can't wait for us to implement mixed visibility for documents, so I can note
+down my private entries as well in this file. As of now only public stuff can
+go here.
+
+-- ds.h1: Optional Closing
+
+So there was a problem in fastn design that I have been struggling with since
+almost 2 year now, and Arpita kind of solved it. The funniest thing is the
+solution was kind of a bug, which now is going to become one of the coolest
+feature.
+
+The problem: including content defined in document into another. I want this to
+be easy to do, and the syntax must be easy, and clean.
+
+Let's say we have a document like this:
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- ds.h1: this is a section
+
+This is some content, which technically belongs to the h1. This
+para itself is not a problem as it gets passed to `ds.h1` as body.
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+\-- ds.markdown:
+
+And this para.
+
+\-- ds.h2: why even this belongs to the h1
+
+\-- ds.h1: but not this one
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+So, if someone wants to include just the first `ds.h1` content, including all
+its "logical" children, meaning all the content till the next `ds.h1` or end of
+the container, how do they do it?
+
+The naive way to do this in `fastn` right now is to create a component.
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- component the-section:  ;; <hl>
+
+\-- ftd.column:  ;; <hl>
+
+\-- ds.h1: this is a section
+
+This is some content, which technically belongs to the h1. This
+para itself is not a problem as it gets passed to `ds.h1` as body.
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+\-- ds.markdown:
+
+And this para.
+
+\-- ds.h2: why even this belongs to the h1
+
+\-- end: ds.column  ;; <hl>
+
+\-- end: the-section  ;; <hl>
+
+\-- the-section:  ;; <hl>
+
+\-- ds.h1: but not this one
+
+\-- end: ds.page
+
+
+-- ds.markdown:
+
+Not fond of all those lines I added. Adding `ftd.column` is completely noisy, we
+had to add the column because a component body can contain only single ftd
+element. The code is even buggy, we have to give full width to the column and
+make sure the column inherits the gap property of the `ds.page`. But this we
+can solve, we are planning to allow a component contain more than one top level
+components.
+
+We will still have the create component line, the end component line, and the
+invocation line, as if we only define the component and not use it, it's
+content will not show up in the page. So three lines.
+
+What I have shown is also currently not possible as a component can not be
+defined while we are in the middle of another component (`ds.page` in this
+case), so we have to move the component definition before or after `ds.page`
+invocation. This problem will also go with time.
+
+If we want to use this in another document we have to do:
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn.io/hello-world  ;; <hl>
+
+\-- ds.page: my new page
+
+\-- hello-world.the-section:  ;; <hl>
+
+\-- end: ds.page
+
+
+-- ds.markdown:
+
+This is not that bad. Just two lines. But this too has a bit of a problem, what
+if we move the definition of `the-section` to another document? It's not a big
+problem, but this is very common referencing problem, referencing different
+definitions, images etc defined in other part of site is a common problem, and
+if we have a lot of references set up moving content around becomes a problem.
+
+This is why sphinx, latex etc allow you to reference by an id alone, without
+worrying about where the id is defined.
+
+-- ds.h2: A Failed Solution
+
+What if we auto created the "component" based on the `id` property:
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- ds.h1: this is a section
+id: the-section
+
+This is some content, which technically belongs to the h1. This
+para itself is not a problem as it gets passed to `ds.h1` as body.
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+\-- ds.markdown:
+
+And this para.
+
+\-- ds.h2: why even this belongs to the h1
+
+\-- ds.h1: but not this one
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+And make it such that this worked still.
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn.io/hello-world  ;; <hl>
+
+\-- ds.page: my new page
+
+\-- hello-world.the-section:  ;; <hl>
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+Wait, how would we know what all to include?
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- ds.h1: this is a section  ;; <hl>
+id: the-section  ;; <hl>
+
+This is some content, which technically belongs to the h1. This  ;; <hl>
+para itself is not a problem as it gets passed to `ds.h1` as body.  ;; <hl>
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+-- ds.markdown:
+
+These much is obvious, we look for the section with matching id, and we include
+it. How do we tell ftd to include till the next h1?
+
+We had a fancy solution for this. We even implemented in 0.2 version of ftd. We
+called it [auto renesting or something](https://github.com/fastn-stack/fastn/blob/df63ce17115ba2c27c060345280eb1eb920e697d/ftd/src/ftd2021/ui.rs#L1758).
+What we did was allow you to specify a "region" on any component, eg for h1 you
+can say its region is "heading-1" or something, and we scan the document, and
+every sibling that proceeds a component with a region is automatically nested
+under that component, till we reach a section with same or higher region.
+
+We removed this feature soon, as it caused some issues with the structure of the
+generated DOM. We could have fixed it, but I found the feature a bit too tricky
+to implement, explain etc. It was a bit magical. And required careful setup.
+
+-- ds.h2: The Final Solution
+
+So the problem is how do we know till what point does the `ds.h1` extend to? And
+we do not want to rely on auto-renesting. What if we allowed the `-- end:
+ds.h1`? This is a standard way to end things.
+
+And this is where we realised there is a bug. See, `ds.h1` is defined to accept
+children, meaning `-- end: ds.h1` is actually allowed, and if you use it, the
+enclosed content will become children of `ds.h1`, but if you do not include
+`-- end: ds.h1`, the proceeding sections are simply siblings.
+
+This "the `-- end: <container-component>` for any container-component is
+optional" felt like a bug to me. "It's a container, it must use `-- end:`" was
+my thinking. But this bug basically lets you omit the `-- end:` if you do not
+want to pass any children to the container, and often we do not want to. I guess
+this is what Aprita was thinking when she impelmented this bug/feature.
+
+After speaking with her I have come around to seeing things from her point of
+view and I consider it a feature now.
+
+-- ds.h2: Coming Back To The ID
+
+So what can we do about the "reference not breaking of content is moved"
+problem?
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn.io/-/refs  ;; <hl>
+
+\-- ds.page: my new page
+
+\-- refs.the-section:  ;; <hl>
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+We basically create a special module, `fastn.io/-/refs` where we embed all the
+`id`, after converting each section with `id` to a virtual component. And now
+the definition of `the-section` can be moved to any document and the above
+document will keep on working.
+
+-- ds.h2: Abstract Vs Full
+
+Now that we have to setup `ds.h1` with children, we can define the `ds.h1`,
+without children, with just the caption, headers and body, as the "abstract" of
+the `ds.h1`. We can generate it by rendering it by temporarily removing the
+children.
+
+-- ds.code:
+lang: rs
+
+\-- import: fastn.io/-/refs  ;; <hl>
+
+;; to get just the abstract
+\-- refs.the-section:
+
+;; to get the full version
+\-- refs.the-section.full:
+
+This allows us to either include just the abstract or the full version. We can
+also use the "abstract" version for auto generated glossary of the site, or for
+search results. We can also use the abstract for if the reference is just
+linked instead of being transcluded in the current document, in this case we
+can show the abstract as a tooltop, like how Wikipedia does.
+
+-- ds.h2: External Referencing And Citation
+
+We can import `/-/refs` belonging to other packages as well, and this was we can
+refer to things published on other website. We can also put extra data on the
+section so we can do citation as well:
+
+-- ds.code:
+lang: rs
+
+\-- import: einstien.com/-/refs as erefs  ;; <hl>
+
+;; to get just the abstract
+\-- erefs.theory-of-relativity:
+
+\-- citation.credits: erefs.theory-of-relativity.cite  <hl>
+
+-- ds.h1: Nix Actions In Github
+
+Came across [this blog post](https://determinate.systems/posts/nix-github-actions)
+about using nix instead of Github's custom action framework for installing
+dependencies.
+
+Has listed good reasons to consider nix, many actions may not exist, or many
+actions may exist for the same task and you have to now research, or maybe the
+actions do not support all the platforms you are interested in, and finally you
+can not run the exact dependency used by your action locally.
+
+With nix you work in the same shell day to day, and the exact same versions run
+on Github.
+
+-- ds.h1: Nushell
+
+Came across [some project](https://github.com/nix-systems/current-system/blob/main/flake.nix)
+using [`nuenv`](https://github.com/DeterminateSystems/nuenv), which lets you
+write `nu` scripts instead of bash in your `nix` files. Made me curious and
+checked out `nu` once again.
+
+It is quite close to PowerShell, you pipe around tables and records instead of
+text. Has support for dataframe for example. And is a immutable, function
+programming language to write your shell scripts/functions in. And you can
+write your [plugins in Rust](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_example/src/main.rs).
+Plugins basically communicate with nushell via stdin/out using JSON or
+messagepack.
+
+-- ds.h1: CLI Idea - curler
+
+So I learnt about [`curl -d` pattern](til/#curl-d) today. What if we had a cli
+to assist with this:
+
+-- ds.code:
+lang: sh
+
+curl https://api.my-site.com/follow -d $(cat ~/.my-site.session) -d username=amitu
+
+Say we have ~/.curler.json.
+
+-- ds.code:
+lang: json
+
+{
+    "my-site": {
+        "endpoint": "https://api.my-site.com/",
+        "session": "~/.my-site.session"
+    }
+}
+
+-- ds.code:
+lang: sh
+
+curler mysite follow --username=amitu
+
+-- ds.markdown:
+
+We can even create site specific executables.
+
+-- ds.code: this is in your `.zshrc`
+lang: sh
+
+curler rehash
+PATH=$PATH:~/.curler/bin
+
+-- ds.markdown:
+
+`curler rehash` will read `~/.curler.json` and create binaries for every site
+in `~/.curler/bin` so you can do:
+
+-- ds.code:
+lang: sh
+
+mysite follow amitu
+
+-- ds.markdown:
+
+We have not given specified username here, as follow takes only one argument,
+username. We can create a spec for this:
+
+-- ds.code: `curler.json`
+lang: json
+
+{
+    "my-site": {
+        "endpoint": "https://api.my-site.com/",
+        "session": "~/.my-site.session",
+        "commands": {
+            "follow": {
+                "about": "Follow your friend."
+                "api": "/follow",
+                "arguments": {
+                    "username": {
+                        "type": "string",
+                        "required": true,
+                        "positional": true,
+                        "about": "The username to follow"
+                    }
+                }
+            }
+        }
+    }
+}
+
+-- ds.markdown:
+
+The spec json can define the entire cli arguments, with sub commands etc. We
+can put basic validations. We can also put TUI UI creation, so you can just call
+the `my-site` command, and it shows you a list of options about what all can you
+do.
+
+Ideally the spec should be itself retrivable via the API, so we do not have to
+store them. If the spec allows validations or some computation or IO that can
+cause potential security issue, we can do hash pinning, the or maybe the specs
+are distributed as part of some community, so you can look at the ratings,
+reviews etc to decide if you want to trust it or not.
+
+How to construct the UI? Can we use `fastn` for this? Further there is the
+question of response. Do we just show the JSON? For many cases a syntax
+highlighted json would be enough. But if we had the power of fastn we can do
+much more.
+
+
+-- end: my-ds.page

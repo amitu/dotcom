@@ -1,0 +1,24 @@
+-- my-ds.page: `atuin` - 🐢 Magical shell history
+
+Github: [ellie/atuin](https://github.com/ellie/atuin)
+
+> - rebind ctrl-r and up (configurable) to a full screen history search UI
+> - store shell history in a sqlite database
+> - backup and sync encrypted shell history
+> - the same history across terminals, across sessions, and across machines
+> - log exit code, cwd, hostname, session, command duration, etc
+> - calculate statistics such as "most used command"
+> - switch filter modes via ctrl-r; search history just from the current
+    session, directory, or globally
+
+
+-- ds.code: install and use their sync server
+lang: sh
+
+bash <(curl https://raw.githubusercontent.com/ellie/atuin/main/install.sh)
+
+atuin register -u <USERNAME> -e <EMAIL> -p <PASSWORD>
+atuin import auto
+atuin sync
+
+-- end: my-ds.page

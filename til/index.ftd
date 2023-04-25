@@ -1,0 +1,29 @@
+-- my-ds.page: TIL
+
+-- ds.h1: `curl -d` pattern
+id: curl-d
+
+25th Apr 2023
+
+Usually passing authentication to curl is hard, so most of the times we take all
+actions against websites via browser or app specific CLIs.
+
+-- ds.code:
+lang: sh
+
+curl https://api.atuin.sh/enable -d $(cat ~/.local/share/atuin/session)
+
+-- ds.markdown:
+
+Store a session in a session file, and call clean APIs to take action on your
+behalf, passing it the session information.
+
+You can pass `-d` multiple times to pass extra information:
+
+-- ds.code:
+lang: sh
+
+curl https://api.my-site.com/follow -d $(cat ~/.my-site.session) -d username=amitu
+
+
+-- end: my-ds.page

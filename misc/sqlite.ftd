@@ -1,0 +1,41 @@
+-- my-ds.page: sqlite
+
+
+-- ds.h1: rowid tables
+
+https://www.sqlite.org/rowidtable.html
+
+-- ds.h1: Listening For Table Changes
+
+https://til.simonwillison.net/sqlite/track-timestamped-changes-to-a-table
+
+-- ds.h1: Sharing In Memory DB
+
+Multiple threads can open the same in-memory db.
+
+-- ds.code:
+lang: rs
+
+fn test_unlock_notify() -> Result<()> {
+    let url = "file::memory:?cache=shared";
+    let flags = OpenFlags::SQLITE_OPEN_READ_WRITE | OpenFlags::SQLITE_OPEN_URI;
+    let db1 = Connection::open_with_flags(url, flags)?;
+    db1.execute_batch("CREATE TABLE foo (x)")?;
+    let (rx, tx) = sync_channel(0);
+    let child = thread::spawn(move || {
+        let mut db2 = Connection::open_with_flags(url, flags).unwrap();
+        let tx2 = Transaction::new(&mut db2, TransactionBehavior::Immediate).unwrap();
+        tx2.execute_batch("INSERT INTO foo VALUES (42)").unwrap();
+        rx.send(1).unwrap();
+        let ten_millis = time::Duration::from_millis(10);
+        thread::sleep(ten_millis);
+        tx2.commit().unwrap();
+    });
+    assert_eq!(tx.recv().unwrap(), 1);
+    let the_answer: i64 = db1.one_column("SELECT x FROM foo")?;
+    assert_eq!(42i64, the_answer);
+    child.join().unwrap();
+    Ok(())
+}
+
+-- end: my-ds.page
