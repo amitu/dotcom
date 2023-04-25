@@ -1,9 +1,25 @@
 -- my-ds.page: Journal
 
 
--- ds.h1: Restarting Journal-ing
+-- ds.h1: TIL: Text Fragment Linking
 
 25th Apr 2023
+
+[Scroll to text fragment](https://stackoverflow.com/questions/62161819)
+
+You can create a link like `https://fastn.com/#:~:text=Build%20anything&text=hello`
+and when someone visits the page the browser will scroll to that location, and
+it will highlight the selection. [Try
+it](https://fastn.com/#:~:text=Build%20anything&text=hello).
+
+You can also use `#:~:text=<first word>,<last word>` to highlight entire para.
+And you can use `:target` pseudo-class to explicitly style the selection.
+
+You can [opt out of this feature](https://github.com/WICG/scroll-to-text-fragment#opting-out) as well for your document.
+
+Works in Safari as well!
+
+-- ds.h1: Restarting Journal-ing
 
 I used to do a lot of journaling for ftd and fpm way back. Starting again.
 Can't wait for us to implement mixed visibility for documents, so I can note
@@ -257,6 +273,46 @@ We basically create a special module, `fastn.io/-/refs` where we embed all the
 `id`, after converting each section with `id` to a virtual component. And now
 the definition of `the-section` can be moved to any document and the above
 document will keep on working.
+
+-- ds.h2: Abstract Vs Full
+
+Now that we have to setup `ds.h1` with children, we can define the `ds.h1`,
+without children, with just the caption, headers and body, as the "abstract" of
+the `ds.h1`. We can generate it by rendering it by temporarily removing the
+children.
+
+-- ds.code:
+lang: rs
+
+\-- import: fastn.io/-/refs  ;; <hl>
+
+;; to get just the abstract
+\-- refs.the-section:
+
+;; to get the full version
+\-- refs.the-section.full:
+
+This allows us to either include just the abstract or the full version. We can
+also use the "abstract" version for auto generated glossary of the site, or for
+search results. We can also use the abstract for if the reference is just
+linked instead of being transcluded in the current document, in this case we
+can show the abstract as a tooltop, like how Wikipedia does.
+
+-- ds.h2: External Referencing And Citation
+
+We can import `/-/refs` belonging to other packages as well, and this was we can
+refer to things published on other website. We can also put extra data on the
+section so we can do citation as well:
+
+-- ds.code:
+lang: rs
+
+\-- import: einstien.com/-/refs as erefs  ;; <hl>
+
+;; to get just the abstract
+\-- erefs.theory-of-relativity:
+
+\-- citation.credits: erefs.theory-of-relativity.cite  <hl>
 
 -- ds.h1: Nix Actions In Github
 
