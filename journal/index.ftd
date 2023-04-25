@@ -1,9 +1,63 @@
 -- my-ds.page: Journal
 
-
--- ds.h1: TIL: Text Fragment Linking
+-- ds.h1: jupylite_duckdb
 
 25th Apr 2023
+
+I am generally having mind blown with WASM. First there was [`pyiodide`]
+(/pyiodide/) which let's you run Python in browser or any wasm capable backend.
+Why does it matter? Imagine if we can run `Python` without installing it on the
+end users machine, say end user only installs `fastn` binary, and it internally
+contains Python via wasm! And unlike regular Python, where there is no safety,
+it can do anything, this will be completely caged Python, where scripts you
+download will have controlled CPU/RAM/network/file access.
+
+And then there is [jupyterlite](https://jupyterlite.readthedocs.io/en/latest/)
+which lets you run Jupyter Notebook in browser.
+
+And while Python is good, what about database? Supabase people have already
+gotten PostgreSQL running in browser, and now there is duckdb also. PostgreSQL
+is more of a demo, but duckdb in browser, and SQLite in browser for that
+matter, and minus the browser part, these on wasm server, read `fastn` can be
+totally game changing.
+
+Why DuckDB and not SQLite? DuckDB is column oriented, so more analytics
+workloads instead of row oriented SQLite. Also DuckDB is more strongly typed,
+SQLite is not so strict.
+
+-- ds.h1: `miette` vs `ariadne`
+
+Been working on a sort of re-architecture of `fastn`, and it's kind of making
+me re-write/refactor significant portion of `fastn`, and during this I stumbled
+upon an opportunity to improve the error messages. I love the [error messages of
+Elm](https://elm-lang.org/news/compiler-errors-for-humans) or Rust. And have
+always wanted to implement something like that in `fastn`.
+
+We are creating very fine grained error types to represent exact error, so we
+have the basic machinery in place. Now we have to do actual error printing. We
+can do that from scratch, and get complete control over the messages, or we use
+some existing crate and save ourselves some bother.
+
+Came across these two crates, [`meitte`](https://github.com/zkat/miette) and
+[`ariadne`](https://github.com/zesterer/ariadne). The two have very similar
+stats, `meitte` gets more downloads than `ariadne` but not enough to be
+undisputed winner.
+
+The tldr of why I am leaning towards `ariadne` is 1. `ariadne` is written as a
+companion library for [chumsky](https://github.com/zesterer/chumsky/), a crate
+to help "write expressive, high-performance parsers with ease", so while we are
+not using `chumsky` and have hand written the parser, we may consider using
+`chumsky` because it has a feature that our parser lacks, "powerful error
+recovery", `chumsky` parsers keep going as much as they can and do not bail at
+first error message. 2. `meitte` seems to have higher download count because it
+is too much tied with `std::error::Error`, people get error and error stack,
+and need a good way to print that error stack, and this is where `meitte` comes
+in, where as `ariadne` is written for programming language parser related error
+messages. Most people are not writing programming language parsers, so it has
+less usage in the wild.
+
+
+-- ds.h1: TIL: Text Fragment Linking
 
 [Scroll to text fragment](https://stackoverflow.com/questions/62161819)
 
