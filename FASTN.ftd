@@ -14,6 +14,8 @@ favicon: images/favicon.png
 
 -- fastn.sitemap:
 
+# Journal: /journal/
+
 # Tech: /git/attributes/
 
 ## General: /git/attributes/

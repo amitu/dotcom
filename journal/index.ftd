@@ -403,7 +403,7 @@ lang: json
         "session": "~/.my-site.session",
         "commands": {
             "follow": {
-                "about": "Follow your friend."
+                "about": "Follow your friend.",
                 "api": "/follow",
                 "arguments": {
                     "username": {
