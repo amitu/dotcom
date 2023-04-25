@@ -21,4 +21,4 @@ atuin register -u <USERNAME> -e <EMAIL> -p <PASSWORD>
 atuin import auto
 atuin sync
 
--- ds.h1: Enable 
+-- end: my-ds.page
