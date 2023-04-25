@@ -1,0 +1,18 @@
+-- my-ds.page: TIL
+
+-- ds.h1: `curl -d` pattern
+id: curl-d
+
+25th Apr 2023
+
+-- ds.code:
+lang: sh
+
+curl https://api.atuin.sh/enable -d $(cat ~/.local/share/atuin/session)
+
+-- ds.markdown:
+
+Store a session in a session file, and call clean APIs to take action on your
+behalf, passing it the session information.
+
+-- end: my-ds.page
