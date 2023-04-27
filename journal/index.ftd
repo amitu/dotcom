@@ -2,9 +2,13 @@
 
 -- my-ds.page: Journal
 
--- ds.h1: Embed `sqlite` or `postgre`?
+-- ds.h1: TIL: `steampipe`
 
 27th Apr 2023
+
+[Notes](/steampipe/).
+
+-- ds.h1: Embed `sqlite` or `postgre`?
 
 I have been thinking of embedded `sqlite` as the in-memory storage mechanism in
 `fastn` so I can make `fastn` internal stuff, like current package, documents

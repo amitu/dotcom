@@ -34,6 +34,8 @@ favicon: images/favicon.png
     document: devops/ttl-sh.ftd
   - elephant-sql: /elephant-sql/
     document: pg/elephant-sql.ftd
+  - steampipe: /steampipe/
+    document: devops/steampipe.ftd
 - Python:
   - `doit`: /doit/
     document: python/doit.ftd
