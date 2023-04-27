@@ -1,5 +1,78 @@
 -- my-ds.page: Journal
 
+-- ds.h1: `trustfall` - How to Query (Almost) Everything
+
+27th Apr 2023
+
+Generally been mindblown by this [How to Query (Almost) Everything](https://www.hytradboi.com/2022/how-to-query-almost-everything)
+talk by [Predrag Gruevski](https://predr.ag/about/).
+
+-- ds.iframe:
+src: https://archive.org/embed/hytradboi2022
+
+-- ds.markdown:
+
+[`trustfall`](https://docs.rs/trustfall/latest/trustfall/) is a Rust crate,
+which helps you create GraphQL backend. It is the backend of
+[cargo-semver-checks](https://predr.ag/blog/speeding-up-rust-semver-checking-by-over-2000x/),
+a crate that checks your Rust crate if it is violating semver norms (breaking change
+without incrementing major version number), it's kind of confusing why such a
+crate need GraphQL? Wasn't GraphQL for exposing APIs? Where is the API here,
+this is a standalone crate!
+
+Turns out that `trustfall` let's you connect disparate datasources together, a
+single trustfall query may use HTTP APIs, databases, file system etc etc
+together, and `trustfall` let's you tie them together. This way the users of the
+query are not aware where the data is coming from, they only know of the schema.
+
+I have been skeptical about GraphQL because of their [resolver design](https://graphql.org/learn/execution/#root-fields-resolvers), each field is
+resolved by the backend, and it is hard to know what other fields would be
+needed when one field is being resolved, so if you are fetching data for a
+field from database or API, you may end up making one DB query / API call for
+each field being resolved.
+
+Predrag has addressed this issue in his [Compiled GraphQL as a database query
+language](https://blog.kensho.com/compiled-graphql-as-a-database-query-language-72e106844282),
+they basically built a GraphQL to SQL compiler, which ensured minimum number of
+DB queries are made for most GraphQL queries, claim is all GraphQL queries
+supported by them make only one DB call.
+
+Coming back to `trustfall`, `trustfall` is not the "compile query to SQL"
+approach as mentioned in the previous blog post, but relies on "there are
+enough hints available to you to do the right thing" approach. Consider the
+example he has shared in the [cargo-semver-checks optimisation post](https://predr.ag/blog/speeding-up-rust-semver-checking-by-over-2000x/):
+
+-- ds.code:
+lang: rs
+
+if let Some(value_resolver) = query_info
+    .destination()                  // -> item vertex info
+    .first_edge("importable_path")  // edge's own info
+    .destination()                  // -> path vertex info
+    .dynamic_field_value("path")    // implied property value
+{
+    // Fast path: we're looking up items by path.
+    // The returned `value_resolver` can tell us
+    // the specific path needed for each result.
+    resolve_items_using_name_index(value_resolver, ...)
+} else {
+    // Slow path: the query is doing something else.
+    // Resolve all items normally.
+    resolve_all_items(...)
+}
+
+-- ds.markdown:
+
+Basically when you are resolving a field, you get `query_info`, to which you can
+ask what other fields are used in this query. Say you are resolving `name`, and
+you are going to make a db call to fetch the `name`, but using `query_info` you
+know that `age` is also used in the same query, you can fetch both `name` and
+`age`, put `age` aside, and when the `age` resolver is called, you can return
+the pre-cached `age` and do not have to do any DB call.
+
+His goal was "We want the _minimal possible_ API that can _still support
+everything we might ever want_", and I think `trustfall` delivers on this.
+
 -- ds.h1: `ariadne` vs `rink`
 
 26th Apr 2023
@@ -14,7 +87,7 @@ Consider the error you get when you run `elm make` in an empty folder:
 -- ds.code: elm make error
 lang: text
 
--- NO elm.json FILE ------------------------------------------------------------
+\-- NO elm.json FILE ------------------------------------------------------------
 
 It looks like you are starting a new Elm project. Very exciting! Try running:
 
