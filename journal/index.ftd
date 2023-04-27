@@ -1,5 +1,267 @@
 -- my-ds.page: Journal
 
+-- ds.h1: `trustfall` - How to Query (Almost) Everything
+
+27th Apr 2023
+
+Generally been mindblown by this [How to Query (Almost) Everything](https://www.hytradboi.com/2022/how-to-query-almost-everything)
+talk by [Predrag Gruevski](https://predr.ag/about/).
+
+-- ds.iframe:
+src: https://archive.org/embed/hytradboi2022
+
+-- ds.markdown:
+
+[`trustfall`](https://docs.rs/trustfall/latest/trustfall/) is a Rust crate,
+which helps you create GraphQL backend. It is the backend of
+[cargo-semver-checks](https://predr.ag/blog/speeding-up-rust-semver-checking-by-over-2000x/),
+a crate that checks your Rust crate if it is violating semver norms (breaking change
+without incrementing major version number), it's kind of confusing why such a
+crate need GraphQL? Wasn't GraphQL for exposing APIs? Where is the API here,
+this is a standalone crate!
+
+Turns out that `trustfall` let's you connect disparate datasources together, a
+single trustfall query may use HTTP APIs, databases, file system etc etc
+together, and `trustfall` let's you tie them together. This way the users of the
+query are not aware where the data is coming from, they only know of the schema.
+
+I have been skeptical about GraphQL because of their [resolver design](https://graphql.org/learn/execution/#root-fields-resolvers), each field is
+resolved by the backend, and it is hard to know what other fields would be
+needed when one field is being resolved, so if you are fetching data for a
+field from database or API, you may end up making one DB query / API call for
+each field being resolved.
+
+Predrag has addressed this issue in his [Compiled GraphQL as a database query
+language](https://blog.kensho.com/compiled-graphql-as-a-database-query-language-72e106844282),
+they basically built a GraphQL to SQL compiler, which ensured minimum number of
+DB queries are made for most GraphQL queries, claim is all GraphQL queries
+supported by them make only one DB call.
+
+Coming back to `trustfall`, `trustfall` is not the "compile query to SQL"
+approach as mentioned in the previous blog post, but relies on "there are
+enough hints available to you to do the right thing" approach. Consider the
+example he has shared in the [cargo-semver-checks optimisation post](https://predr.ag/blog/speeding-up-rust-semver-checking-by-over-2000x/):
+
+-- ds.code:
+lang: rs
+
+if let Some(value_resolver) = query_info
+    .destination()                  // -> item vertex info
+    .first_edge("importable_path")  // edge's own info
+    .destination()                  // -> path vertex info
+    .dynamic_field_value("path")    // implied property value
+{
+    // Fast path: we're looking up items by path.
+    // The returned `value_resolver` can tell us
+    // the specific path needed for each result.
+    resolve_items_using_name_index(value_resolver, ...)
+} else {
+    // Slow path: the query is doing something else.
+    // Resolve all items normally.
+    resolve_all_items(...)
+}
+
+-- ds.markdown:
+
+Basically when you are resolving a field, you get `query_info`, to which you can
+ask what other fields are used in this query. Say you are resolving `name`, and
+you are going to make a db call to fetch the `name`, but using `query_info` you
+know that `age` is also used in the same query, you can fetch both `name` and
+`age`, put `age` aside, and when the `age` resolver is called, you can return
+the pre-cached `age` and do not have to do any DB call.
+
+His goal was "We want the _minimal possible_ API that can _still support
+everything we might ever want_", and I think `trustfall` delivers on this.
+
+-- ds.h1: `ariadne` vs `rink`
+
+26th Apr 2023
+
+So yesterday I was looking at the problem of how to render the error messages
+from `fastn`, and narrowed down on `ariadne`. I started working on that, but
+before I made any progress I realised `ariadne` is only useful for some kind
+of messages.
+
+Consider the error you get when you run `elm make` in an empty folder:
+
+-- ds.code: elm make error
+lang: text
+
+\-- NO elm.json FILE ------------------------------------------------------------
+
+It looks like you are starting a new Elm project. Very exciting! Try running:
+
+    elm init
+
+It will help you get set up. It is really simple!
+
+-- ds.markdown:
+
+This is the kind of error we want to show. But `ariadne` can not be used for
+this. A message like elm one, there is no library for that, and has to be hard
+coded. What is missing in the above is that `elm init` is in green color. So
+we need color stuff as well.
+
+We can generate the messages by writing our own printers. But if we used
+`ariadne` we may get incompatible look and feels across different errors. So we
+have to give up on library and hand write everything.
+
+So I started exploring libraries like [`textwrap`](https://docs.rs/textwrap/latest/textwrap/)
+and looking into the capabilities of Rust's builtin formatter,
+[`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html#syntax). And it kind
+of depressed me. We can do it, but it's going to be major pain in the ass. Not
+only will it be a lot of code, but it will also all be in Rust, so if we have
+to modify any of those messages we have to write Rust code, meaning non Rust
+developers can not really contribute.
+
+Which is where I started thinking of [rink](https://github.com/DioxusLabs/dioxus/tree/master/packages/rink).
+Actually I played with [`dioxus-tui`](https://github.com/DioxusLabs/dioxus/tree/master/packages/dioxus-tui),
+but the code in their README did not compile when using the crates version of
+their library. Was about to give up on them, but then I tried their examples,
+and it blew my mind, so I tried using their git version of crate and it
+compiled.
+
+The `dioxus-tui` are quite big a dependency tho. So I tried `rink`, which is
+also big, but not as much. Rink is Rust version of [ink](https://github.com/vadimdemedes/ink),
+"🌈 React for interactive command-line apps". So `rink` is a bit low level, given
+some HTML/CSS, render them in terminal, where as `dioxus-tui` is more of a React
+like framework for building apps.
+
+We already have a React like framework for building app, it's called `fastn`, so
+we just need the low level ability of "given some HTML/CSS, render them in
+terminal" that `rink` offers.
+
+So the idea is we are going to try to see if the error messages can be written
+in `ftd` itself, so it is easy for us to write error messages. Talk about
+over-engineering! The coolest thing is if this works we can render fastn
+documents in terminal, and that will be super sweet.
+
+-- ds.h1: Responsive Component
+
+Currently `fastn` supports runtime support for [dark mode](https://fastn.com/ftd/built-in-types/#ftd-color)
+and [responsive dimensions](https://fastn.com/ftd/built-in-types/#ftd-length).
+But if you want to write responsive components, you have to use a `if` condition
+and create more components.
+
+-- ds.code:
+lang: ftd
+
+\-- component foo:
+caption title:
+
+\-- foo-desktop: $foo.title
+if: { ftd.device == "desktop" }
+
+\-- foo-mobile: $foo.title
+if: { ftd.device == "mobile" }
+
+\-- end: foo
+
+\-- component foo-desktop:
+caption title:
+
+;; actual logic
+
+\-- end: foo-desktop
+
+\-- component foo-mobile:
+caption title:
+
+;; actual logic
+
+\-- end: foo-mobile
+
+-- ds.markdown:
+
+This is annoying because we have to copy each property of `foo` to `foo-desktop`
+and `foo-mobile`, which is duplication and error prone. Further since we are
+allowing user to write arbitrary `if` condition on `ftd.device`, unless we do
+deep tracking of what all variables went in the `if` condition (the exact
+expression used) it becomes hard for runtime to know which branches are for
+mobile and which for desktop.
+
+Not having this knowledge means we can not do some optimisations, like consider
+google bot, they do not care about the mobile version of the site, desktop
+version usually has more content, which is what we should serve to them, and we
+should elide the mobile related parts of the DOM tree.
+
+There is a much deeper issue too with this approach. The `if` condition branches
+the DOM into two, one for mobile and other for desktop, the tree for mobile
+branch now much not worry about desktop. But if `foo-mobile` uses `bar`, and
+`bar` itself has both `bar-desktop` and `bar-mobile`, both the branches will be
+included, but `foo-mobile`'s child `bar-desktop` will never be used, and should
+never be included. This leads to an exponential increase in branches, assume
+there are `n` level DOM tree, and at each level a branching component was used,
+we end up generating `2 to power n` branches, where as we should only have
+generated a `2` branches.
+
+To solve this Arpita is going to make the following work:
+
+-- ds.code:
+lang: ftd
+
+\-- component foo:
+caption title:
+
+\-- ftd.desktop:
+
+\-- bar: $foo.title
+
+\-- end: ftd.desktop
+
+\-- ftd.mobile:
+
+\-- end: ftd.mobile
+
+\-- bar: $foo.title
+
+\-- end: foo
+
+
+-- ds.markdown:
+
+So we will create two new kernel level components, `ftd.mobile` and
+`ftd.desktop` (eventually three, we will also add `ftd.xl` as we want to
+support all three). The `ftd.mobile` can be used anywhere, and if used, it's
+children will be only included when we are in "mobile render mode", similarly
+for `ftd.desktop`. When the outer most rendering starts we will be in "both
+rendering mode", but when we encouter the first `ftd.mobile` or `ftd.desktop`
+we switch the mode to mobile or desktop. And now onwards we will simply discard
+desktop branches from inside mobile, and mobile branches from inside desktop.
+
+-- ds.h2: What About Children?
+
+-- ftd.code:
+lang: ftd
+
+\-- component foo:
+caption title:
+children c:  ;; <hl>
+
+\-- ftd.desktop:
+
+\-- bar: $foo.title
+children: $foo.c  ;; <hl>
+
+\-- end: ftd.desktop
+
+\-- ftd.mobile:
+
+\-- end: ftd.mobile
+
+\-- bar: $foo.title
+children: $foo.c  ;; <hl>
+
+\-- end: foo
+
+
+-- ds.markdown:
+
+We will end up copying the children in both branches. In 0.2 of `fastn`, Arpita
+had implemented a "reparenting" feature, which moves the children from one node
+to another when we are switching between mobile and desktop modes. We can still
+do it, but we will do it later on.
+
 -- ds.h1: jupylite_duckdb
 
 25th Apr 2023
