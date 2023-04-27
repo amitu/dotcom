@@ -1,8 +1,110 @@
+-- import: fifthtry.github.io/bling/quote
+
 -- my-ds.page: Journal
 
--- ds.h1: `trustfall` - How to Query (Almost) Everything
+-- ds.h1: Embed `sqlite` or `postgre`?
 
 27th Apr 2023
+
+I have been thinking of embedded `sqlite` as the in-memory storage mechanism in
+`fastn` so I can make `fastn` internal stuff, like current package, documents
+of this package, dependencies, content defined in the documents etc, available
+as query language to fasnt authors.
+
+`sqlite` is the ["Most Widely Deployed and Used Database Engine"](https://sqlite.org/mostdeployed.html).
+But did you know you can embed `postgre` as well?
+
+There is a project called [embedded-postgres-binaries](https://github.com/zonkyio/embedded-postgres-binaries), which has created
+postgre as single binary for a lot of platforms. There is even a Rust crate
+[pg-embed](https://crates.io/crates/pg-embed), which makes it easy to use it
+with your project. `pg-embed` basically [downloads](https://github.com/faokunega/pg-embed/blob/5b2b60608f8d7883acf60f3960beed9a5fd98459/src/pg_fetch.rs#L72)
+the right [binary provided by [embedded-postgres-binaries project](https://mvnrepository.com/artifact/io.zonky.test.postgres/embedded-postgres-binaries-bom).
+Isn't open source just the best thing ever!?
+
+What about mobile? Postgre can run on Android, but iOS would be some work, tho
+not impossible.
+
+-- ds.h2: `fastn` + `postgres`?
+
+The first thought I had was can we use `postgres` instead of `sqlite` for the
+built in stuff? Maybe not, what would be the use? `SQLite` is good enough,
+`postgres` is slightly better overall, but for this use case `sqlite` quite
+clearly wins.
+
+But what about the user data? One of the plans for `fastn` is to give hosting to
+people, and in our cloud hosting we will give you a database, which is going to
+be `postgres` of-course. So with embedded `postgres` we can let you download
+the replica on your machine, so you have `postgres` managed by us in the cloud,
+used by the `fastn` managed by us running in cloud on your behalf talk to that
+one. And then you can run `fastn` locally, and we used embedded `postgres` so
+you get a local database as well, so if we do syncing properly, everything will
+work offline for you.
+
+This has two issues, one is the iOS consideration, but I am going to assume it
+is possible to compile postgres on iOS for now. The other issue is data
+syncing. We have a bunch of ways to sync two `postgre` databases, making the
+remote one the main, and letting the local one a read replica is easiest. But
+what about local writes when we are offline? If we want perfect offline
+experience we either solve the problem of syncing, or let application
+developers worry about it.
+
+-- ds.h3: Syncing Issue
+
+Writes happening in both local and remote postgres, when they are not connected
+with each other, and them syncing once they come online, is not supported by
+`postgres`, so if we have to solve the syncing problem, we will have to solve
+it ourselves. `raft` based approach does not work because they compromise on
+availability when hit with partition.
+
+How about we monitor all write operations when offline, say there using the
+trigger functions. We now know all the changes happened on local, while we were
+not connected with remote. What if we when we come online we somehow apply
+these changes?
+
+Problem is in such problem, it is not possible to do in a generalised way
+without bring humans in the loop, due to conflicts, if say someones salary
+changed on remote to x and on local to y, what is the final salary? Only a
+human can decide is our strong belief, and we do not want to compromise on
+this. Maybe the two people who made those respective changes both communicated
+the salary via other means, do you want the database to siletnly just pick one,
+and not tell every party involved that a major fuckup has happened? Absolutely
+not.
+
+So we can keep local changes in a "draft" kind of place, and let applications
+know that they can not write to main db, but can to draft db, and call an
+application defined method to move draft to main when we are online, and may be
+handle the conflicts if need be.
+
+
+-- ds.h1: Sitemap Explorer
+
+The sitemap of fastn.com is becoming quite big now. It would be cool if we had
+some sort of explorer on top of it, say if I can quickly see all the URLs, and
+can filter out the URLs. Just as a tool for site authors.
+
+Maybe we can also have drag and drop, and other features. We can create a mini
+app just around modifying `FASTN.ftd` file.
+
+-- ds.h1: `nixos-anywhere`
+
+
+I kind of love `nix`. But it's a real time sink, so barely use it. Keep wanting
+to use it though. Anyways, came across a nice tool, [`nixos-anywhere`](https://numtide.github.io/nixos-anywhere/),
+which can install `nix` on any Linux server if you have root ssh access to it.
+
+-- ds.code:
+lang: sh
+
+nix run github:numtide/nixos-anywhere -- \
+  root@65.109.232.132 \
+  --flake .#hetzner-cloud
+
+-- ds.markdown:
+
+Checkout thier blog post for more details: [Single-Command Server
+Bootstrapping](https://galowicz.de/2023/04/05/single-command-server-bootstrap/).
+
+-- ds.h1: `trustfall` - How to Query (Almost) Everything
 
 Generally been mindblown by this [How to Query (Almost) Everything](https://www.hytradboi.com/2022/how-to-query-almost-everything)
 talk by [Predrag Gruevski](https://predr.ag/about/).
@@ -70,8 +172,29 @@ know that `age` is also used in the same query, you can fetch both `name` and
 `age`, put `age` aside, and when the `age` resolver is called, you can return
 the pre-cached `age` and do not have to do any DB call.
 
-His goal was "We want the _minimal possible_ API that can _still support
-everything we might ever want_", and I think `trustfall` delivers on this.
+His goal was:
+
+-- quote.marengo-hug: Predrag Gruevski
+
+We want the _minimal possible_ API that can _still support
+everything we might ever want_.
+
+-- ds.markdown:
+
+... and I think `trustfall` delivers on this.
+
+-- ds.h2: `trustfall` in `fastn`?
+
+What really excited me about `trustfall` is that it allows you to become the
+abstraction over all sorts of data sources. Like currently we have two different
+way to do queries in `fastn`, [http](https://fastn.com/http/) and
+[sql](https://fastn.com/sql/), and it's not great to have to change all the
+query code when the datasource changes, say what if the API changed, or the DB
+schema? Or if we wanted to get some data from DB, and some from API?
+
+To add a new data source, we have to write a new [`trustfall::provider::Adapter`](https://docs.rs/trustfall/latest/trustfall/provider/trait.Adapter.html),
+but we can not write all the Adapters. So we will have to see if Adapters can be
+written using [WASM](/wasm/) and distributed as `fastn packages`.
 
 -- ds.h1: `ariadne` vs `rink`
 
