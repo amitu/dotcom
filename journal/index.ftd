@@ -87,7 +87,7 @@ Consider the error you get when you run `elm make` in an empty folder:
 -- ds.code: elm make error
 lang: text
 
-\-- NO elm.json FILE ------------------------------------------------------------
+\-- NO elm.json FILE --------------------------------------------------
 
 It looks like you are starting a new Elm project. Very exciting! Try running:
 
@@ -231,7 +231,7 @@ desktop branches from inside mobile, and mobile branches from inside desktop.
 
 -- ds.h2: What About Children?
 
--- ftd.code:
+-- ds.code:
 lang: ftd
 
 \-- component foo:
