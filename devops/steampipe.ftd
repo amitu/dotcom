@@ -1,0 +1,37 @@
+-- import: fifthtry.github.io/bling/quote
+
+-- my-ds.page:
+
+[steampipe](https://github.com/turbot/steampipe) let's you do queries on your
+infra.
+
+-- quote.marengo-hug: steampipe README
+
+Use SQL to instantly query your cloud services (AWS, Azure, GCP and more).
+Open source CLI. No DB required.
+
+-- ds.markdown:
+
+Embeds postgres, and fetches the data in real time.
+
+-- ds.code:
+lang: sql
+
+select
+  aws.name aws_user_name,
+  slack.id as slack_user_id,
+  slack.display_name as slack_name
+from
+  aws_iam_user as aws,
+  slack_user as slack
+where
+  aws.name = slack.email;
+
++--------------------------+---------------+------------+
+|     aws_user_name        | slack_user_id | slack_name |
++--------------------------+---------------+------------+
+| dwight@dundermifflin.com | U2EMB8HLP     | dwight     |
+| jim@dundermifflin.com    | U02HE4Z7E     | jim        |
++--------------------------+---------------+------------+
+
+-- end: my-ds.page
