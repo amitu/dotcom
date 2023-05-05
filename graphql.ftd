@@ -1,0 +1,14 @@
+-- my-ds.page: GraphQL
+
+-- ds.h1: `!` => "field is non-nullable"
+
+-- ds.code:
+lang: graphql
+
+# Information on an account relationship
+type AccountEdge {
+  cursor: String!
+  node: Account!
+}
+
+-- end: my-ds.page

@@ -2,6 +2,144 @@
 
 -- my-ds.page: Journal
 
+
+-- ds.h1: Videos For FastN
+
+5th May 2023
+
+Ajit has been making videos for us. He has created an entire course already:
+[fastn.com/expander/](https://fastn.com/expander/). Now we are trying to ramp
+up social media marketing and video creation.
+
+We are doing the planning of our upcoming videos in the "planning document":
+[fastn.com/planning/](https://fastn.com/planning/). Any idea we get about
+possible video we can create, we add it to the planning video. We use some
+legends there, like `R` meaing we are ready to create this video, or `D` which
+means we have add some feature of fix some bug in `fastn` before we can create
+this video, or `P` which means this video requires some preperation, like
+creating an app, or a color scheme etc. The legends are optional, the important
+thing is to dump all the ideas there.
+
+-- ds.h2: Prioritizing Videos
+
+Once we have a list of possible videos we have to figure out what video we want
+to create next. The goal of these videos is that videos get viewed so they must
+be what our end users want. We are creating these videos for people to learn so
+anything that we feel people need to know the most should be covered by our
+videos before we start covering niche topics that only few people will need. The
+prompt to decide is if we are going to go press tomorrow, and we can make only
+one more video, that video would be viewed by a lot of people, which one should
+be that video.
+
+-- ds.h2: Video Effort
+
+One important consideration is video effort, we do not want to create videos
+that lowers our ouput. We have a lot of low hanging fruits available, we can
+create dozens or even hundreds of quick video that talks about a small aspect
+of what we have built, and yet be of help to users.
+
+-- ds.h2: Video Titles
+
+Ultimately we want people to want to see our videos and video titles play a very
+important role. The example I give is say there is a new PotX which is the best
+tea pot for making tea, if you are introducing it you can call it "What is
+PotX?", but that is a horrible name, as no one knows what is PotX and they have
+hundreads and thousands of videos to watch on youtube and other places, so it
+most likely will get ignored. Instead a title like "Best pot for making tea" or
+something, which is click-batey, will get more views.
+
+We do not want to go crazy in this direction either, we are not creating click
+batey content, that will lower our reputation among the smart people, and we
+are catering to people who are very quick to spot salesy tricks and are
+repelled by them.
+
+So the idea is to not talk about X, but talk about the benefit one gets because
+of X. The benefit should be in the title. Like there is a video "border-radius
+in fastn", now if you know what border radius this works. But what if you have
+never done CSS, what if you are a lay-person, you may deduce it has radius so
+must be something to do with circle etc, but don't make them do so much work.
+The border radius is for rounding corners. What people are looking for is how
+to create a image with rounded corners or button with rounded corners. Jump
+from radius to rounding is a big jump.
+
+-- ds.h2: Planning Cum Publishing Document
+
+For every video we want a planning document that should be created as soon as we
+start working on that video, it should contain the script, the content, code
+samples etc. Any video shared for feedback should be shared by adding the video
+in the planning document. If multiple version of the video was shot each video
+should be available in the planning document. The YouTube URL MUST NEVER BE
+SHARED. The planning video should be added in the planning section of fastn.com
+site.
+
+Once the video is done we need a "publishing document" for that video. We never
+share youtube video URLs anywhere, we share the published document for the
+video. The document should embed the video, and also contain all the relevant
+code snippets, links, supplementary material for the video. The document can
+also contain the content of the video in text form so people who can not listen
+or do not like videos can get the same content.
+
+The published document should be added to all the relevant sections in fastn
+site, under the "video couse" sub section. If the video may be helpful for
+designers include it in the designer section etc. Including a video in multiple
+section is perfectly okay and even encouraged.
+
+We have a feature in fastn that allows the same document to be published on
+multiple URLs or sections. We also have feature in fastn that allows you to
+create multiple views of the same document, so planning view can contain the
+script, the draft videos etc, and the published view can contain only the
+information relevant for end users. We should use that feature.
+
+-- ds.h2: Chat With Contributors
+
+We don't only create training videos for learning fastn, but also short video
+interviews with people who are building fastn itself. These videos can pick
+small topics like "why are we statically typed language and not dynamically
+typed like JavaScript?", or "why did we create types for dark mode handling?"
+etc. List of such videos are also in the planning document.
+
+Each such video should be 10mins or less. It should select one question or topic
+which will become the title of the video itself. The material should be semi
+technical, should go in some technical depth but not too much, ideally we
+should show 4-10 lines of code, not show whole source code file. It should be
+conversational, and should be considered entertainment and not education. So we
+are not trying to be comprehensive, discuss everything, this is also supported
+that is also supported, we just talk about one thing we are most passionate
+about.
+
+The tone should be we are very excited to share something with you. It should
+ideally not require too much planning, we are not writing scripts etc. But some
+planning in terms of what all are we going to cover in this video, what all
+questions are going to be asked should be done. Maybe a trial video should be
+created, and then based on the video, the qeustion should be written down and
+some attempt on how to answer should be done.
+
+-- ds.h2: Chat With Learners
+
+Anyone who finishes the course and has built something interesting, we have to
+do a video interview with them as well. Ajit has a Google Doc document with
+interview questions, we will move it to the planning area on fastn, and in each
+interview we should focus on a single question or two. Short is better. People
+learning others like them are learning fastn is important part, so 10 short
+videos proving 10 people have learnt is more important than 2 long videos.
+
+-- ds.h2: Self Critical
+
+The nature of content should include both good and bad things, we do not want
+the videos to be all "we are so good", we should focus and highlight why we are
+not good yet, where you will face issues if you use fastn etc. We have to
+strike a balance, we are doing sales and marketing, but we also want to remain
+authentic and honest.
+
+
+
+
+-- ds.h1: How To Think About IME?
+
+4th May 2023
+
+IME, or https://en.wikipedia.org/wiki/Input_method
+
 -- ds.h1: TIL: `steampipe`
 
 27th Apr 2023
@@ -130,6 +268,41 @@ Turns out that `trustfall` let's you connect disparate datasources together, a
 single trustfall query may use HTTP APIs, databases, file system etc etc
 together, and `trustfall` let's you tie them together. This way the users of the
 query are not aware where the data is coming from, they only know of the schema.
+
+-- ds.code:
+lang: py
+
+{
+  HackerNewsTop(max: 200) {
+    ... on HackerNewsStory {
+      hn_score: score @filter(op: ">=", value: ["$min_score"]) @output
+
+      link {
+        ... on GitHubRepository {
+          repo_url: url @output
+
+          workflows {
+            workflow: name @output
+            workflow_path: path @output
+
+            jobs {
+              job: name @output
+
+              step {
+                ... on GitHubActionsImportedStep {
+                  step: name @output
+                  action: uses @output
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+-- ds.markdown:
 
 I have been skeptical about GraphQL because of their [resolver design](https://graphql.org/learn/execution/#root-fields-resolvers), each field is
 resolved by the backend, and it is hard to know what other fields would be
