@@ -1,0 +1,17 @@
+-- my-ds.page: Rust
+
+-- ds.h1: Concepts
+
+- [sealed traits](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/)
+
+-- ds.h1: Graphics & Rendering
+
+- [A crate I want: 2d graphics](https://raphlinus.github.io/rust/graphics/2018/10/11/2d-graphics.html)
+  - Crate: [piet](https://github.com/linebender/piet)
+
+-- ds.h1: Crates
+
+- [hibitset](https://docs.rs/hibitset/)
+
+
+-- end: my-ds.page
