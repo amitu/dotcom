@@ -2,10 +2,348 @@
 
 -- my-ds.page: Journal
 
+-- ds.h1: `fastn-surface`
+
+5th May 2023
+
+Based on the discussion I had with Arpita about JS vs WASM earlier I have
+started a new crate in `fastn` repo called `fastn-surface`. The crate will have
+one main abstraction, the top level window.
+
+-- ds.code: `fastn_surface::Window`
+lang: rs
+
+struct Window {
+    // private stuff
+}
+
+-- ds.markdown:
+
+When the window is constructed it takes window `title`, and a `root`
+`fastn_surface::Element`. The window works for browser, terminal and native.
+
+
+-- ds.code:
+lang: rs
+
+enum Element {
+    FlexContainer(FlexContainer),
+    Text(Text),
+    Image(Image),
+    Code(Code),
+    TextInput(TextInput),
+}
+
+
+-- ds.markdown:
+
+Any UI that can be represented using these structures can be drawn/rendered
+using this crate. To draw/render something we need to decide the backend we are
+using. We have three backend, native, terminal and browser.
+
+-- ds.code: constructing `fastn_surface::Window` on browser
+lang: rs
+
+let root = construct_root();
+let title = "hello";
+
+let win = fastn_surface::web::create_root_window(title);
+win.run();
+
+-- ds.markdown:
+
+`.create_root_window()` uses the entire document body to show the UI. If you
+want to update only a single DOM node, say because you have an existing app and
+you only want to power a single div using `fastn`, you can use
+`fastn_surface::web::window_in_id(id, root)`, which does not take the `title`.
+
+This only works if `web` feature is enabled. We can similarly use `wgpu` or
+`terminal` features and use `fastn_surface::{wgpu,terminal}::create_root_window();`
+to create in those places. When using terminal we also have access to
+`fastn_surface::terminal::print(root, Option<u16>)` to print the UI. If
+the width is not given we will compute the terminal width.
+
+-- ds.h2: Hydration
+
+For browsers, the window can be serialised using `to_html()` method. The HTML
+should be inserted in the HTML at the right location from server side, and when
+constructing window back, `web::create_root_window()` or `window_in_id()` check
+if the serialised HTML is already present, if so it attaches event handlers.
+
+-- ds.h2: Mutating Window
+
+Once the window has been constructed, the elements can be mutated using the
+window mutation api. The mutation API ensures the surface is precisely aware
+of the change. The returned windows implement `fastn_surface::WindowMutation`
+trait.
+
+For mutating we need to identify the exact node that we want to mutate. We want
+this operation to be fast. How is the tree stored? One option is we have a top
+level simple tree.
+
+-- ds.code:
+lang: rs
+
+new_key_type! { struct NodeKey; }
+
+enum NodeKind {
+    FlexContainer,
+    Text,
+    Image,
+}
+
+struct Window {
+    nodes: SlotMap<NodeKey, u32>,
+    node_kinds: SecondaryMap<NodeKind>
+    containers: SecondaryMap<FlexContainer>,
+    text_nodes = SecondaryMap<Text>,
+    root: NodeKey,
+    root_taffy: taffy::NodeKey,
+    taffy_root: taffy::Taffy,
+}
+
+let root: NodeKey = todo!();
+
+let mut containers: SecondaryMap<FlexContainer>  = SecondaryMap::new();
+
+impl Window {
+    fn get_next_key() -> u32 {
+        todo!()
+    }
+
+    fn set_root(&mut self, &f: FlexContainer) -> NodeKey {
+        let k = self.nodes.insert(get_next_key());
+        self.node_kinds.insert(k, NodeKind::FlexContainer);
+        self.root = k;
+        k
+    }
+
+    fn create_text(&mut self, t: Text) -> NodeKey {
+        let k = self.nodes.insert(get_next_key());
+        self.node_kinds.insert(k, NodeKind::FlexContainer);
+        self.texts.insert(k, NodeKind::Text);
+        k
+    }
+
+    fn create_container(
+        &mut self, c: FlexContainer, children: Vec<NodeKey>
+    ) -> NodeKey {
+        todo!()
+    }
+
+    fn add_child(&mut self, parent: NodeKey, child: NodeKey) {
+        match self.containers.get(parent) {
+            Some(c) => {
+                c.children.push(child);
+                self.taffy.add_child(c.taffy, child.taffy);
+            }
+            None => panic!();
+        }
+    }
+}
+
+-- ds.code:
+lang: rs
+
+
+let mut dc = data_container(win);
+
+let index = dc.create_module();
+
+// -- boolean $open: true
+
+let open = dc.create_mut_boolean(index, true);
+let open_ref = dc.get_ref(open);
+
+dc.update_boolean(open, false);
+
+// -- boolean $foo: $open
+
+let foo = dc.create_alias(open);
+
+// -- boolean hello(a):
+// boolean a:
+//
+// !a
+
+let hello_wat = "
+fn hello(args: [&Any]) -> Any {
+    let a = args.0.downcast_ref::<bool>.unwrap();
+    !a as (dyn Any)
+}";
+
+let hello_a = dc.create_boolean_argument();
+let hello_return = dc.crate_boolean_return(); // record or enum also supported
+
+let hello = dc.create_function([hello_a], hello_return, hello_wat);
+
+// -- boolean bar = hello(a=$open);
+
+let bar = dc.create_formula(hello, [open_ref]);
+
+// win
+
+let mut win = web::create_root_window();
+
+
+// -- ftd.text: hello
+// color if hello($open): some_fn(red)
+
+let t = win.create_text(Text {
+    value: "Hello",
+    ..Default::default()
+});
+
+let t_color_wat = "
+
+fn t_color(args: [&Any]) -> Any {
+    let a = args.0.downcast_ref::<bool>.unwrap();
+    if hello(&Vec::new(a as Any)) {
+        Some(some_fn(&Vec::new("red" as Any))
+    } else {
+        None
+    } as Any
+}";
+
+dc.add_color_dependency(
+    [open], t, t_color_wat
+)
+
+
+dc.add_mutation(open, t, |node, value| {
+    if value {
+        win.set_text_color(node, "red")
+    }
+})
+
+let c = FlexContainer {
+    gap: Option<usize>,
+    direction: <>,
+    children: Vec<NodeKey>,
+    taffy: taffy::NodeKey,
+};
+
+c_id = win.set_root(c);
+
+let t = Text {
+    value: "hello".to_string(),
+    // other text related styles
+}
+
+t_id = win.create_text_with_parent(t, c_id);
+
+
+
+-- ds.h2: Events
+
+The window release events. Event handlers can be attached to `Element`.
+
+-- ds.h2: Mental Model For UI and Data
+
+While the `fastn-surface` is designed for UI, it is optimally used if the data
+model is in sync with UI.
+
+
+
+-- ds.h1: Pyret Playground
+
+
+Pyret is a language, and they have an online playground, and they use Google
+Drive to [store your pyret files](https://www.pyret.org/cpo-faq/). I find it
+quite interesting. They could have created their own store but that would have
+been pain. Or they could have used Github, the traditional store for storing
+source code, but they Google Drive gives you a bigger target audiance.
+
+They store the refresh tokens, and access Google Drive using the tokens when the
+document is needed. If we have to take inspiration from them, we can give a
+playground if fastn can be compiled as a WASM binary. They our playground would
+only have to worry about how to fetch files from Google Drive and pass to wasm.
+No other backend stuff required.
+
+-- ds.h1: JavaScript vs WASM vs ?
+
+[Summary of my chat with Aprita]
+
+In `ftd` we allow people to create functions. These functions are exectued
+either on page generation time, or after the page is rendered, called from
+event handlers.
+
+When we are tagetting web browser, terminal, native UI and embedded systems
+where our functions have to run.
+
+We have a few ways to run our functions. One is we add JS as an internal
+dependency to `fastn`, and compile all fastn functions to JS functions and let
+JS run it. In browser we already have a browser engine so websites would be
+relatively fast to load. Browsers are also very good at JIT compiling the JS
+functions, so they will run pretty fast as well. But for terminal, native,
+embedded now we will need to ship QuickJS or some such.
+
+Our next option is WASM. We compile fastn functions to WASM and add `wasmtime`
+or `wasmer` as a dependency, and let them optimise our generated code. These
+will run pretty fast thanks to wasmtime etc. But wasm may be a heavy dependency,
+especially for embedded systems.
+
+Or we write our "interpreter", or byte code machine like Python etc. To run them
+in browser we have to either translate our code in both interpreter and in JS
+or send the interpreter to browser as WASM. If we generate both interpreter and
+JS, keeping the behaviour of `fastn` functions same in both may get tricky.
+This approach has least dependencies, and also what we do right now. But our
+function library is small, function language is minimal, does not even support
+`if`s, so this will not continue to be easy.
+
+-- ds.h2: wasm functions
+
+do we allow people to write fastn functions in wasm? We can take a target
+specific answer here, we can say wasm is a target capability, and not fasnt
+capability. User then is in most control, they can opt in to go with wasm or
+not, and if they go with wasm they will get access to functions written in
+wasm, but their code will now not work in places where wasm is not available.
+
+The best solution seems we have interpreter, JS generator and opt in wasm. The
+interpreter can also use wasm is supported on that device as a optimisation.
+
+-- ds.h2: limits on RAM and CPU
+
+If we go with interperter approach, how to do we limit RAM and CPU? Both
+interpreted code and wasm can implement these limits.
+
+-- ds.h2: Shared Hosting
+
+We are planning to give shared hosting, so interpreter approach on our shared
+host will be quite wasteful for us, as interpreter is worse than WASM. But we
+can do wasm code generation from fastn function to solve this.
+
+-- ds.h2: Three Execution Modes
+
+The AST generated from fastn has to be 1. directly interpreted for embedded
+systems which can't run WASM or JS, 2. translated into JS code for browsers and
+3. translated in WAT code for shared hosting or maybe even dynamic
+hosting/regular fastn.
+
+WASM and JS can take us quite far. Terminal and native UI can take WASM
+dependency. So we do not have to build the interpreter for now and build it
+only when embedded device support is needed.
+
+If we are generating WASM, we do not even have to generate JS for now, as JS
+without WASM is an optimisation.
+
+-- ds.h2: What About Runtime?
+
+Runtime's job is to call functions when event happen, and modify the UI based on
+events and dependencies etc. If we take WASM as a dependency for compiling
+event handlers, the runtime can also be written in WASM.
+
+-- ds.h2: Is WASM < JS for Browsers?
+
+We do not even know that. JS (99+%) is more supported than WASM (95%). But what
+about wasm size vs JS code size? Are we preferring JS because JS is helpful for
+the 95%, or because we want the extra 4%? If the motivation is 4%, what would
+be this figure in 2024? WASM will become more popular with time. So JS backend,
+unless it delivers significant advantage (size much smaller or speed much
+better) over WASM is a bet against time.
 
 -- ds.h1: Videos For FastN
 
-5th May 2023
 
 Ajit has been making videos for us. He has created an entire course already:
 [fastn.com/expander/](https://fastn.com/expander/). Now we are trying to ramp
