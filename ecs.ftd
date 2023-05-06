@@ -1,3 +1,5 @@
+-- my-ds.page: ECS
+
 https://mbuffett.com/posts/bevy-snake-tutorial/
 
 https://bevyengine.org/news/introducing-bevy/
@@ -21,3 +23,5 @@ https://kyren.github.io/2018/09/14/rustconf-talk.html
 
 
 https://www.geeksforgeeks.org/binary-space-partitioning/
+
+-- end: my-ds.page
