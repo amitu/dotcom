@@ -1,0 +1,920 @@
+-- import: fifthtry.github.io/bling/quote
+
+-- my-ds.page: AmitU's Journal - April 2023
+
+-- ds.h1: TIL: `steampipe`
+
+27th Apr 2023
+
+[Notes](/steampipe/).
+
+-- ds.h1: Embed `sqlite` or `postgre`?
+
+I have been thinking of embedded `sqlite` as the in-memory storage mechanism in
+`fastn` so I can make `fastn` internal stuff, like current package, documents
+of this package, dependencies, content defined in the documents etc, available
+as query language to fasnt authors.
+
+`sqlite` is the ["Most Widely Deployed and Used Database Engine"](https://sqlite.org/mostdeployed.html).
+But did you know you can embed `postgre` as well?
+
+There is a project called [embedded-postgres-binaries](https://github.com/zonkyio/embedded-postgres-binaries), which has created
+postgre as single binary for a lot of platforms. There is even a Rust crate
+[pg-embed](https://crates.io/crates/pg-embed), which makes it easy to use it
+with your project. `pg-embed` basically [downloads](https://github.com/faokunega/pg-embed/blob/5b2b60608f8d7883acf60f3960beed9a5fd98459/src/pg_fetch.rs#L72)
+the right [binary provided by [embedded-postgres-binaries project](https://mvnrepository.com/artifact/io.zonky.test.postgres/embedded-postgres-binaries-bom).
+Isn't open source just the best thing ever!?
+
+What about mobile? Postgre can run on Android, but iOS would be some work, tho
+not impossible.
+
+-- ds.h2: `fastn` + `postgres`?
+
+The first thought I had was can we use `postgres` instead of `sqlite` for the
+built in stuff? Maybe not, what would be the use? `SQLite` is good enough,
+`postgres` is slightly better overall, but for this use case `sqlite` quite
+clearly wins.
+
+But what about the user data? One of the plans for `fastn` is to give hosting to
+people, and in our cloud hosting we will give you a database, which is going to
+be `postgres` of-course. So with embedded `postgres` we can let you download
+the replica on your machine, so you have `postgres` managed by us in the cloud,
+used by the `fastn` managed by us running in cloud on your behalf talk to that
+one. And then you can run `fastn` locally, and we used embedded `postgres` so
+you get a local database as well, so if we do syncing properly, everything will
+work offline for you.
+
+This has two issues, one is the iOS consideration, but I am going to assume it
+is possible to compile postgres on iOS for now. The other issue is data
+syncing. We have a bunch of ways to sync two `postgre` databases, making the
+remote one the main, and letting the local one a read replica is easiest. But
+what about local writes when we are offline? If we want perfect offline
+experience we either solve the problem of syncing, or let application
+developers worry about it.
+
+-- ds.h3: Syncing Issue
+
+Writes happening in both local and remote postgres, when they are not connected
+with each other, and them syncing once they come online, is not supported by
+`postgres`, so if we have to solve the syncing problem, we will have to solve
+it ourselves. `raft` based approach does not work because they compromise on
+availability when hit with partition.
+
+How about we monitor all write operations when offline, say there using the
+trigger functions. We now know all the changes happened on local, while we were
+not connected with remote. What if we when we come online we somehow apply
+these changes?
+
+Problem is in such problem, it is not possible to do in a generalised way
+without bring humans in the loop, due to conflicts, if say someones salary
+changed on remote to x and on local to y, what is the final salary? Only a
+human can decide is our strong belief, and we do not want to compromise on
+this. Maybe the two people who made those respective changes both communicated
+the salary via other means, do you want the database to siletnly just pick one,
+and not tell every party involved that a major fuckup has happened? Absolutely
+not.
+
+So we can keep local changes in a "draft" kind of place, and let applications
+know that they can not write to main db, but can to draft db, and call an
+application defined method to move draft to main when we are online, and may be
+handle the conflicts if need be.
+
+
+-- ds.h1: Sitemap Explorer
+
+The sitemap of fastn.com is becoming quite big now. It would be cool if we had
+some sort of explorer on top of it, say if I can quickly see all the URLs, and
+can filter out the URLs. Just as a tool for site authors.
+
+Maybe we can also have drag and drop, and other features. We can create a mini
+app just around modifying `FASTN.ftd` file.
+
+-- ds.h1: `nixos-anywhere`
+
+
+I kind of love `nix`. But it's a real time sink, so barely use it. Keep wanting
+to use it though. Anyways, came across a nice tool, [`nixos-anywhere`](https://numtide.github.io/nixos-anywhere/),
+which can install `nix` on any Linux server if you have root ssh access to it.
+
+-- ds.code:
+lang: sh
+
+nix run github:numtide/nixos-anywhere -- \
+  root@65.109.232.132 \
+  --flake .#hetzner-cloud
+
+-- ds.markdown:
+
+Checkout thier blog post for more details: [Single-Command Server
+Bootstrapping](https://galowicz.de/2023/04/05/single-command-server-bootstrap/).
+
+-- ds.h1: `trustfall` - How to Query (Almost) Everything
+
+Generally been mindblown by this [How to Query (Almost) Everything](https://www.hytradboi.com/2022/how-to-query-almost-everything)
+talk by [Predrag Gruevski](https://predr.ag/about/).
+
+-- ds.iframe:
+src: https://archive.org/embed/hytradboi2022
+
+-- ds.markdown:
+
+[`trustfall`](https://docs.rs/trustfall/latest/trustfall/) is a Rust crate,
+which helps you create GraphQL backend. It is the backend of
+[cargo-semver-checks](https://predr.ag/blog/speeding-up-rust-semver-checking-by-over-2000x/),
+a crate that checks your Rust crate if it is violating semver norms (breaking change
+without incrementing major version number), it's kind of confusing why such a
+crate need GraphQL? Wasn't GraphQL for exposing APIs? Where is the API here,
+this is a standalone crate!
+
+Turns out that `trustfall` let's you connect disparate datasources together, a
+single trustfall query may use HTTP APIs, databases, file system etc etc
+together, and `trustfall` let's you tie them together. This way the users of the
+query are not aware where the data is coming from, they only know of the schema.
+
+-- ds.code:
+lang: py
+
+{
+  HackerNewsTop(max: 200) {
+    ... on HackerNewsStory {
+      hn_score: score @filter(op: ">=", value: ["$min_score"]) @output
+
+      link {
+        ... on GitHubRepository {
+          repo_url: url @output
+
+          workflows {
+            workflow: name @output
+            workflow_path: path @output
+
+            jobs {
+              job: name @output
+
+              step {
+                ... on GitHubActionsImportedStep {
+                  step: name @output
+                  action: uses @output
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+-- ds.markdown:
+
+I have been skeptical about GraphQL because of their [resolver design](https://graphql.org/learn/execution/#root-fields-resolvers), each field is
+resolved by the backend, and it is hard to know what other fields would be
+needed when one field is being resolved, so if you are fetching data for a
+field from database or API, you may end up making one DB query / API call for
+each field being resolved.
+
+Predrag has addressed this issue in his [Compiled GraphQL as a database query
+language](https://blog.kensho.com/compiled-graphql-as-a-database-query-language-72e106844282),
+they basically built a GraphQL to SQL compiler, which ensured minimum number of
+DB queries are made for most GraphQL queries, claim is all GraphQL queries
+supported by them make only one DB call.
+
+Coming back to `trustfall`, `trustfall` is not the "compile query to SQL"
+approach as mentioned in the previous blog post, but relies on "there are
+enough hints available to you to do the right thing" approach. Consider the
+example he has shared in the [cargo-semver-checks optimisation post](https://predr.ag/blog/speeding-up-rust-semver-checking-by-over-2000x/):
+
+-- ds.code:
+lang: rs
+
+if let Some(value_resolver) = query_info
+    .destination()                  // -> item vertex info
+    .first_edge("importable_path")  // edge's own info
+    .destination()                  // -> path vertex info
+    .dynamic_field_value("path")    // implied property value
+{
+    // Fast path: we're looking up items by path.
+    // The returned `value_resolver` can tell us
+    // the specific path needed for each result.
+    resolve_items_using_name_index(value_resolver, ...)
+} else {
+    // Slow path: the query is doing something else.
+    // Resolve all items normally.
+    resolve_all_items(...)
+}
+
+-- ds.markdown:
+
+Basically when you are resolving a field, you get `query_info`, to which you can
+ask what other fields are used in this query. Say you are resolving `name`, and
+you are going to make a db call to fetch the `name`, but using `query_info` you
+know that `age` is also used in the same query, you can fetch both `name` and
+`age`, put `age` aside, and when the `age` resolver is called, you can return
+the pre-cached `age` and do not have to do any DB call.
+
+His goal was:
+
+-- quote.marengo-hug: Predrag Gruevski
+
+We want the _minimal possible_ API that can _still support
+everything we might ever want_.
+
+-- ds.markdown:
+
+... and I think `trustfall` delivers on this.
+
+-- ds.h2: `trustfall` in `fastn`?
+
+What really excited me about `trustfall` is that it allows you to become the
+abstraction over all sorts of data sources. Like currently we have two different
+way to do queries in `fastn`, [http](https://fastn.com/http/) and
+[sql](https://fastn.com/sql/), and it's not great to have to change all the
+query code when the datasource changes, say what if the API changed, or the DB
+schema? Or if we wanted to get some data from DB, and some from API?
+
+To add a new data source, we have to write a new [`trustfall::provider::Adapter`](https://docs.rs/trustfall/latest/trustfall/provider/trait.Adapter.html),
+but we can not write all the Adapters. So we will have to see if Adapters can be
+written using [WASM](/wasm/) and distributed as `fastn packages`.
+
+-- ds.h1: `ariadne` vs `rink`
+
+26th Apr 2023
+
+So yesterday I was looking at the problem of how to render the error messages
+from `fastn`, and narrowed down on `ariadne`. I started working on that, but
+before I made any progress I realised `ariadne` is only useful for some kind
+of messages.
+
+Consider the error you get when you run `elm make` in an empty folder:
+
+-- ds.code: elm make error
+lang: text
+
+\-- NO elm.json FILE --------------------------------------------------
+
+It looks like you are starting a new Elm project. Very exciting! Try running:
+
+    elm init
+
+It will help you get set up. It is really simple!
+
+-- ds.markdown:
+
+This is the kind of error we want to show. But `ariadne` can not be used for
+this. A message like elm one, there is no library for that, and has to be hard
+coded. What is missing in the above is that `elm init` is in green color. So
+we need color stuff as well.
+
+We can generate the messages by writing our own printers. But if we used
+`ariadne` we may get incompatible look and feels across different errors. So we
+have to give up on library and hand write everything.
+
+So I started exploring libraries like [`textwrap`](https://docs.rs/textwrap/latest/textwrap/)
+and looking into the capabilities of Rust's builtin formatter,
+[`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html#syntax). And it kind
+of depressed me. We can do it, but it's going to be major pain in the ass. Not
+only will it be a lot of code, but it will also all be in Rust, so if we have
+to modify any of those messages we have to write Rust code, meaning non Rust
+developers can not really contribute.
+
+Which is where I started thinking of [rink](https://github.com/DioxusLabs/dioxus/tree/master/packages/rink).
+Actually I played with [`dioxus-tui`](https://github.com/DioxusLabs/dioxus/tree/master/packages/dioxus-tui),
+but the code in their README did not compile when using the crates version of
+their library. Was about to give up on them, but then I tried their examples,
+and it blew my mind, so I tried using their git version of crate and it
+compiled.
+
+The `dioxus-tui` are quite big a dependency tho. So I tried `rink`, which is
+also big, but not as much. Rink is Rust version of [ink](https://github.com/vadimdemedes/ink),
+"🌈 React for interactive command-line apps". So `rink` is a bit low level, given
+some HTML/CSS, render them in terminal, where as `dioxus-tui` is more of a React
+like framework for building apps.
+
+We already have a React like framework for building app, it's called `fastn`, so
+we just need the low level ability of "given some HTML/CSS, render them in
+terminal" that `rink` offers.
+
+So the idea is we are going to try to see if the error messages can be written
+in `ftd` itself, so it is easy for us to write error messages. Talk about
+over-engineering! The coolest thing is if this works we can render fastn
+documents in terminal, and that will be super sweet.
+
+-- ds.h1: Responsive Component
+
+Currently `fastn` supports runtime support for [dark mode](https://fastn.com/ftd/built-in-types/#ftd-color)
+and [responsive dimensions](https://fastn.com/ftd/built-in-types/#ftd-length).
+But if you want to write responsive components, you have to use a `if` condition
+and create more components.
+
+-- ds.code:
+lang: ftd
+
+\-- component foo:
+caption title:
+
+\-- foo-desktop: $foo.title
+if: { ftd.device == "desktop" }
+
+\-- foo-mobile: $foo.title
+if: { ftd.device == "mobile" }
+
+\-- end: foo
+
+\-- component foo-desktop:
+caption title:
+
+;; actual logic
+
+\-- end: foo-desktop
+
+\-- component foo-mobile:
+caption title:
+
+;; actual logic
+
+\-- end: foo-mobile
+
+-- ds.markdown:
+
+This is annoying because we have to copy each property of `foo` to `foo-desktop`
+and `foo-mobile`, which is duplication and error prone. Further since we are
+allowing user to write arbitrary `if` condition on `ftd.device`, unless we do
+deep tracking of what all variables went in the `if` condition (the exact
+expression used) it becomes hard for runtime to know which branches are for
+mobile and which for desktop.
+
+Not having this knowledge means we can not do some optimisations, like consider
+google bot, they do not care about the mobile version of the site, desktop
+version usually has more content, which is what we should serve to them, and we
+should elide the mobile related parts of the DOM tree.
+
+There is a much deeper issue too with this approach. The `if` condition branches
+the DOM into two, one for mobile and other for desktop, the tree for mobile
+branch now much not worry about desktop. But if `foo-mobile` uses `bar`, and
+`bar` itself has both `bar-desktop` and `bar-mobile`, both the branches will be
+included, but `foo-mobile`'s child `bar-desktop` will never be used, and should
+never be included. This leads to an exponential increase in branches, assume
+there are `n` level DOM tree, and at each level a branching component was used,
+we end up generating `2 to power n` branches, where as we should only have
+generated a `2` branches.
+
+To solve this Arpita is going to make the following work:
+
+-- ds.code:
+lang: ftd
+
+\-- component foo:
+caption title:
+
+\-- ftd.desktop:
+
+\-- bar: $foo.title
+
+\-- end: ftd.desktop
+
+\-- ftd.mobile:
+
+\-- end: ftd.mobile
+
+\-- bar: $foo.title
+
+\-- end: foo
+
+
+-- ds.markdown:
+
+So we will create two new kernel level components, `ftd.mobile` and
+`ftd.desktop` (eventually three, we will also add `ftd.xl` as we want to
+support all three). The `ftd.mobile` can be used anywhere, and if used, it's
+children will be only included when we are in "mobile render mode", similarly
+for `ftd.desktop`. When the outer most rendering starts we will be in "both
+rendering mode", but when we encouter the first `ftd.mobile` or `ftd.desktop`
+we switch the mode to mobile or desktop. And now onwards we will simply discard
+desktop branches from inside mobile, and mobile branches from inside desktop.
+
+-- ds.h2: What About Children?
+
+-- ds.code:
+lang: ftd
+
+\-- component foo:
+caption title:
+children c:  ;; <hl>
+
+\-- ftd.desktop:
+
+\-- bar: $foo.title
+children: $foo.c  ;; <hl>
+
+\-- end: ftd.desktop
+
+\-- ftd.mobile:
+
+\-- end: ftd.mobile
+
+\-- bar: $foo.title
+children: $foo.c  ;; <hl>
+
+\-- end: foo
+
+
+-- ds.markdown:
+
+We will end up copying the children in both branches. In 0.2 of `fastn`, Arpita
+had implemented a "reparenting" feature, which moves the children from one node
+to another when we are switching between mobile and desktop modes. We can still
+do it, but we will do it later on.
+
+-- ds.h1: jupylite_duckdb
+
+25th Apr 2023
+
+I am generally having mind blown with WASM. First there was [`pyiodide`]
+(/pyiodide/) which let's you run Python in browser or any wasm capable backend.
+Why does it matter? Imagine if we can run `Python` without installing it on the
+end users machine, say end user only installs `fastn` binary, and it internally
+contains Python via wasm! And unlike regular Python, where there is no safety,
+it can do anything, this will be completely caged Python, where scripts you
+download will have controlled CPU/RAM/network/file access.
+
+And then there is [jupyterlite](https://jupyterlite.readthedocs.io/en/latest/)
+which lets you run Jupyter Notebook in browser.
+
+And while Python is good, what about database? Supabase people have already
+gotten PostgreSQL running in browser, and now there is duckdb also. PostgreSQL
+is more of a demo, but duckdb in browser, and SQLite in browser for that
+matter, and minus the browser part, these on wasm server, read `fastn` can be
+totally game changing.
+
+Why DuckDB and not SQLite? DuckDB is column oriented, so more analytics
+workloads instead of row oriented SQLite. Also DuckDB is more strongly typed,
+SQLite is not so strict.
+
+-- ds.h1: `miette` vs `ariadne`
+
+Been working on a sort of re-architecture of `fastn`, and it's kind of making
+me re-write/refactor significant portion of `fastn`, and during this I stumbled
+upon an opportunity to improve the error messages. I love the [error messages of
+Elm](https://elm-lang.org/news/compiler-errors-for-humans) or Rust. And have
+always wanted to implement something like that in `fastn`.
+
+We are creating very fine grained error types to represent exact error, so we
+have the basic machinery in place. Now we have to do actual error printing. We
+can do that from scratch, and get complete control over the messages, or we use
+some existing crate and save ourselves some bother.
+
+Came across these two crates, [`meitte`](https://github.com/zkat/miette) and
+[`ariadne`](https://github.com/zesterer/ariadne). The two have very similar
+stats, `meitte` gets more downloads than `ariadne` but not enough to be
+undisputed winner.
+
+The tldr of why I am leaning towards `ariadne` is 1. `ariadne` is written as a
+companion library for [chumsky](https://github.com/zesterer/chumsky/), a crate
+to help "write expressive, high-performance parsers with ease", so while we are
+not using `chumsky` and have hand written the parser, we may consider using
+`chumsky` because it has a feature that our parser lacks, "powerful error
+recovery", `chumsky` parsers keep going as much as they can and do not bail at
+first error message. 2. `meitte` seems to have higher download count because it
+is too much tied with `std::error::Error`, people get error and error stack,
+and need a good way to print that error stack, and this is where `meitte` comes
+in, where as `ariadne` is written for programming language parser related error
+messages. Most people are not writing programming language parsers, so it has
+less usage in the wild.
+
+
+-- ds.h1: TIL: Text Fragment Linking
+
+[Scroll to text fragment](https://stackoverflow.com/questions/62161819)
+
+You can create a link like `https://fastn.com/#:~:text=Build%20anything&text=hello`
+and when someone visits the page the browser will scroll to that location, and
+it will highlight the selection. [Try
+it](https://fastn.com/#:~:text=Build%20anything&text=hello).
+
+You can also use `#:~:text=<first word>,<last word>` to highlight entire para.
+And you can use `:target` pseudo-class to explicitly style the selection.
+
+You can [opt out of this feature](https://github.com/WICG/scroll-to-text-fragment#opting-out) as well for your document.
+
+Works in Safari as well!
+
+-- ds.h1: Restarting Journal-ing
+
+I used to do a lot of journaling for ftd and fpm way back. Starting again.
+Can't wait for us to implement mixed visibility for documents, so I can note
+down my private entries as well in this file. As of now only public stuff can
+go here.
+
+-- ds.h1: Optional Closing
+
+So there was a problem in fastn design that I have been struggling with since
+almost 2 year now, and Arpita kind of solved it. The funniest thing is the
+solution was kind of a bug, which now is going to become one of the coolest
+feature.
+
+The problem: including content defined in document into another. I want this to
+be easy to do, and the syntax must be easy, and clean.
+
+Let's say we have a document like this:
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- ds.h1: this is a section
+
+This is some content, which technically belongs to the h1. This
+para itself is not a problem as it gets passed to `ds.h1` as body.
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+\-- ds.markdown:
+
+And this para.
+
+\-- ds.h2: why even this belongs to the h1
+
+\-- ds.h1: but not this one
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+So, if someone wants to include just the first `ds.h1` content, including all
+its "logical" children, meaning all the content till the next `ds.h1` or end of
+the container, how do they do it?
+
+The naive way to do this in `fastn` right now is to create a component.
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- component the-section:  ;; <hl>
+
+\-- ftd.column:  ;; <hl>
+
+\-- ds.h1: this is a section
+
+This is some content, which technically belongs to the h1. This
+para itself is not a problem as it gets passed to `ds.h1` as body.
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+\-- ds.markdown:
+
+And this para.
+
+\-- ds.h2: why even this belongs to the h1
+
+\-- end: ds.column  ;; <hl>
+
+\-- end: the-section  ;; <hl>
+
+\-- the-section:  ;; <hl>
+
+\-- ds.h1: but not this one
+
+\-- end: ds.page
+
+
+-- ds.markdown:
+
+Not fond of all those lines I added. Adding `ftd.column` is completely noisy, we
+had to add the column because a component body can contain only single ftd
+element. The code is even buggy, we have to give full width to the column and
+make sure the column inherits the gap property of the `ds.page`. But this we
+can solve, we are planning to allow a component contain more than one top level
+components.
+
+We will still have the create component line, the end component line, and the
+invocation line, as if we only define the component and not use it, it's
+content will not show up in the page. So three lines.
+
+What I have shown is also currently not possible as a component can not be
+defined while we are in the middle of another component (`ds.page` in this
+case), so we have to move the component definition before or after `ds.page`
+invocation. This problem will also go with time.
+
+If we want to use this in another document we have to do:
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn.io/hello-world  ;; <hl>
+
+\-- ds.page: my new page
+
+\-- hello-world.the-section:  ;; <hl>
+
+\-- end: ds.page
+
+
+-- ds.markdown:
+
+This is not that bad. Just two lines. But this too has a bit of a problem, what
+if we move the definition of `the-section` to another document? It's not a big
+problem, but this is very common referencing problem, referencing different
+definitions, images etc defined in other part of site is a common problem, and
+if we have a lot of references set up moving content around becomes a problem.
+
+This is why sphinx, latex etc allow you to reference by an id alone, without
+worrying about where the id is defined.
+
+-- ds.h2: A Failed Solution
+
+What if we auto created the "component" based on the `id` property:
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- ds.h1: this is a section
+id: the-section
+
+This is some content, which technically belongs to the h1. This
+para itself is not a problem as it gets passed to `ds.h1` as body.
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+\-- ds.markdown:
+
+And this para.
+
+\-- ds.h2: why even this belongs to the h1
+
+\-- ds.h1: but not this one
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+And make it such that this worked still.
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn.io/hello-world  ;; <hl>
+
+\-- ds.page: my new page
+
+\-- hello-world.the-section:  ;; <hl>
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+Wait, how would we know what all to include?
+
+-- ds.code:
+lang: ftd
+
+\-- ds.page: hello world
+
+\-- ds.h1: this is a section  ;; <hl>
+id: the-section  ;; <hl>
+
+This is some content, which technically belongs to the h1. This  ;; <hl>
+para itself is not a problem as it gets passed to `ds.h1` as body.  ;; <hl>
+
+\-- ds.code: but consider this code for example
+lang: md
+
+This is a sibling of the `ds.h1`
+
+-- ds.markdown:
+
+These much is obvious, we look for the section with matching id, and we include
+it. How do we tell ftd to include till the next h1?
+
+We had a fancy solution for this. We even implemented in 0.2 version of ftd. We
+called it [auto renesting or something](https://github.com/fastn-stack/fastn/blob/df63ce17115ba2c27c060345280eb1eb920e697d/ftd/src/ftd2021/ui.rs#L1758).
+What we did was allow you to specify a "region" on any component, eg for h1 you
+can say its region is "heading-1" or something, and we scan the document, and
+every sibling that proceeds a component with a region is automatically nested
+under that component, till we reach a section with same or higher region.
+
+We removed this feature soon, as it caused some issues with the structure of the
+generated DOM. We could have fixed it, but I found the feature a bit too tricky
+to implement, explain etc. It was a bit magical. And required careful setup.
+
+-- ds.h2: The Final Solution
+
+So the problem is how do we know till what point does the `ds.h1` extend to? And
+we do not want to rely on auto-renesting. What if we allowed the `-- end:
+ds.h1`? This is a standard way to end things.
+
+And this is where we realised there is a bug. See, `ds.h1` is defined to accept
+children, meaning `-- end: ds.h1` is actually allowed, and if you use it, the
+enclosed content will become children of `ds.h1`, but if you do not include
+`-- end: ds.h1`, the proceeding sections are simply siblings.
+
+This "the `-- end: <container-component>` for any container-component is
+optional" felt like a bug to me. "It's a container, it must use `-- end:`" was
+my thinking. But this bug basically lets you omit the `-- end:` if you do not
+want to pass any children to the container, and often we do not want to. I guess
+this is what Aprita was thinking when she impelmented this bug/feature.
+
+After speaking with her I have come around to seeing things from her point of
+view and I consider it a feature now.
+
+-- ds.h2: Coming Back To The ID
+
+So what can we do about the "reference not breaking of content is moved"
+problem?
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn.io/-/refs  ;; <hl>
+
+\-- ds.page: my new page
+
+\-- refs.the-section:  ;; <hl>
+
+\-- end: ds.page
+
+-- ds.markdown:
+
+We basically create a special module, `fastn.io/-/refs` where we embed all the
+`id`, after converting each section with `id` to a virtual component. And now
+the definition of `the-section` can be moved to any document and the above
+document will keep on working.
+
+-- ds.h2: Abstract Vs Full
+
+Now that we have to setup `ds.h1` with children, we can define the `ds.h1`,
+without children, with just the caption, headers and body, as the "abstract" of
+the `ds.h1`. We can generate it by rendering it by temporarily removing the
+children.
+
+-- ds.code:
+lang: ftd
+
+\-- import: fastn.io/-/refs  ;; <hl>
+
+;; to get just the abstract
+\-- refs.the-section:
+
+;; to get the full version
+\-- refs.the-section.full:
+
+-- ds.markdown:
+
+This allows us to either include just the abstract or the full version. We can
+also use the "abstract" version for auto generated glossary of the site, or for
+search results. We can also use the abstract for if the reference is just
+linked instead of being transcluded in the current document, in this case we
+can show the abstract as a tooltop, like how Wikipedia does.
+
+-- ds.h2: External Referencing And Citation
+
+We can import `/-/refs` belonging to other packages as well, and this was we can
+refer to things published on other website. We can also put extra data on the
+section so we can do citation as well:
+
+-- ds.code:
+lang: rs
+
+\-- import: einstien.com/-/refs as erefs  ;; <hl>
+
+;; to get just the abstract
+\-- erefs.theory-of-relativity:
+
+\-- citation.credits: erefs.theory-of-relativity.cite  <hl>
+
+-- ds.h1: Nix Actions In Github
+
+Came across [this blog post](https://determinate.systems/posts/nix-github-actions)
+about using nix instead of Github's custom action framework for installing
+dependencies.
+
+Has listed good reasons to consider nix, many actions may not exist, or many
+actions may exist for the same task and you have to now research, or maybe the
+actions do not support all the platforms you are interested in, and finally you
+can not run the exact dependency used by your action locally.
+
+With nix you work in the same shell day to day, and the exact same versions run
+on Github.
+
+-- ds.h1: Nushell
+
+Came across [some project](https://github.com/nix-systems/current-system/blob/main/flake.nix)
+using [`nuenv`](https://github.com/DeterminateSystems/nuenv), which lets you
+write `nu` scripts instead of bash in your `nix` files. Made me curious and
+checked out `nu` once again.
+
+It is quite close to PowerShell, you pipe around tables and records instead of
+text. Has support for dataframe for example. And is a immutable, function
+programming language to write your shell scripts/functions in. And you can
+write your [plugins in Rust](https://github.com/nushell/nushell/blob/main/crates/nu_plugin_example/src/main.rs).
+Plugins basically communicate with nushell via stdin/out using JSON or
+messagepack.
+
+-- ds.h1: CLI Idea - curler
+
+So I learnt about [`curl -d` pattern](til/#curl-d) today. What if we had a cli
+to assist with this:
+
+-- ds.code:
+lang: sh
+
+curl https://api.my-site.com/follow -d $(cat ~/.my-site.session) -d username=amitu
+
+Say we have ~/.curler.json.
+
+-- ds.code:
+lang: json
+
+{
+    "my-site": {
+        "endpoint": "https://api.my-site.com/",
+        "session": "~/.my-site.session"
+    }
+}
+
+-- ds.code:
+lang: sh
+
+curler mysite follow --username=amitu
+
+-- ds.markdown:
+
+We can even create site specific executables.
+
+-- ds.code: this is in your `.zshrc`
+lang: sh
+
+curler rehash
+PATH=$PATH:~/.curler/bin
+
+-- ds.markdown:
+
+`curler rehash` will read `~/.curler.json` and create binaries for every site
+in `~/.curler/bin` so you can do:
+
+-- ds.code:
+lang: sh
+
+mysite follow amitu
+
+-- ds.markdown:
+
+We have not given specified username here, as follow takes only one argument,
+username. We can create a spec for this:
+
+-- ds.code: `curler.json`
+lang: json
+
+{
+    "my-site": {
+        "endpoint": "https://api.my-site.com/",
+        "session": "~/.my-site.session",
+        "commands": {
+            "follow": {
+                "about": "Follow your friend.",
+                "api": "/follow",
+                "arguments": {
+                    "username": {
+                        "type": "string",
+                        "required": true,
+                        "positional": true,
+                        "about": "The username to follow"
+                    }
+                }
+            }
+        }
+    }
+}
+
+-- ds.markdown:
+
+The spec json can define the entire cli arguments, with sub commands etc. We
+can put basic validations. We can also put TUI UI creation, so you can just call
+the `my-site` command, and it shows you a list of options about what all can you
+do.
+
+Ideally the spec should be itself retrivable via the API, so we do not have to
+store them. If the spec allows validations or some computation or IO that can
+cause potential security issue, we can do hash pinning, the or maybe the specs
+are distributed as part of some community, so you can look at the ratings,
+reviews etc to decide if you want to trust it or not.
+
+How to construct the UI? Can we use `fastn` for this? Further there is the
+question of response. Do we just show the JSON? For many cases a syntax
+highlighted json would be enough. But if we had the power of fastn we can do
+much more.
+
+
+-- end: my-ds.page
