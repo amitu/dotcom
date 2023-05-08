@@ -1,0 +1,88 @@
+Layout - Holy Grail
+
+
+After the Parser:
+
+- column:
+    width: auto
+    height: auto
+    - header: column
+      height: 100px
+      width: fill-container
+    - central-area: row
+        width: auto
+        height: auto
+        - left-sidebar: column
+          width: flex 1
+          height: auto
+        - main-area: column
+          width: flex 2
+          height: auto
+          - title: row
+            - width: 100%
+            - height: 10%
+        - right-sidebar: column
+          width: flex 1
+          height: auto
+    - footer: column
+      height: 100px
+      width: fill-container
+
+layouting pass:
+
+- column:
+    width: 1000
+    height: 1000
+    top: 0
+    left: 0
+    - header: column
+      height: 100
+      width: 1000
+      top: 0
+      left: 0
+    - central-area: row
+        width: 1000
+        height: 800
+        top: 100
+        left: 0
+        - left-sidebar: column
+          width: 250
+          height: 800
+          top: 100
+          left: 0
+        - main-area: column
+          width: 500
+          height: 800
+          top: 100
+          left: 250
+          - title: ftd.text
+            width: 500
+            height: 80
+            top: 100
+            left: 250
+        - right-sidebar: column
+          width: 250
+          height: 800
+          top: 100
+          left: 750
+    - footer: column
+      height: 100
+      width: 1000
+
+
+    width: 1000
+    height: 1000
+    top: 0
+    left: 0
+
+
+
+draw_rect(1000, 1000, 0, 0, white)
+
+    draw_triangle((0, 0), (1000, 0), (1000, 0), "white")
+    draw_triangle((1000, 0), (1000, 0), (1000, 1000), "white")
+
+
+    draw_triangle((1000, 0), (1000, 0), (1000, 1000), "hello.png")
+
+

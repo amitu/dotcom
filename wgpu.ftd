@@ -2,4 +2,31 @@
 
 https://github.com/gfx-rs/wgpu/wiki/Running-on-the-Web-with-WebGPU-and-WebGL
 
+
+-- ds.h1: Text Rendering
+
+https://github.com/hecrj/wgpu_glyph is powered by
+https://github.com/alexheretic/glyph-brush. There is also
+https://github.com/Blatko1/wgpu-text. wgpu-text has StagingBelt for future
+but wgpu_glyph already uses that. wgpu_glyph also has 10 times more stars, 31 vs
+378 as of 6th May 2023. [iced-rs uses wgpu_glyph](https://github.com/iced-rs/iced/blob/master/wgpu/Cargo.toml)
+and so does [coffee, a game engine](https://github.com/search?q=repo%3Ahecrj%2Fcoffee%20wgpu_glyph&type=code).
+
+Another crate for text rendering: https://github.com/dfrg/swash.
+
+THere is also https://github.com/linebender/piet, and
+
+https://github.com/nical/lyon/ is a "tessalator", they generate [vertex and
+index buffers that can be fed into wgpu](https://github.com/nical/lyon/blob/a6e9fc98d25dd5cd6f948edf67a3fa2116e04956/examples/wgpu/src/main.rs).
+
+https://github.com/rust-skia/rust-skia, a wrapper for https://skia.org/docs/,
+which is used in Chrome.
+
+
+-- ds.h1: `force_fallback_adapter`
+
+One problem with WebGPU is that there are many implementations. Each device has
+potentially a different hardware. Which means potentially your code will work
+slightly differently on each. There is also a software adapter.
+
 -- end: my-ds.page

@@ -15,7 +15,10 @@ favicon: images/favicon.png
 
 -- fastn.sitemap:
 
-# Journal: /journal/
+# Journal: /journal/23-05/
+
+- May, 2023: /journal/23-05/
+- Apr, 2023: /journal/23-04/
 
 # Tech: /git/attributes/
 
