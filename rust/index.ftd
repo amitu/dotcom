@@ -3,6 +3,7 @@
 -- ds.h1: Concepts
 
 - [sealed traits](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/)
+- [thread per core](https://www.datadoghq.com/blog/engineering/introducing-glommio/#what-is-thread-per-core)
 
 -- ds.h1: Graphics & Rendering
 

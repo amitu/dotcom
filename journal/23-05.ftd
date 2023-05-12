@@ -1,4 +1,48 @@
--- my-ds.page: Journal
+-- my-ds.page: AmitU's Journal - May 2023
+
+-- ds.h1: `fastn-runtime`
+
+12th May 2023
+
+I have renamed our `fastn-surface` discord channel, and the `fastn-surface`
+crates to `fastn-runtime`. I was thinking we can create just the UI layer, and
+runtime would be a separate crate. Surface for a thing to draw on, and I
+thought maybe our drawing utilities can be used by other.
+
+Turns out we can not do that easily. Drawing requires optimisation, like what
+event changed what part of UI. Also drawing surface is also the source of
+events, and event handling has to be done to update the UI, so the separation
+did not prove easy. There is too much shared data between UI state and runtime
+state, that combining the two into once unified concern appears easy.
+
+We can still aim for creating a crate that can be used independent of `ftd` or
+`fastn` crates, so you can build your own UI. But even that is a bit tricky.
+Problem is our data layer. Our data layers is quite tied to the UI layer, if
+you want to use our UI stuff, you have to model your UI state data using our
+data layer. Which means you have to have concepts of modules, and variables,
+and you have to have the exact types that FTD exposes.
+
+Assuming you can do that, there is one more concern, the functions. The UI
+triggers functions, and functions change data, and that triggers UI updates.
+This is what runtime is responsible for. So runtime has to be able to execute
+the functions as well. But how do we share function definition across crates?
+Either we say `fastn-function` is a separate crate that you can take a
+dependency on, and that crate will contain function parser etc. But this leads
+to another issue, can the fastn-function have direct access to ftd stuff? Of so
+we end up bringing ftd back as a dependency. Or we create a function syntax and
+abstraction, which does not know about ftd, and ftd related operations
+are "registered" when using it with ftd.
+
+Technically we can try that. `fastn-function`, which defines a function layer.
+But then the function layer will need access to data which is managed by
+runtime and data types, which are limited by what is supported by ftd. We can
+invert this last bit and say `fastn-function` and `fastn-runtime` define the
+types supported by the two and ftd slaves on those definitions.
+
+Is it a worthwhile goal to give a data/runtime layer, decoupled from ftd/fastn?
+Who will use it, what are the use cases? I may want to build my own UI without
+relying on ftd syntax and fastn package manager etc. For now we are keeping
+fastn-function and fastn-runtime together. We will see how it goes later.
 
 -- ds.h1: Path to `fastn 0.4`
 
