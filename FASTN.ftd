@@ -30,6 +30,8 @@ favicon: images/favicon.png
 - Supabase ❤️ `fastn`: /supabase/fastn/
 - SRS: /srs/
   document: misc/srs.ftd
+- LLVM: /llvm/
+  document: misc/llvm.ftd
 - Devops:
   - fibreplane: /fibreplane/
     document: devops/fibreplane.ftd

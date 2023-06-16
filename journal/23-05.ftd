@@ -1,5 +1,82 @@
 -- my-ds.page: AmitU's Journal - May 2023
 
+
+-- ds.h1: wasm code generation from Rust
+
+20th May 2023
+
+So we are trying to compile `ftd` to `wasm`. How do we do this? Some things are
+simple, functions and components are going to get compiled/transpied into wasm,
+we generate WAT or WAST files.
+
+Records, Strings, etc are going to get compiled away into mallocs and pointer
+arithmatic, and we have to export or implement some functions like `array_new
+()`, `string_new()` etc, all the helpers we need.
+
+The challenge is in variables and data. Lets look at them. First we have what
+we call global variables. If you declare a variable in module, its effectively
+a module scoped global variable.
+
+Before we proceed further let's look at what is happening in ftd
+compilation/interpreter pipeline. Given a string we first parse it in `p1`, and
+then call `ftd::interpreter()` on it. The interpreter returns a Document:
+
+-- ds.code:
+lang: rs
+
+
+
+-- ds.h1: malloc with wasm
+
+17th May 2023
+
+What is this thing?
+
+-- ds.code:
+lang: wast
+
+(data (i32.const 0x42) "Hello, Reference Types!\n")
+
+
+-- ds.markdown:
+
+Been researching how malloc is implemented in wasm.
+
+[Source](https://bytecodealliance.zulipchat.com/#narrow/stream/217126-wasmtime/topic/recommendations.20for.20proper.20usage.20of.20.60wasmtime.60.20.28Rust.29/near/342657647)
+
+So `wasmtime::Caller`, which we have access from host function handlers, can be
+used where we need `wasmtime::Store`.
+
+-- ds.code:
+lang: rs
+
+let input: &[u8] = ...;
+linker
+    .func_wrap("my_host", "get_input_size", move || -> i32 {
+        input.len() as i32
+    })
+    .unwrap();
+
+linker
+    .func_wrap(
+        "my_host",
+        "get_input",
+        move |mut caller: Caller<'_, WasiState>, ptr: i32| {
+            let mem = caller.get_export("memory").unwrap().into_memory().unwrap();
+            let offset = ptr as u32 as usize;
+            mem.write(&mut caller, offset, input).unwrap();
+        },
+    )
+    .unwrap();
+
+
+-- ds.markdown:
+
+Which means we can recursively call into wasm from Rust. Malloc then becomes
+trivial, say you exported foo, which needs to create and return a string to
+wasm, when foo is called we call malloc exported from wasm, and initialise the
+memory and return the pointer to it.
+
 -- ds.h1: `fastn-runtime`
 
 12th May 2023
