@@ -19,11 +19,8 @@ a module scoped global variable.
 
 Before we proceed further let's look at what is happening in ftd
 compilation/interpreter pipeline. Given a string we first parse it in `p1`, and
-then call `ftd::interpreter()` on it. The interpreter returns a Document:
-
--- ds.code:
-lang: rs
-
+then call `ftd::interpreter()` on it. The interpreter returns a Document ..
+(TODO).
 
 
 -- ds.h1: malloc with wasm

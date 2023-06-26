@@ -6,8 +6,6 @@ spec](https://gpuweb.github.io/gpuweb/wgsl/#attribute-location).
 -- ds.code:
 lang: wgsl
 
-// Vertex shader
-
 struct VertexOutput {
     @builtin(position) clip_position: vec4<f32>,
     @location(0) position: vec2<f32>,
@@ -31,6 +29,8 @@ fn vs_main(
 fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
     return vec4<f32>(in.position, 0.5, 1.0);
 }
+
+
 
 -- ds.h1: What does `@builtin(position)` mean?
 
@@ -91,8 +91,6 @@ A simpler triangle drawing shader is:
 
 -- ds.code:
 lang: wgsl
-
-// Vertex shader
 
 struct VertexOutput {
     @builtin(position) clip_position: vec4<f32>,
