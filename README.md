@@ -1,3 +1,3 @@
 # AmitU's Blog
 
-This is the source of amitu.github.io/dotcom/. It will become `amitu.com` soon.
+This is the source of [amitu.com](https://amitu.com).
