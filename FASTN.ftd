@@ -30,6 +30,8 @@ favicon: images/favicon.png
 - Supabase ❤️ `fastn`: /supabase/fastn/
 - SRS: /srs/
   document: misc/srs.ftd
+- LLVM: /llvm/
+  document: misc/llvm.ftd
 - Devops:
   - fibreplane: /fibreplane/
     document: devops/fibreplane.ftd
@@ -39,6 +41,8 @@ favicon: images/favicon.png
     document: pg/elephant-sql.ftd
   - steampipe: /steampipe/
     document: devops/steampipe.ftd
+  - steampipe: /nix/
+    document: devops/nix.ftd
 - Python:
   - `doit`: /doit/
     document: python/doit.ftd

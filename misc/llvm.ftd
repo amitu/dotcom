@@ -1,0 +1,7 @@
+-- my-ds.page: LLVM
+
+- [Writing an LLVM backend for the Move language in
+  Rust](https://brson.github.io/2023/03/12/move-on-llvm)
+- [LLVM tutorial in Rust language](https://github.com/jauhien/iron-kaleidoscope)
+
+-- end: my-ds.page

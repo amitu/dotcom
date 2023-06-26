@@ -881,6 +881,14 @@ window.ftd.utils.set_full_height = function () {
 window.ftd.utils.reset_full_height = function () {
     document.body.style.height = `100%`;
 };
+window.ftd.utils.get_event_key = function (event) {
+    if (65 <= event.keyCode && event.keyCode <= 90) {
+        return String.fromCharCode(event.keyCode).toLowerCase();
+    }
+    else {
+        return event.key;
+    }
+};
 window.ftd.utils.function_name_to_js_function = function (s) {
     let new_string = s;
     let startsWithDigit = /^\d/.test(s);
@@ -975,12 +983,33 @@ window.ftd.dependencies.eval_background_image = function (bg, data) {
         }
     }
     else if (typeof bg === 'object' && !!bg && "colors" in bg) {
-        var colors = bg.colors;
+        var colors = "";
         var direction = "to bottom";
         if ("direction" in bg) {
             direction = bg.direction;
         }
-        return "linear-gradient(" + direction + ", " + colors.join(", ") + ")";
+        var colors_vec = bg.colors;
+        for (var c of colors_vec) {
+            if (typeof c === 'object' && !!c && "color" in c) {
+                let color_value = c.color;
+                if (typeof color_value === 'object' && !!color_value && "light" in color_value && "dark" in color_value) {
+                    if (colors) {
+                        colors = data["ftd#dark-mode"] ? `${colors}, ${color_value.dark}` : `${colors}, ${color_value.light}`;
+                    }
+                    else {
+                        colors = data["ftd#dark-mode"] ? `${color_value.dark}` : `${color_value.light}`;
+                    }
+                    if ("start" in c)
+                        colors = `${colors} ${c.start}`;
+                    if ("end" in c)
+                        colors = `${colors} ${c.end}`;
+                    if ("stop-position" in c)
+                        colors = `${colors}, ${c["stop-position"]}`;
+                }
+            }
+        }
+        var res = "linear-gradient(" + direction + ", " + colors + ")";
+        return res;
     }
     else {
         return null;
@@ -1062,22 +1091,6 @@ function updatedID(str, flag, suffix) {
     }
 }
 
-
-(function () {
-    document.addEventListener('keypress', (event) => {
-        let key = event.key;
-        let url = window.location.href;
-        let source = document.baseURI.endsWith("/") ? "-/view-src/" : "/-/view-src/";
-        let new_url = document.baseURI + source + url.replace(document.baseURI, "");
-        if (url.includes("-/view-src/")) {
-            new_url = url.replace("-/view-src/", "");
-        }
-        if (key === '.' &&
-            ((event.target.nodeName !== "INPUT" && event.target.nodeName !== "TEXTAREA") || event.ctrlKey)) {
-                window.location.href = new_url;
-            }
-        }, false);
-})();
 
 (function() {
     /*! instant.page v5.1.0 - (C) 2019-2020 Alexandre Dieulot - https://instant.page/license */

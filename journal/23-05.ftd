@@ -1,4 +1,122 @@
--- my-ds.page: Journal
+-- my-ds.page: AmitU's Journal - May 2023
+
+
+-- ds.h1: wasm code generation from Rust
+
+20th May 2023
+
+So we are trying to compile `ftd` to `wasm`. How do we do this? Some things are
+simple, functions and components are going to get compiled/transpied into wasm,
+we generate WAT or WAST files.
+
+Records, Strings, etc are going to get compiled away into mallocs and pointer
+arithmatic, and we have to export or implement some functions like `array_new
+()`, `string_new()` etc, all the helpers we need.
+
+The challenge is in variables and data. Lets look at them. First we have what
+we call global variables. If you declare a variable in module, its effectively
+a module scoped global variable.
+
+Before we proceed further let's look at what is happening in ftd
+compilation/interpreter pipeline. Given a string we first parse it in `p1`, and
+then call `ftd::interpreter()` on it. The interpreter returns a Document ..
+(TODO).
+
+
+-- ds.h1: malloc with wasm
+
+17th May 2023
+
+What is this thing?
+
+-- ds.code:
+lang: wast
+
+(data (i32.const 0x42) "Hello, Reference Types!\n")
+
+
+-- ds.markdown:
+
+Been researching how malloc is implemented in wasm.
+
+[Source](https://bytecodealliance.zulipchat.com/#narrow/stream/217126-wasmtime/topic/recommendations.20for.20proper.20usage.20of.20.60wasmtime.60.20.28Rust.29/near/342657647)
+
+So `wasmtime::Caller`, which we have access from host function handlers, can be
+used where we need `wasmtime::Store`.
+
+-- ds.code:
+lang: rs
+
+let input: &[u8] = ...;
+linker
+    .func_wrap("my_host", "get_input_size", move || -> i32 {
+        input.len() as i32
+    })
+    .unwrap();
+
+linker
+    .func_wrap(
+        "my_host",
+        "get_input",
+        move |mut caller: Caller<'_, WasiState>, ptr: i32| {
+            let mem = caller.get_export("memory").unwrap().into_memory().unwrap();
+            let offset = ptr as u32 as usize;
+            mem.write(&mut caller, offset, input).unwrap();
+        },
+    )
+    .unwrap();
+
+
+-- ds.markdown:
+
+Which means we can recursively call into wasm from Rust. Malloc then becomes
+trivial, say you exported foo, which needs to create and return a string to
+wasm, when foo is called we call malloc exported from wasm, and initialise the
+memory and return the pointer to it.
+
+-- ds.h1: `fastn-runtime`
+
+12th May 2023
+
+I have renamed our `fastn-surface` discord channel, and the `fastn-surface`
+crates to `fastn-runtime`. I was thinking we can create just the UI layer, and
+runtime would be a separate crate. Surface for a thing to draw on, and I
+thought maybe our drawing utilities can be used by other.
+
+Turns out we can not do that easily. Drawing requires optimisation, like what
+event changed what part of UI. Also drawing surface is also the source of
+events, and event handling has to be done to update the UI, so the separation
+did not prove easy. There is too much shared data between UI state and runtime
+state, that combining the two into once unified concern appears easy.
+
+We can still aim for creating a crate that can be used independent of `ftd` or
+`fastn` crates, so you can build your own UI. But even that is a bit tricky.
+Problem is our data layer. Our data layers is quite tied to the UI layer, if
+you want to use our UI stuff, you have to model your UI state data using our
+data layer. Which means you have to have concepts of modules, and variables,
+and you have to have the exact types that FTD exposes.
+
+Assuming you can do that, there is one more concern, the functions. The UI
+triggers functions, and functions change data, and that triggers UI updates.
+This is what runtime is responsible for. So runtime has to be able to execute
+the functions as well. But how do we share function definition across crates?
+Either we say `fastn-function` is a separate crate that you can take a
+dependency on, and that crate will contain function parser etc. But this leads
+to another issue, can the fastn-function have direct access to ftd stuff? Of so
+we end up bringing ftd back as a dependency. Or we create a function syntax and
+abstraction, which does not know about ftd, and ftd related operations
+are "registered" when using it with ftd.
+
+Technically we can try that. `fastn-function`, which defines a function layer.
+But then the function layer will need access to data which is managed by
+runtime and data types, which are limited by what is supported by ftd. We can
+invert this last bit and say `fastn-function` and `fastn-runtime` define the
+types supported by the two and ftd slaves on those definitions.
+
+Is it a worthwhile goal to give a data/runtime layer, decoupled from ftd/fastn?
+Who will use it, what are the use cases? I may want to build my own UI without
+relying on ftd syntax and fastn package manager etc. For now we are keeping
+fastn-function and fastn-runtime together. We will see how it goes later.
 
 -- ds.h1: Path to `fastn 0.4`
 
