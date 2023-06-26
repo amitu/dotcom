@@ -3,9 +3,6 @@ name: Deploy Site
 on:
   push:
     branches: [ main ]
-    paths:
-    - '**.ftd'
-    - '**.md'
   workflow_dispatch:
   workflow_call:
 env:
@@ -26,7 +23,7 @@ jobs:
         continue-on-error: false
         run: |
           echo "Using '$CI_REPOSITORY_NAME_SLUG/' as the base while building"
-          fastn build --base=/$CI_REPOSITORY_NAME/ 
+          fastn build
       - name: copy CNAME
         run: '(test -f CNAME && cp CNAME .build) || echo "CNAME does not exist, skipping step"'
       - name: Deploy
