@@ -9,6 +9,7 @@ favicon: images/favicon.png
 -- fastn.dependency: fifthtry.github.io/dark-mode-switcher
 -- fastn.dependency: fastn-stack.github.io/media
 -- fastn.dependency: fifthtry.github.io/bling
+-- fastn.dependency: harshdoesdev.github.io/hacktree-ui as hacktree
 
 -- fastn.auto-import: ds
 -- fastn.auto-import: amitu.github.io/dotcom/my-ds

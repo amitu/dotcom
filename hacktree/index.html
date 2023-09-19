@@ -1,0 +1,2533 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<base href="/">
+<meta content="fastn" name="generator">
+
+<link rel="shortcut icon" href="images/favicon.png" type="image/png">
+
+<script>
+let __fastn_package_name__ = "amitu.github.io/dotcom";
+
+</script>
+
+
+<script src="markdown-37D647982059462973339C58D1F7A18E3FDACCF47927ECB9B9B5E23A98008187.js"></script>
+<script src="prism-8FE3A42AD547E2DBBC9FE16BA059F8F1870D613AD0C5B0B013D6205B72A62BAF.js"></script>
+<script src="default-F5BAD649C243BFF4FE87ECC05138420A1AC2291A8A6AA9411FFC61B83AAF8170.js"></script>
+<link rel="stylesheet" href="prism-73F718B9234C00C5C14AB6A11BF239A103F0B0F93B69CD55CB5C6530501182EB.css">
+
+
+
+<style>
+/* http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*/
+
+/*html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+!* HTML5 display-role reset for older browsers *!
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+display: block;
+}
+body {
+line-height: 1;
+}
+ol, ul {
+list-style: none;
+}
+blockquote, q {
+quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+content: '';
+content: none;
+}
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}*/
+
+*, :after, :before {
+/*box-sizing: inherit;*/
+box-sizing: border-box;
+text-decoration: none;
+box-sizing: border-box;
+border-top-width: 0px;
+border-bottom-width: 0px;
+border-left-width: 0px;
+border-right-width: 0px;
+border-style: solid;
+height: auto;
+width: auto;
+}
+
+*, pre, div {
+padding: 0;
+margin: 0;
+gap: 0;
+outline: none;
+}
+
+
+body, ol ol, ol ul, ul ol, ul ul {
+margin:0
+}
+pre, table{
+overflow:auto
+}
+html {
+height: 100%;
+width: 100%;
+}
+
+body {
+height: 100%;
+width: 100%;
+}
+
+input, code {
+vertical-align: middle;
+}
+pre {
+white-space: break-spaces;
+word-wrap: break-word;
+}
+html {
+-webkit-font-smoothing: antialiased;
+text-rendering: optimizelegibility;
+-webkit-text-size-adjust: 100%;
+text-size-adjust: 100%;
+}
+iframe {
+border: 0;
+color-scheme: auto;
+}
+
+pre code {
+/*
+This break show-line-number in `ftd.code`
+overflow-x: auto;
+*/
+display: block;
+padding: 0 1em !important;
+}
+
+/* Common styles  */
+.ft_common{
+text-decoration: none;
+box-sizing: border-box;
+border-top-width: 0px;
+border-bottom-width: 0px;
+border-left-width: 0px;
+border-right-width: 0px;
+border-style: solid;
+height: auto;
+width: auto;
+}
+
+/* Common container attributes */
+.ft_row, .ft_column {
+display: flex;
+align-items: start;
+justify-content: start
+}
+
+.full {
+width: 100%;
+height: 100%;
+}
+
+.ft_row {
+display: flex;
+align-items: start;
+justify-content: start;
+flex-direction: row;
+box-sizing: border-box;
+}
+.ft_column {
+display: flex;
+align-items: start;
+justify-content: start;
+flex-direction: column;
+box-sizing: border-box;
+}
+
+.ft_row {
+flex-direction: row;
+}
+
+.ft_column {
+flex-direction: column;
+}
+
+.ft_md ul,
+.ft_md ol{
+margin: 10px 0;
+}
+
+.ft_md ul ul,
+.ft_md ul ol,
+.ft_md ol ul,
+.ft_md ol ol {
+margin: 0;
+}
+
+.ft_md ul li,
+.ft_md ol li,
+.ft_md ul ol li .ft_md ul ul li .ft_md ol ul li .ft_md ol ol li {
+position: relative;
+padding-left: 32px;
+margin: 4px 0;
+}
+
+.ft_md ul {
+list-style: none;
+padding-left: 0;
+}
+
+.ft_md ol {
+list-style: none;
+padding-left: 0;
+counter-reset: item;
+}
+
+.ft_md ol li:before,
+.ft_md ol ol li:before,
+.ft_md ul ol li:before {
+content: counter(item);
+counter-increment: item;
+font-size: 11px;
+line-height: 10px;
+text-align: center;
+padding: 4px 0;
+height: 10px;
+width: 18px;
+border-radius: 10px;
+position: absolute;
+left: 0;
+top: 5px;
+}
+
+.ft_md ul li::before,
+.ft_md ul ul li::before,
+.ft_md ol ul li::before {
+content: "";
+position: absolute;
+width: 6px;
+height: 6px;
+left: 8px;
+top: 10px;
+border-radius: 50%;
+background: #c1c8ce;
+}
+
+ul, ol {
+/* Added padding to the left to move the ol number/ ul bullet to the right */
+padding-left: 20px;
+}
+
+a {
+color: #2952a3;
+}
+
+a:visited {
+color: #856ab9;
+}
+
+a:hover {
+color: #24478f;
+}
+
+.ft_md a {
+text-decoration: none;
+}
+
+.ft_md a:visited {
+text-decoration: none;
+}
+
+.ft_md a:hover {
+text-decoration: none;
+}
+
+code {
+padding: 0.1rem 0.25rem;
+border-radius: 4px;
+background-color: #0000000d;
+}
+
+.ft_md blockquote {
+padding: 0.25rem 1rem;
+margin: 1rem 0;
+border-radius: 3px;
+}
+
+.ft_md blockquote > blockquote {
+margin: 0;
+}
+
+
+body.dark code {
+padding: 0.1rem 0.25rem;
+border-radius: 4px;
+background-color: #ffffff1f;
+}
+
+
+body.dark a {
+color: #6498ff
+}
+
+body.dark a:visited {
+color: #b793fb;
+}
+
+
+p {
+margin-block-end: 1em;
+}
+
+h1:only-child {
+margin-block-end: 0.67em
+}
+
+table, td, th {
+border: 1px solid;
+}
+
+th {
+padding: 6px;
+}
+
+td {
+padding-left: 6px;
+padding-right: 6px;
+padding-top: 3px;
+padding-bottom: 3px;
+}
+
+</style>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<body data-id="1"><div data-id="2" class="ft_column __w-1 __h-2"><div data-id="3" class="ft_column full"><div data-id="4" class="ft_column __w-3 __h-4 __bgc-5 __jc-6 __ali-7 __g-8"><div data-id="5" class="ft_row __jc-9 __ali-10 __g-11"><div data-id="6" class="__c-12 __rl-13">Amit Upadhyay</div><comment data-id="7"></comment><div data-id="8" class="__c-14 __rl-15">aka. amitu</div></div><comment data-id="9"></comment><div data-id="10" class="ft_row __jc-16 __ali-17 __g-18"><comment data-id="11"></comment><div data-id="12" class="ft_row __jc-19 __ali-20 __g-21"><img data-id="13" src="-/harshdoesdev.github.io/hacktree-ui/images/business.svg" class="__w-22 __h-23"></img><div data-id="14" class="__c-24 __rl-25">fastn-stack</div></div><comment data-id="15"></comment></div><div data-id="16" class="__p-26 __c-27 __rl-28">CEO and Founder of FifthTry.com. Creator of fastn framework.</div><div data-id="17" class="ft_row __pl-29 __pr-30 __fw-31 __jc-32"><comment data-id="18"></comment><a data-id="19" href="https://twitter.com/amitu" target="_blank" class="ft_row __p-33 __jc-34 __ali-35 __g-36"><img data-id="20" src="-/harshdoesdev.github.io/hacktree-ui/images/social/twitter.svg" class="__w-37 __h-38"></img><div data-id="21" class="__c-39 __rl-40">Twitter</div></a><comment data-id="22"></comment><a data-id="23" href="https://github.com/amitu" target="_blank" class="ft_row __p-44 __jc-45 __ali-46 __g-47"><img data-id="24" src="-/harshdoesdev.github.io/hacktree-ui/images/social/github.svg" class="__w-48 __h-49"></img><div data-id="25" class="__c-50 __rl-51">Github</div></a><comment data-id="26"></comment><comment data-id="27"></comment><a data-id="28" href="https://linkedin.com/in/amitu" target="_blank" class="ft_row __p-55 __jc-56 __ali-57 __g-58"><img data-id="29" src="-/harshdoesdev.github.io/hacktree-ui/images/social/linkedin.svg" class="__w-59 __h-60"></img><div data-id="30" class="__c-61 __rl-62">LinkedIn</div></a><comment data-id="31"></comment><a data-id="32" href="https://www.amitu.com" target="_blank" class="ft_row __p-66 __jc-67 __ali-68 __g-69"><img data-id="33" src="-/harshdoesdev.github.io/hacktree-ui/images/social/google-chrome.svg" class="__w-70 __h-71"></img><div data-id="34" class="__c-72 __rl-73">Website</div></a><comment data-id="35"></comment></div></div></div></div></body><style id="styles">
+.__w-1 { width: 100%; }
+.__h-2 { height: 100%; }
+.__w-3 { width: 100%; }
+.__h-4 { height: 100%; }
+.__bgc-5 { background-color: #e7e7e4; }
+body.dark .__bgc-5 { background-color: #18181b; }
+.__jc-6 { justify-content: center; }
+.__ali-7 { align-items: center; }
+.__g-8 { gap: 2rem; }
+.__jc-9 { justify-content: center; }
+.__ali-10 { align-items: center; }
+.__g-11 { gap: 1rem; }
+.__c-12 { color: #141414 !important; }
+body.dark .__c-12 { color: #ffffff !important; }
+.__c-12:visited { color: #141414 !important; }
+body.dark  .__c-12:visited { color: #ffffff !important; }
+.__rl-13 {  font-family: sans-serif; font-size: 24px; font-weight: 400; line-height: 31px; }
+body.mobile .__rl-13 {  font-family: sans-serif; font-size: 22px; font-weight: 400; line-height: 29px; }
+.__c-14 { color: #584b42 !important; }
+body.dark .__c-14 { color: #a8a29e !important; }
+.__c-14:visited { color: #584b42 !important; }
+body.dark  .__c-14:visited { color: #a8a29e !important; }
+.__rl-15 {  font-family: sans-serif; font-size: 18px; font-weight: 400; line-height: 30px; }
+body.mobile .__rl-15 {  font-family: sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; }
+.__jc-16 { justify-content: center; }
+.__ali-17 { align-items: center; }
+.__g-18 { gap: 1rem; }
+.__jc-19 { justify-content: center; }
+.__ali-20 { align-items: center; }
+.__g-21 { gap: 0.5rem; }
+.__w-22 { width: 16px; }
+.__h-23 { height: 16px; }
+.__c-24 { color: #584b42 !important; }
+body.dark .__c-24 { color: #a8a29e !important; }
+.__c-24:visited { color: #584b42 !important; }
+body.dark  .__c-24:visited { color: #a8a29e !important; }
+.__rl-25 {  font-family: sans-serif; font-size: 18px; font-weight: 400; line-height: 30px; }
+body.mobile .__rl-25 {  font-family: sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; }
+.__p-26 { padding: 1rem; }
+.__c-27 { color: #141414 !important; }
+body.dark .__c-27 { color: #ffffff !important; }
+.__c-27:visited { color: #141414 !important; }
+body.dark  .__c-27:visited { color: #ffffff !important; }
+.__rl-28 {  font-family: sans-serif; font-size: 18px; font-weight: 400; line-height: 30px; }
+body.mobile .__rl-28 {  font-family: sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; }
+.__pl-29 { padding-left: 2rem; }
+.__pr-30 { padding-right: 2rem; }
+.__fw-31 { flex-wrap: wrap; }
+.__jc-32 { justify-content: space-between; }
+.__p-33 { padding: 1rem; }
+.__jc-34 { justify-content: center; }
+.__ali-35 { align-items: center; }
+.__g-36 { gap: 1rem; }
+.__w-37 { width: 24px; }
+.__h-38 { height: 24px; }
+.__c-39 { color: #141414 !important; }
+body.dark .__c-39 { color: #ffffff !important; }
+.__c-39:visited { color: #141414 !important; }
+body.dark  .__c-39:visited { color: #ffffff !important; }
+.__rl-40 {  font-family: sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; }
+body.mobile .__rl-40 {  font-family: sans-serif; font-size: 12px; font-weight: 400; line-height: 16px; }
+.__p-44 { padding: 1rem; }
+.__jc-45 { justify-content: center; }
+.__ali-46 { align-items: center; }
+.__g-47 { gap: 1rem; }
+.__w-48 { width: 24px; }
+.__h-49 { height: 24px; }
+.__c-50 { color: #141414 !important; }
+body.dark .__c-50 { color: #ffffff !important; }
+.__c-50:visited { color: #141414 !important; }
+body.dark  .__c-50:visited { color: #ffffff !important; }
+.__rl-51 {  font-family: sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; }
+body.mobile .__rl-51 {  font-family: sans-serif; font-size: 12px; font-weight: 400; line-height: 16px; }
+.__p-55 { padding: 1rem; }
+.__jc-56 { justify-content: center; }
+.__ali-57 { align-items: center; }
+.__g-58 { gap: 1rem; }
+.__w-59 { width: 24px; }
+.__h-60 { height: 24px; }
+.__c-61 { color: #141414 !important; }
+body.dark .__c-61 { color: #ffffff !important; }
+.__c-61:visited { color: #141414 !important; }
+body.dark  .__c-61:visited { color: #ffffff !important; }
+.__rl-62 {  font-family: sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; }
+body.mobile .__rl-62 {  font-family: sans-serif; font-size: 12px; font-weight: 400; line-height: 16px; }
+.__p-66 { padding: 1rem; }
+.__jc-67 { justify-content: center; }
+.__ali-68 { align-items: center; }
+.__g-69 { gap: 1rem; }
+.__w-70 { width: 24px; }
+.__h-71 { height: 24px; }
+.__c-72 { color: #141414 !important; }
+body.dark .__c-72 { color: #ffffff !important; }
+.__c-72:visited { color: #141414 !important; }
+body.dark  .__c-72:visited { color: #ffffff !important; }
+.__rl-73 {  font-family: sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; }
+body.mobile .__rl-73 {  font-family: sans-serif; font-size: 12px; font-weight: 400; line-height: 16px; }
+</style><style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-100-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-100-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-100-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-100-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-100-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-100-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-100-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-200-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-200-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-200-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-200-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-200-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-200-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-200-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-300-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-300-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-300-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-300-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-300-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-300-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-300-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-400-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-400-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-400-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-400-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-400-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-400-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-400-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-500-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-500-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-500-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-500-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-500-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-500-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-500-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-600-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-600-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-600-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-600-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-600-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-600-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-600-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-700-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-700-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-700-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-700-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-700-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-700-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-700-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-800-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-800-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-800-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-800-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-800-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-800-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-800-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-900-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-900-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+1F00-1FFF;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-900-normal-greek-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0370-03FF;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-900-normal-greek.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-900-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-900-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/inter-font/static/Inter-900-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-inter-font-Inter }
+
+
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: italic;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-italic-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: italic;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-italic-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: italic;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-italic-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: italic;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-italic-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: italic;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-italic-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 100;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-100-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 200;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-200-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 300;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-300-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 400;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-400-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 500;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-500-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 600;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-600-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 700;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-700-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 800;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-800-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-normal-cyrillic-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-normal-cyrillic.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-normal-vietnamese.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-normal-latin-ext.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+@font-face { unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+font-style: normal;
+font-weight: 900;
+src: url(-/fifthtry.github.io/raleway-font/static/Raleway-900-normal-latin.woff2) format('woff2');
+font-family: fifthtry-github-io-raleway-font-Raleway }
+
+
+
+
+
+</style>
+<script>
+(function() {
+let global = {
+};
+let main = function (parent) {
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let parenti0 = harshdoesdev_github_io_hacktree_ui__bio(parent, inherited, {
+name: "Amit Upadhyay",
+about: "CEO and Founder of FifthTry.com. Creator of fastn framework.",
+nickname: "amitu",
+website: "https://www.amitu.com",
+github: "amitu",
+twitter: "amitu",
+linked_in: "amitu",
+company: "fastn-stack",
+color_scheme: global.fifthtry_github_io_winter_cs__main
+});
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["main"] = main;
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__base_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#04293f"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__step_1_", fastn.recordInstance({
+light: "#bcdaf5",
+dark: "#073652"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__step_2_", fastn.recordInstance({
+light: "#F1F1F1",
+dark: "#07324D"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__overlay_", fastn.recordInstance({
+light: "#000000",
+dark: "#000000"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__code_", fastn.recordInstance({
+light: "#edf7ff",
+dark: "#013d62"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__background_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__base_,
+step_1: global.fastn_community_github_io_winter_cs_colors__step_1_,
+step_2: global.fastn_community_github_io_winter_cs_colors__step_2_,
+overlay: global.fastn_community_github_io_winter_cs_colors__overlay_,
+code: global.fastn_community_github_io_winter_cs_colors__code_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__border_", fastn.recordInstance({
+light: "#eeeeee",
+dark: "#013d62"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__border_strong_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#eeeeee"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__text_", fastn.recordInstance({
+light: "#094367",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__text_strong_", fastn.recordInstance({
+light: "#094367",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__shadow_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#0096eb"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__scrim_", fastn.recordInstance({
+light: "#393939",
+dark: "#393939"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_base_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#0096eb"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_hover_", fastn.recordInstance({
+light: "#0087D4",
+dark: "#0087D4"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_pressed_", fastn.recordInstance({
+light: "#0078BC",
+dark: "#0078BC"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_disabled_", fastn.recordInstance({
+light: "#0096eb66",
+dark: "#0096eb66"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_focused_", fastn.recordInstance({
+light: "#0071B0",
+dark: "#0071B0"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_border_", fastn.recordInstance({
+light: "#0096EB",
+dark: "#0096EB"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_text_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_text_disabled_", fastn.recordInstance({
+light: "#0096eb6b",
+dark: "#0096eb6b"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_border_disabled_", fastn.recordInstance({
+light: "#0096eb66",
+dark: "#0096eb66"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_primary_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__cta_primary_base_,
+hover: global.fastn_community_github_io_winter_cs_colors__cta_primary_hover_,
+pressed: global.fastn_community_github_io_winter_cs_colors__cta_primary_pressed_,
+disabled: global.fastn_community_github_io_winter_cs_colors__cta_primary_disabled_,
+focused: global.fastn_community_github_io_winter_cs_colors__cta_primary_focused_,
+border: global.fastn_community_github_io_winter_cs_colors__cta_primary_border_,
+border_disabled: global.fastn_community_github_io_winter_cs_colors__cta_primary_border_disabled_,
+text: global.fastn_community_github_io_winter_cs_colors__cta_primary_text_,
+text_disabled: global.fastn_community_github_io_winter_cs_colors__cta_primary_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_base_", fastn.recordInstance({
+light: "#094367",
+dark: "#04293f"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_hover_", fastn.recordInstance({
+light: "#083c5d",
+dark: "#083c5d"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_pressed_", fastn.recordInstance({
+light: "#073652",
+dark: "#073652"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_disabled_", fastn.recordInstance({
+light: "#e6ecf0",
+dark: "#e6ecf0"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_focused_", fastn.recordInstance({
+light: "#07324d",
+dark: "#07324d"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_border_", fastn.recordInstance({
+light: "#094367",
+dark: "#094367"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_text_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_text_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_border_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_secondary_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__cta_secondary_base_,
+hover: global.fastn_community_github_io_winter_cs_colors__cta_secondary_hover_,
+pressed: global.fastn_community_github_io_winter_cs_colors__cta_secondary_pressed_,
+disabled: global.fastn_community_github_io_winter_cs_colors__cta_secondary_disabled_,
+focused: global.fastn_community_github_io_winter_cs_colors__cta_secondary_focused_,
+border: global.fastn_community_github_io_winter_cs_colors__cta_secondary_border_,
+border_disabled: global.fastn_community_github_io_winter_cs_colors__cta_secondary_border_disabled_,
+text: global.fastn_community_github_io_winter_cs_colors__cta_secondary_text_,
+text_disabled: global.fastn_community_github_io_winter_cs_colors__cta_secondary_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_base_", fastn.recordInstance({
+light: "#4A6490",
+dark: "#4A6490"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_hover_", fastn.recordInstance({
+light: "#3d5276",
+dark: "#3d5276"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_pressed_", fastn.recordInstance({
+light: "#2b3a54",
+dark: "#2b3a54"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_disabled_", fastn.recordInstance({
+light: "rgba(74, 100, 144, 0.4)",
+dark: "rgba(74, 100, 144, 0.4)"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_focused_", fastn.recordInstance({
+light: "#6882b1",
+dark: "#6882b1"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_border_", fastn.recordInstance({
+light: "#4e6997",
+dark: "#4e6997"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_text_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_text_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_border_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_tertiary_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_base_,
+hover: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_hover_,
+pressed: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_pressed_,
+disabled: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_disabled_,
+focused: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_focused_,
+border: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_border_,
+border_disabled: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_border_disabled_,
+text: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_text_,
+text_disabled: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_base_", fastn.recordInstance({
+light: "#f9e4e1",
+dark: "#f9e4e1"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_hover_", fastn.recordInstance({
+light: "#f1bdb6",
+dark: "#f1bdb6"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_pressed_", fastn.recordInstance({
+light: "#d46a63",
+dark: "#d46a63"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_disabled_", fastn.recordInstance({
+light: "#faeceb",
+dark: "#faeceb"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_focused_", fastn.recordInstance({
+light: "#d97973",
+dark: "#d97973"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_border_", fastn.recordInstance({
+light: "#e9968c",
+dark: "#E9968C"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_text_", fastn.recordInstance({
+light: "#d84836",
+dark: "#d84836"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_text_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_border_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__cta_danger_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__cta_danger_base_,
+hover: global.fastn_community_github_io_winter_cs_colors__cta_danger_hover_,
+pressed: global.fastn_community_github_io_winter_cs_colors__cta_danger_pressed_,
+disabled: global.fastn_community_github_io_winter_cs_colors__cta_danger_disabled_,
+focused: global.fastn_community_github_io_winter_cs_colors__cta_danger_focused_,
+border: global.fastn_community_github_io_winter_cs_colors__cta_danger_border_,
+border_disabled: global.fastn_community_github_io_winter_cs_colors__cta_danger_border_disabled_,
+text: global.fastn_community_github_io_winter_cs_colors__cta_danger_text_,
+text_disabled: global.fastn_community_github_io_winter_cs_colors__cta_danger_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__accent_primary_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#0096eb"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__accent_secondary_", fastn.recordInstance({
+light: "#094367",
+dark: "#04293f"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__accent_tertiary_", fastn.recordInstance({
+light: "#c5cbd7",
+dark: "#c5cbd7"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__accent_", fastn.recordInstance({
+primary: global.fastn_community_github_io_winter_cs_colors__accent_primary_,
+secondary: global.fastn_community_github_io_winter_cs_colors__accent_secondary_,
+tertiary: global.fastn_community_github_io_winter_cs_colors__accent_tertiary_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__error_base_", fastn.recordInstance({
+light: "#f9e4e1",
+dark: "#f9e4e1"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__error_text_", fastn.recordInstance({
+light: "#d84836",
+dark: "#d84836"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__error_border_", fastn.recordInstance({
+light: "#e9968c",
+dark: "#e9968c"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__error_btb_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__error_base_,
+text: global.fastn_community_github_io_winter_cs_colors__error_text_,
+border: global.fastn_community_github_io_winter_cs_colors__error_border_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__success_base_", fastn.recordInstance({
+light: "#dcefe4",
+dark: "#dcefe4"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__success_text_", fastn.recordInstance({
+light: "#3e8d61",
+dark: "#3e8d61"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__success_border_", fastn.recordInstance({
+light: "#95d0af",
+dark: "#95d0af"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__success_btb_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__success_base_,
+text: global.fastn_community_github_io_winter_cs_colors__success_text_,
+border: global.fastn_community_github_io_winter_cs_colors__success_border_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__info_base_", fastn.recordInstance({
+light: "#dae7fb",
+dark: "#dae7fb"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__info_text_", fastn.recordInstance({
+light: "#5290ec",
+dark: "#5290ec"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__info_border_", fastn.recordInstance({
+light: "#7eacf1",
+dark: "#7eacf1"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__info_btb_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__info_base_,
+text: global.fastn_community_github_io_winter_cs_colors__info_text_,
+border: global.fastn_community_github_io_winter_cs_colors__info_border_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__warning_base_", fastn.recordInstance({
+light: "#ffdab6",
+dark: "#ffdab6"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__warning_text_", fastn.recordInstance({
+light: "#e78b3e",
+dark: "#e78b3e"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__warning_border_", fastn.recordInstance({
+light: "#f2c097",
+dark: "#f2c097"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__warning_btb_", fastn.recordInstance({
+base: global.fastn_community_github_io_winter_cs_colors__warning_base_,
+text: global.fastn_community_github_io_winter_cs_colors__warning_text_,
+border: global.fastn_community_github_io_winter_cs_colors__warning_border_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_one_", fastn.recordInstance({
+light: "#ef6f6c",
+dark: "#ef6f6c"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_two_", fastn.recordInstance({
+light: "#ffe8e7",
+dark: "#083C5D"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_three_", fastn.recordInstance({
+light: "#ebbe52",
+dark: "#ebbe52"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_four_", fastn.recordInstance({
+light: "#fcf5f5",
+dark: "#083c5d"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_five_", fastn.recordInstance({
+light: "#fbf5e2",
+dark: "#fbf5e2"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_six_", fastn.recordInstance({
+light: "#ef8dd6",
+dark: "#ef8dd6"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_seven_", fastn.recordInstance({
+light: "#7564be",
+dark: "#7564be"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_eight_", fastn.recordInstance({
+light: "#d554b3",
+dark: "#d554b3"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_nine_", fastn.recordInstance({
+light: "#ec8943",
+dark: "#ec8943"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_ten_", fastn.recordInstance({
+light: "#da7a4a",
+dark: "#da7a4a"
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs_colors__custom_", fastn.recordInstance({
+one: global.fastn_community_github_io_winter_cs_colors__custom_one_,
+two: global.fastn_community_github_io_winter_cs_colors__custom_two_,
+three: global.fastn_community_github_io_winter_cs_colors__custom_three_,
+four: global.fastn_community_github_io_winter_cs_colors__custom_four_,
+five: global.fastn_community_github_io_winter_cs_colors__custom_five_,
+six: global.fastn_community_github_io_winter_cs_colors__custom_six_,
+seven: global.fastn_community_github_io_winter_cs_colors__custom_seven_,
+eight: global.fastn_community_github_io_winter_cs_colors__custom_eight_,
+nine: global.fastn_community_github_io_winter_cs_colors__custom_nine_,
+ten: global.fastn_community_github_io_winter_cs_colors__custom_ten_
+}));
+fastn_utils.createNestedObject(global, "fastn_community_github_io_winter_cs__main", fastn.recordInstance({
+background: global.fastn_community_github_io_winter_cs_colors__background_,
+border: global.fastn_community_github_io_winter_cs_colors__border_,
+border_strong: global.fastn_community_github_io_winter_cs_colors__border_strong_,
+text: global.fastn_community_github_io_winter_cs_colors__text_,
+text_strong: global.fastn_community_github_io_winter_cs_colors__text_strong_,
+shadow: global.fastn_community_github_io_winter_cs_colors__shadow_,
+scrim: global.fastn_community_github_io_winter_cs_colors__scrim_,
+cta_primary: global.fastn_community_github_io_winter_cs_colors__cta_primary_,
+cta_secondary: global.fastn_community_github_io_winter_cs_colors__cta_secondary_,
+cta_tertiary: global.fastn_community_github_io_winter_cs_colors__cta_tertiary_,
+cta_danger: global.fastn_community_github_io_winter_cs_colors__cta_danger_,
+accent: global.fastn_community_github_io_winter_cs_colors__accent_,
+error: global.fastn_community_github_io_winter_cs_colors__error_btb_,
+success: global.fastn_community_github_io_winter_cs_colors__success_btb_,
+info: global.fastn_community_github_io_winter_cs_colors__info_btb_,
+warning: global.fastn_community_github_io_winter_cs_colors__warning_btb_,
+custom: global.fastn_community_github_io_winter_cs_colors__custom_
+}));
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.location.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/location.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/location-dark.svg"
+}));
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.business.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/business.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/business-dark.svg"
+}));
+let harshdoesdev_github_io_hacktree_ui_utility__format_nickname = function (args)
+{
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let __args__ = args;
+return ("aka. " + fastn_utils.getter(__args__.a));
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["harshdoesdev_github_io_hacktree_ui_utility__format_nickname"] = harshdoesdev_github_io_hacktree_ui_utility__format_nickname;
+let harshdoesdev_github_io_hacktree_ui_utility__get_mail_link = function (args)
+{
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let __args__ = args;
+return ("mailto://" + fastn_utils.getter(__args__.a));
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["harshdoesdev_github_io_hacktree_ui_utility__get_mail_link"] = harshdoesdev_github_io_hacktree_ui_utility__get_mail_link;
+let harshdoesdev_github_io_hacktree_ui_components__icon = function (parent, inherited, args)
+{
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let __args__ = {
+};
+inherited = fastn_utils.getInheritedValues(__args__, inherited, args);
+__args__ = {
+...__args__,
+...args
+};
+let parenti0 = fastn_dom.createKernel(parent, fastn_dom.ElementKind.Image);
+parenti0.setProperty(fastn_dom.PropertyKind.ImageSrc, __args__.src, inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Width, fastn_dom.Resizing.Fixed(fastn_dom.Length.Px(24)), inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Height, fastn_dom.Resizing.Fixed(fastn_dom.Length.Px(24)), inherited);
+return parenti0;
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["harshdoesdev_github_io_hacktree_ui_components__icon"] = harshdoesdev_github_io_hacktree_ui_components__icon;
+let harshdoesdev_github_io_hacktree_ui_utility__with_base_url = function (args)
+{
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let __args__ = args;
+return (fastn_utils.getter(__args__.a) + "" + fastn_utils.getter(__args__.b));
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["harshdoesdev_github_io_hacktree_ui_utility__with_base_url"] = harshdoesdev_github_io_hacktree_ui_utility__with_base_url;
+let harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon = function (parent, inherited, args)
+{
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let __args__ = {
+base_url: null,
+is_email: false,
+hovering: fastn.mutable(false),
+};
+inherited = fastn_utils.getInheritedValues(__args__, inherited, args);
+__args__ = {
+...__args__,
+...args
+};
+let parenti0 = fastn_dom.createKernel(parent, fastn_dom.ElementKind.Row);
+parenti0.addEventHandler(fastn_dom.Event.MouseEnter, function () {
+ftd.set_boolean({
+a: __args__.hovering,
+v: true,
+}, parenti0);
+});
+parenti0.addEventHandler(fastn_dom.Event.MouseLeave, function () {
+ftd.set_boolean({
+a: __args__.hovering,
+v: false,
+}, parenti0);
+});
+parenti0.setProperty(fastn_dom.PropertyKind.Padding, fastn_dom.Length.Rem(1), inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Link, fastn.formula([__args__.url,
+__args__.url,
+__args__.is_email,
+__args__.base_url,
+__args__.url,
+__args__.base_url], function () {
+if (function () {
+return fastn_utils.getter(__args__.is_email);
+}()) {
+return fastn.formula([__args__.url], function () {
+return harshdoesdev_github_io_hacktree_ui_utility__get_mail_link({
+a: __args__.url,
+}, parenti0);
+});
+} else if (function () {
+return (!ftd.is_empty(__args__.base_url));
+}()) {
+return fastn.formula([__args__.base_url,
+__args__.url], function () {
+return harshdoesdev_github_io_hacktree_ui_utility__with_base_url({
+a: __args__.base_url,
+b: __args__.url,
+}, parenti0);
+});
+} else {
+return __args__.url;
+}
+}
+), inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.OpenInNewTab, true, inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.AlignContent, fastn_dom.AlignContent.Center, inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Spacing, fastn_dom.Spacing.Fixed(fastn_dom.Length.Rem(1)), inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__icon(root, inherited, {
+src: __args__.icon_src
+});
+},
+function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Text);
+rooti0.setProperty(fastn_dom.PropertyKind.StringValue, __args__.text, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Color, inherited.get("colors").get("text_strong"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Role, inherited.get("types").get("copy_small"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.TextStyle, fastn.formula([__args__.hovering], function () {
+if (function () {
+return fastn_utils.getter(__args__.hovering);
+}()) {
+return fastn.mutableList([fastn_dom.TextStyle.Underline]);
+}
+}
+), inherited);
+}
+]), inherited);
+return parenti0;
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon"] = harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon;
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.social.gmail.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/social/gmail.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/social/gmail-dark.svg"
+}));
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.social.google_chrome.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/social/google-chrome.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/social/google-chrome-dark.svg"
+}));
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.social.linkedin.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/social/linkedin.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/social/linkedin-dark.svg"
+}));
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.social.youtube.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/social/youtube.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/social/youtube-dark.svg"
+}));
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.social.github.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/social/github.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/social/github-dark.svg"
+}));
+fastn_utils.createNestedObject(global, "harshdoesdev_github_io_hacktree_ui_assets__files.images.social.twitter.svg", fastn.recordInstance({
+light: "-/harshdoesdev.github.io/hacktree-ui/images/social/twitter.svg",
+dark: "-/harshdoesdev.github.io/hacktree-ui/images/social/twitter-dark.svg"
+}));
+let harshdoesdev_github_io_hacktree_ui_components__social_links = function (parent, inherited, args)
+{
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let __args__ = {
+website: null,
+email: null,
+github: null,
+twitter: null,
+linked_in: null,
+youtube: null,
+};
+inherited = fastn_utils.getInheritedValues(__args__, inherited, args);
+__args__ = {
+...__args__,
+...args
+};
+let parenti0 = fastn_dom.createKernel(parent, fastn_dom.ElementKind.Row);
+parenti0.setProperty(fastn_dom.PropertyKind.PaddingHorizontal, fastn_dom.Length.Rem(2), inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Wrap, true, inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Spacing, fastn_dom.Spacing.SpaceBetween, inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.twitter
+], function () {
+return (!ftd.is_empty(__args__.twitter));
+}, function (root) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon(root, inherited, {
+url: __args__.twitter,
+text: "Twitter",
+icon_src: global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("social").get("twitter").get("svg"),
+base_url: "https://twitter.com/",
+color_scheme: __args__.color_scheme
+});
+return rooti0;
+});
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.github
+], function () {
+return (!ftd.is_empty(__args__.github));
+}, function (root) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon(root, inherited, {
+url: __args__.github,
+text: "Github",
+icon_src: global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("social").get("github").get("svg"),
+base_url: "https://github.com/",
+color_scheme: __args__.color_scheme
+});
+return rooti0;
+});
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.youtube
+], function () {
+return (!ftd.is_empty(__args__.youtube));
+}, function (root) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon(root, inherited, {
+url: __args__.youtube,
+text: "Youtube",
+icon_src: global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("social").get("youtube").get("svg"),
+base_url: "https://youtube.com/",
+color_scheme: __args__.color_scheme
+});
+return rooti0;
+});
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.linked_in
+], function () {
+return (!ftd.is_empty(__args__.linked_in));
+}, function (root) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon(root, inherited, {
+url: __args__.linked_in,
+text: "LinkedIn",
+icon_src: global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("social").get("linkedin").get("svg"),
+base_url: "https://linkedin.com/in/",
+color_scheme: __args__.color_scheme
+});
+return rooti0;
+});
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.website
+], function () {
+return (!ftd.is_empty(__args__.website));
+}, function (root) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon(root, inherited, {
+url: __args__.website,
+text: "Website",
+icon_src: global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("social").get("google_chrome").get("svg"),
+color_scheme: __args__.color_scheme
+});
+return rooti0;
+});
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.email
+], function () {
+return (!ftd.is_empty(__args__.email));
+}, function (root) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__social_link_with_icon(root, inherited, {
+url: __args__.email,
+text: "Email",
+icon_src: global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("social").get("gmail").get("svg"),
+is_email: true,
+color_scheme: __args__.color_scheme
+});
+return rooti0;
+});
+}
+]), inherited);
+return parenti0;
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["harshdoesdev_github_io_hacktree_ui_components__social_links"] = harshdoesdev_github_io_hacktree_ui_components__social_links;
+let harshdoesdev_github_io_hacktree_ui__bio = function (parent, inherited, args)
+{
+let __fastn_super_package_name__ = __fastn_package_name__;
+__fastn_package_name__ = "amitu_github_io_dotcom";
+try {
+let __args__ = {
+nickname: null,
+website: null,
+email: null,
+github: null,
+twitter: null,
+linked_in: null,
+youtube: null,
+company: null,
+location: null,
+color_scheme: global.fastn_community_github_io_winter_cs__main,
+};
+inherited = fastn_utils.getInheritedValues(__args__, inherited, args);
+__args__ = {
+...__args__,
+...args
+};
+let parenti0 = fastn_dom.createKernel(parent, fastn_dom.ElementKind.Document);
+parenti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Column);
+rooti0.setProperty(fastn_dom.PropertyKind.Width, fastn_dom.Resizing.FillContainer, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Height, fastn_dom.Resizing.FillContainer, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Background, fastn_dom.BackgroundStyle.Solid(inherited.get("colors").get("background").get("base")), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.AlignContent, fastn_dom.AlignContent.Center, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Spacing, fastn_dom.Spacing.Fixed(fastn_dom.Length.Rem(2)), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Row);
+rooti0.setProperty(fastn_dom.PropertyKind.AlignContent, fastn_dom.AlignContent.Center, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Spacing, fastn_dom.Spacing.Fixed(fastn_dom.Length.Rem(1)), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Text);
+rooti0.setProperty(fastn_dom.PropertyKind.StringValue, __args__.name, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Color, inherited.get("colors").get("text_strong"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Role, inherited.get("types").get("heading_small"), inherited);
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.nickname
+], function () {
+return (!ftd.is_empty(__args__.nickname));
+}, function (root) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Text);
+rooti0.setProperty(fastn_dom.PropertyKind.StringValue, fastn.formula([__args__.nickname], function () {
+return harshdoesdev_github_io_hacktree_ui_utility__format_nickname({
+a: __args__.nickname,
+}, rooti0);
+}), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Color, inherited.get("colors").get("text"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Role, inherited.get("types").get("copy_regular"), inherited);
+return rooti0;
+});
+}
+]), inherited);
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.company,
+__args__.location
+], function () {
+return (!ftd.is_empty(__args__.company) || !ftd.is_empty(__args__.location));
+}, function (root) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Row);
+rooti0.setProperty(fastn_dom.PropertyKind.AlignContent, fastn_dom.AlignContent.Center, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Spacing, fastn_dom.Spacing.Fixed(fastn_dom.Length.Rem(1)), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.company
+], function () {
+return (!ftd.is_empty(__args__.company));
+}, function (root) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Row);
+rooti0.setProperty(fastn_dom.PropertyKind.AlignContent, fastn_dom.AlignContent.Center, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Spacing, fastn_dom.Spacing.Fixed(fastn_dom.Length.Rem(0.5)), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Image);
+rooti0.setProperty(fastn_dom.PropertyKind.ImageSrc, global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("business").get("svg"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Width, fastn_dom.Resizing.Fixed(fastn_dom.Length.Px(16)), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Height, fastn_dom.Resizing.Fixed(fastn_dom.Length.Px(16)), inherited);
+},
+function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Text);
+rooti0.setProperty(fastn_dom.PropertyKind.StringValue, __args__.company, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Color, inherited.get("colors").get("text"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Role, inherited.get("types").get("copy_regular"), inherited);
+}
+]), inherited);
+return rooti0;
+});
+},
+function (root, inherited) {
+fastn_dom.conditionalDom(root, [
+__args__.location
+], function () {
+return (!ftd.is_empty(__args__.location));
+}, function (root) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Row);
+rooti0.setProperty(fastn_dom.PropertyKind.AlignContent, fastn_dom.AlignContent.Center, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Spacing, fastn_dom.Spacing.Fixed(fastn_dom.Length.Rem(0.5)), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Children, fastn.mutableList([function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Image);
+rooti0.setProperty(fastn_dom.PropertyKind.ImageSrc, global.harshdoesdev_github_io_hacktree_ui_assets__files.get("images").get("location").get("svg"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Width, fastn_dom.Resizing.Fixed(fastn_dom.Length.Px(16)), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Height, fastn_dom.Resizing.Fixed(fastn_dom.Length.Px(16)), inherited);
+},
+function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Text);
+rooti0.setProperty(fastn_dom.PropertyKind.StringValue, __args__.location, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Color, inherited.get("colors").get("text"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Role, inherited.get("types").get("copy_regular"), inherited);
+}
+]), inherited);
+return rooti0;
+});
+}
+]), inherited);
+return rooti0;
+});
+},
+function (root, inherited) {
+let rooti0 = fastn_dom.createKernel(root, fastn_dom.ElementKind.Text);
+rooti0.setProperty(fastn_dom.PropertyKind.StringValue, __args__.about, inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Padding, fastn_dom.Length.Rem(1), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Color, inherited.get("colors").get("text_strong"), inherited);
+rooti0.setProperty(fastn_dom.PropertyKind.Role, inherited.get("types").get("copy_regular"), inherited);
+},
+function (root, inherited) {
+let rooti0 = harshdoesdev_github_io_hacktree_ui_components__social_links(root, inherited, {
+website: __args__.website,
+email: __args__.email,
+github: __args__.github,
+twitter: __args__.twitter,
+linked_in: __args__.linked_in,
+youtube: __args__.youtube,
+color_scheme: __args__.color_scheme
+});
+}
+]), inherited);
+}
+]), inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.DocumentProperties.MetaTitle, __args__.name, inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.DocumentProperties.MetaDescription, __args__.about, inherited);
+return parenti0;
+} finally {
+__fastn_package_name__ = __fastn_super_package_name__;
+}
+}
+global["harshdoesdev_github_io_hacktree_ui__bio"] = harshdoesdev_github_io_hacktree_ui__bio;
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__base_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#04293f"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__step_1_", fastn.recordInstance({
+light: "#bcdaf5",
+dark: "#073652"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__step_2_", fastn.recordInstance({
+light: "#F1F1F1",
+dark: "#07324D"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__overlay_", fastn.recordInstance({
+light: "#000000",
+dark: "#000000"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__code_", fastn.recordInstance({
+light: "#edf7ff",
+dark: "#013d62"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__background_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__base_,
+step_1: global.fifthtry_github_io_winter_cs_colors__step_1_,
+step_2: global.fifthtry_github_io_winter_cs_colors__step_2_,
+overlay: global.fifthtry_github_io_winter_cs_colors__overlay_,
+code: global.fifthtry_github_io_winter_cs_colors__code_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__border_", fastn.recordInstance({
+light: "#eeeeee",
+dark: "#013d62"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__border_strong_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#eeeeee"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__text_", fastn.recordInstance({
+light: "#094367",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__text_strong_", fastn.recordInstance({
+light: "#094367",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__shadow_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#0096eb"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__scrim_", fastn.recordInstance({
+light: "#393939",
+dark: "#393939"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_base_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#0096eb"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_hover_", fastn.recordInstance({
+light: "#0087D4",
+dark: "#0087D4"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_pressed_", fastn.recordInstance({
+light: "#0078BC",
+dark: "#0078BC"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_disabled_", fastn.recordInstance({
+light: "#0096eb66",
+dark: "#0096eb66"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_focused_", fastn.recordInstance({
+light: "#0071B0",
+dark: "#0071B0"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_border_", fastn.recordInstance({
+light: "#0096EB",
+dark: "#0096EB"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_text_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_text_disabled_", fastn.recordInstance({
+light: "#0096eb6b",
+dark: "#0096eb6b"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_border_disabled_", fastn.recordInstance({
+light: "#0096eb66",
+dark: "#0096eb66"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_primary_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__cta_primary_base_,
+hover: global.fifthtry_github_io_winter_cs_colors__cta_primary_hover_,
+pressed: global.fifthtry_github_io_winter_cs_colors__cta_primary_pressed_,
+disabled: global.fifthtry_github_io_winter_cs_colors__cta_primary_disabled_,
+focused: global.fifthtry_github_io_winter_cs_colors__cta_primary_focused_,
+border: global.fifthtry_github_io_winter_cs_colors__cta_primary_border_,
+border_disabled: global.fifthtry_github_io_winter_cs_colors__cta_primary_border_disabled_,
+text: global.fifthtry_github_io_winter_cs_colors__cta_primary_text_,
+text_disabled: global.fifthtry_github_io_winter_cs_colors__cta_primary_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_base_", fastn.recordInstance({
+light: "#094367",
+dark: "#04293f"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_hover_", fastn.recordInstance({
+light: "#083c5d",
+dark: "#083c5d"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_pressed_", fastn.recordInstance({
+light: "#073652",
+dark: "#073652"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_disabled_", fastn.recordInstance({
+light: "#e6ecf0",
+dark: "#e6ecf0"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_focused_", fastn.recordInstance({
+light: "#07324d",
+dark: "#07324d"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_border_", fastn.recordInstance({
+light: "#094367",
+dark: "#094367"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_text_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_text_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_border_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_secondary_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__cta_secondary_base_,
+hover: global.fifthtry_github_io_winter_cs_colors__cta_secondary_hover_,
+pressed: global.fifthtry_github_io_winter_cs_colors__cta_secondary_pressed_,
+disabled: global.fifthtry_github_io_winter_cs_colors__cta_secondary_disabled_,
+focused: global.fifthtry_github_io_winter_cs_colors__cta_secondary_focused_,
+border: global.fifthtry_github_io_winter_cs_colors__cta_secondary_border_,
+border_disabled: global.fifthtry_github_io_winter_cs_colors__cta_secondary_border_disabled_,
+text: global.fifthtry_github_io_winter_cs_colors__cta_secondary_text_,
+text_disabled: global.fifthtry_github_io_winter_cs_colors__cta_secondary_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_base_", fastn.recordInstance({
+light: "#4A6490",
+dark: "#4A6490"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_hover_", fastn.recordInstance({
+light: "#3d5276",
+dark: "#3d5276"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_pressed_", fastn.recordInstance({
+light: "#2b3a54",
+dark: "#2b3a54"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_disabled_", fastn.recordInstance({
+light: "rgba(74, 100, 144, 0.4)",
+dark: "rgba(74, 100, 144, 0.4)"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_focused_", fastn.recordInstance({
+light: "#6882b1",
+dark: "#6882b1"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_border_", fastn.recordInstance({
+light: "#4e6997",
+dark: "#4e6997"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_text_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_text_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_border_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_tertiary_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_base_,
+hover: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_hover_,
+pressed: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_pressed_,
+disabled: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_disabled_,
+focused: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_focused_,
+border: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_border_,
+border_disabled: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_border_disabled_,
+text: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_text_,
+text_disabled: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_base_", fastn.recordInstance({
+light: "#f9e4e1",
+dark: "#f9e4e1"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_hover_", fastn.recordInstance({
+light: "#f1bdb6",
+dark: "#f1bdb6"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_pressed_", fastn.recordInstance({
+light: "#d46a63",
+dark: "#d46a63"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_disabled_", fastn.recordInstance({
+light: "#faeceb",
+dark: "#faeceb"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_focused_", fastn.recordInstance({
+light: "#d97973",
+dark: "#d97973"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_border_", fastn.recordInstance({
+light: "#e9968c",
+dark: "#E9968C"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_text_", fastn.recordInstance({
+light: "#d84836",
+dark: "#d84836"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_text_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_border_disabled_", fastn.recordInstance({
+light: "#ffffff",
+dark: "#ffffff"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__cta_danger_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__cta_danger_base_,
+hover: global.fifthtry_github_io_winter_cs_colors__cta_danger_hover_,
+pressed: global.fifthtry_github_io_winter_cs_colors__cta_danger_pressed_,
+disabled: global.fifthtry_github_io_winter_cs_colors__cta_danger_disabled_,
+focused: global.fifthtry_github_io_winter_cs_colors__cta_danger_focused_,
+border: global.fifthtry_github_io_winter_cs_colors__cta_danger_border_,
+border_disabled: global.fifthtry_github_io_winter_cs_colors__cta_danger_border_disabled_,
+text: global.fifthtry_github_io_winter_cs_colors__cta_danger_text_,
+text_disabled: global.fifthtry_github_io_winter_cs_colors__cta_danger_text_disabled_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__accent_primary_", fastn.recordInstance({
+light: "#0096eb",
+dark: "#0096eb"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__accent_secondary_", fastn.recordInstance({
+light: "#094367",
+dark: "#04293f"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__accent_tertiary_", fastn.recordInstance({
+light: "#c5cbd7",
+dark: "#c5cbd7"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__accent_", fastn.recordInstance({
+primary: global.fifthtry_github_io_winter_cs_colors__accent_primary_,
+secondary: global.fifthtry_github_io_winter_cs_colors__accent_secondary_,
+tertiary: global.fifthtry_github_io_winter_cs_colors__accent_tertiary_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__error_base_", fastn.recordInstance({
+light: "#f9e4e1",
+dark: "#f9e4e1"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__error_text_", fastn.recordInstance({
+light: "#d84836",
+dark: "#d84836"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__error_border_", fastn.recordInstance({
+light: "#e9968c",
+dark: "#e9968c"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__error_btb_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__error_base_,
+text: global.fifthtry_github_io_winter_cs_colors__error_text_,
+border: global.fifthtry_github_io_winter_cs_colors__error_border_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__success_base_", fastn.recordInstance({
+light: "#dcefe4",
+dark: "#dcefe4"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__success_text_", fastn.recordInstance({
+light: "#3e8d61",
+dark: "#3e8d61"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__success_border_", fastn.recordInstance({
+light: "#95d0af",
+dark: "#95d0af"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__success_btb_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__success_base_,
+text: global.fifthtry_github_io_winter_cs_colors__success_text_,
+border: global.fifthtry_github_io_winter_cs_colors__success_border_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__info_base_", fastn.recordInstance({
+light: "#dae7fb",
+dark: "#dae7fb"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__info_text_", fastn.recordInstance({
+light: "#5290ec",
+dark: "#5290ec"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__info_border_", fastn.recordInstance({
+light: "#7eacf1",
+dark: "#7eacf1"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__info_btb_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__info_base_,
+text: global.fifthtry_github_io_winter_cs_colors__info_text_,
+border: global.fifthtry_github_io_winter_cs_colors__info_border_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__warning_base_", fastn.recordInstance({
+light: "#ffdab6",
+dark: "#ffdab6"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__warning_text_", fastn.recordInstance({
+light: "#e78b3e",
+dark: "#e78b3e"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__warning_border_", fastn.recordInstance({
+light: "#f2c097",
+dark: "#f2c097"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__warning_btb_", fastn.recordInstance({
+base: global.fifthtry_github_io_winter_cs_colors__warning_base_,
+text: global.fifthtry_github_io_winter_cs_colors__warning_text_,
+border: global.fifthtry_github_io_winter_cs_colors__warning_border_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_one_", fastn.recordInstance({
+light: "#ef6f6c",
+dark: "#ef6f6c"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_two_", fastn.recordInstance({
+light: "#ffe8e7",
+dark: "#083C5D"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_three_", fastn.recordInstance({
+light: "#ebbe52",
+dark: "#ebbe52"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_four_", fastn.recordInstance({
+light: "#fcf5f5",
+dark: "#083c5d"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_five_", fastn.recordInstance({
+light: "#fbf5e2",
+dark: "#fbf5e2"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_six_", fastn.recordInstance({
+light: "#ef8dd6",
+dark: "#ef8dd6"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_seven_", fastn.recordInstance({
+light: "#7564be",
+dark: "#7564be"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_eight_", fastn.recordInstance({
+light: "#d554b3",
+dark: "#d554b3"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_nine_", fastn.recordInstance({
+light: "#ec8943",
+dark: "#ec8943"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_ten_", fastn.recordInstance({
+light: "#da7a4a",
+dark: "#da7a4a"
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs_colors__custom_", fastn.recordInstance({
+one: global.fifthtry_github_io_winter_cs_colors__custom_one_,
+two: global.fifthtry_github_io_winter_cs_colors__custom_two_,
+three: global.fifthtry_github_io_winter_cs_colors__custom_three_,
+four: global.fifthtry_github_io_winter_cs_colors__custom_four_,
+five: global.fifthtry_github_io_winter_cs_colors__custom_five_,
+six: global.fifthtry_github_io_winter_cs_colors__custom_six_,
+seven: global.fifthtry_github_io_winter_cs_colors__custom_seven_,
+eight: global.fifthtry_github_io_winter_cs_colors__custom_eight_,
+nine: global.fifthtry_github_io_winter_cs_colors__custom_nine_,
+ten: global.fifthtry_github_io_winter_cs_colors__custom_ten_
+}));
+fastn_utils.createNestedObject(global, "fifthtry_github_io_winter_cs__main", fastn.recordInstance({
+background: global.fifthtry_github_io_winter_cs_colors__background_,
+border: global.fifthtry_github_io_winter_cs_colors__border_,
+border_strong: global.fifthtry_github_io_winter_cs_colors__border_strong_,
+text: global.fifthtry_github_io_winter_cs_colors__text_,
+text_strong: global.fifthtry_github_io_winter_cs_colors__text_strong_,
+shadow: global.fifthtry_github_io_winter_cs_colors__shadow_,
+scrim: global.fifthtry_github_io_winter_cs_colors__scrim_,
+cta_primary: global.fifthtry_github_io_winter_cs_colors__cta_primary_,
+cta_secondary: global.fifthtry_github_io_winter_cs_colors__cta_secondary_,
+cta_tertiary: global.fifthtry_github_io_winter_cs_colors__cta_tertiary_,
+cta_danger: global.fifthtry_github_io_winter_cs_colors__cta_danger_,
+accent: global.fifthtry_github_io_winter_cs_colors__accent_,
+error: global.fifthtry_github_io_winter_cs_colors__error_btb_,
+success: global.fifthtry_github_io_winter_cs_colors__success_btb_,
+info: global.fifthtry_github_io_winter_cs_colors__info_btb_,
+warning: global.fifthtry_github_io_winter_cs_colors__warning_btb_,
+custom: global.fifthtry_github_io_winter_cs_colors__custom_
+}));
+fastn_dom.codeData.availableThemes["coldark-theme.dark"] = "code-theme-9A3284FD117DFF7CFD432FF860A5E14169FA592BC3DA4F5E8A6975143F5EA07F.css";
+fastn_dom.codeData.availableThemes["coldark-theme.light"] = "code-theme-99CD7B013C96C4632F0AEA39AC265387B814AE85A7D33666A4AE4BEFF59016D0.css";
+fastn_dom.codeData.availableThemes["coy-theme"] = "code-theme-B3AEA322EADEDA61F0E219845A0E9C8E73F6345E49362B46E6F52CEE40471248.css";
+fastn_dom.codeData.availableThemes["dracula-theme"] = "code-theme-0CA636E4954E3FC6184FB8000174F8EAA6C61DB10F6A18D74740E6D2032C1A2E.css";
+fastn_dom.codeData.availableThemes["duotone-theme.dark"] = "code-theme-95B9118AFC8631777EEBBD89B2066C3706A6DF3579B14F41AF05564E41CAA09C.css";
+fastn_dom.codeData.availableThemes["duotone-theme.earth"] = "code-theme-6EB6F03F9F578742CA0CD1189693E43A6135D910989ADD88CA3C0D6117EE24D7.css";
+fastn_dom.codeData.availableThemes["duotone-theme.forest"] = "code-theme-256C21B515FC9E77F95D88689A4086B9D9406B7AAE3A273780FE8B8748C5A7D2.css";
+fastn_dom.codeData.availableThemes["duotone-theme.light"] = "code-theme-0800A18B1822D6AFDAF807CF840379A2DB3483A1F058CA29FBCFB3815CA76148.css";
+fastn_dom.codeData.availableThemes["duotone-theme.sea"] = "code-theme-9A45313F167DBD90654BFD5BB3BC0BDF6AE447485C30B0389ADA7B49C069E46A.css";
+fastn_dom.codeData.availableThemes["duotone-theme.space"] = "code-theme-4DD8479BE14A755645BC09FF433FB70EB4CB28F0CBF3CA98DCB71B244B85B194.css";
+fastn_dom.codeData.availableThemes["fastn-theme.dark"] = "code-theme-F614177D3155EA8E915B35A3445175DC7C96D02FBC621F8AFD0FCCC417ED8A43.css";
+fastn_dom.codeData.availableThemes["fastn-theme.light"] = "code-theme-B8645DE281A38A3068C56919DE1BB0511696A1EE8002C5088748DA0BAC0806E6.css";
+fastn_dom.codeData.availableThemes["fire.light"] = "code-theme-A352AF572179AB980583D41BC41ADDBA36C4C17757A34C1C6AAAF2C253E25CE3.css";
+fastn_dom.codeData.availableThemes["gruvbox-theme.dark"] = "code-theme-B68AA27E05B319F04A9CD747AADBF9B9CD791E040DEC519AE9544B4FF65DDBAC.css";
+fastn_dom.codeData.availableThemes["gruvbox-theme.light"] = "code-theme-06E6F84E43C61CB1653D9F4FACD46B7EBCB3CD8A48EFAEF2E5BE3E9E9212D1E6.css";
+fastn_dom.codeData.availableThemes["laserwave-theme"] = "code-theme-0F444C6433C356376F7E92122F6C521FE40242BEC9D9E050359EE1DF4A9D5E6D.css";
+fastn_dom.codeData.availableThemes["material-theme.dark"] = "code-theme-8CCA3D600F91FA55950DF3132F2ABE4BA14CEEA13CD23E157BF6A137762B8452.css";
+fastn_dom.codeData.availableThemes["material-theme.light"] = "code-theme-8C59190F5018F48CCBB063359072EE9053D04923BBC5D1BA52B574E78D8C536A.css";
+fastn_dom.codeData.availableThemes["nightowl-theme"] = "code-theme-88F91252A8A0EA125B4BA2C7B85E65580DB580F1477931AADCB5118E4E69D1CD.css";
+fastn_dom.codeData.availableThemes["one-theme.dark"] = "code-theme-A24DC8F09D03756A62923E8A883CAE3B938D54E2813F0855312D2554DBE97BAD.css";
+fastn_dom.codeData.availableThemes["one-theme.light"] = "code-theme-60E02531E77333F3F1B636C4FC43E976EA9F41AD75268B2DD825C33C68B573A6.css";
+fastn_dom.codeData.availableThemes["vs-theme.dark"] = "code-theme-DC76F700474E809F7BA2D9914793D04881B17EA4699BA9C568C83D32A18B0173.css";
+fastn_dom.codeData.availableThemes["vs-theme.light"] = "code-theme-7852E516BA094B01897820BB3432BE553FE5B28F00E9CA0EBC9DFFB8312EE8BF.css";
+fastn_dom.codeData.availableThemes["ztouch-theme"] = "code-theme-792C7BB9F4C8DFF3E0CBC354D2084DBF71BC5750C2C1357F0E7D936867AFAB62.css";
+
+let main_wrapper = function (parent) {
+let parenti0 = fastn_dom.createKernel(parent, fastn_dom.ElementKind.Column);
+parenti0.setProperty(fastn_dom.PropertyKind.Width, fastn_dom.Resizing.FillContainer, inherited);
+parenti0.setProperty(fastn_dom.PropertyKind.Height, fastn_dom.Resizing.FillContainer, inherited);
+main(parenti0);
+}
+fastn_virtual.hydrate(main_wrapper);
+ftd.post_init();
+})();
+
+window.onload = function() {
+fastn_utils.resetFullHeight();
+fastn_utils.setFullHeight();
+};
+
+</script>
+</html>
