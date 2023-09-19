@@ -23,7 +23,7 @@ jobs:
         continue-on-error: false
         run: |
           echo "Using '$CI_REPOSITORY_NAME_SLUG/' as the base while building"
-          fastn build
+          fastn build --edition=2023
       - name: copy CNAME
         run: '(test -f CNAME && cp CNAME .build) || echo "CNAME does not exist, skipping step"'
       - name: Deploy
